@@ -1,4 +1,4 @@
-package vistas;
+package views;
 
 public class Connect {
 

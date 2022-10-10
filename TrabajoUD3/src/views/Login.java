@@ -1,4 +1,4 @@
-package vistas;
+package views;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -104,7 +104,7 @@ public class Login extends JFrame {
 		jppassword.addActionListener(new Handler());
 		jpanel3.add(jppassword);
 
-		jbregister = new JButton("re");
+		jbregister = new JButton();
 		jbregister.setBounds(22, 93, 85, 21);
 		jbregister.setBackground(new Color(0, 176, 220));
 		jbregister.setToolTipText("Register");
@@ -115,13 +115,13 @@ public class Login extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Registro reg = new Registro();
+				Register reg = new Register();
 				dispose();
 			}
 		});
 		jpanel4.add(jbregister);
 
-		jbaccess = new JButton("ac");
+		jbaccess = new JButton();
 		jbaccess.setBounds(128, 93, 85, 21);
 		jbaccess.setBackground(new Color(0, 176, 220));
 		jbaccess.setToolTipText("Login");
@@ -151,7 +151,7 @@ public class Login extends JFrame {
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
 		jf.setLayout(new GridLayout(4, 1));
-		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/CoinMarket.png");
+		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
 
@@ -165,7 +165,7 @@ public class Login extends JFrame {
 		 *
 		 * @param e the e
 		 */
-		@SuppressWarnings({ "deprecation", "unused" })
+		@SuppressWarnings({ "deprecation"})
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			boolean existUser = false;

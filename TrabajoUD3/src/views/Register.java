@@ -1,4 +1,4 @@
-package vistas;
+package views;
 
 import java.awt.GridLayout;
 import java.awt.Image;
@@ -27,7 +27,7 @@ import java.awt.Font;
  * The Class Register.
  */
 @SuppressWarnings("serial")
-public class Registro extends JFrame {
+public class Register extends JFrame {
 
 	/** The jlpassword 2. */
 	private JLabel jlusername, jlname, jldni, jlemail, jlpassword, jlpassword2;
@@ -59,11 +59,11 @@ public class Registro extends JFrame {
 	/**
 	 * Instantiates a new register.
 	 */
-	public Registro() {
+	public Register() {
 
-		super("Registrar un usuario");
+		super("Register an user");
 		getContentPane().setBackground(new Color(102, 204, 153));
-		inicializate(Registro.this);
+		inicializate(Register.this);
 
 		jlusername = new JLabel("Username:");
 		jlusername.setBackground(new Color(252, 228, 163));
@@ -146,7 +146,7 @@ public class Registro extends JFrame {
 		jppassword2.setBounds(119, 211, 114, 19);
 		jppassword2.setBackground(new Color(0, 176, 220));
 		jppassword2.setColumns(10);
-		jppassword2.setToolTipText("Repeat your password");
+		jppassword2.setToolTipText("Confirm your password");
 		getContentPane().add(jppassword2);
 
 		jbconfirm = new JButton("");
@@ -259,7 +259,7 @@ public class Registro extends JFrame {
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
 		jf.getContentPane().setLayout(new GridLayout(7, 2));
-		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/CoinMarket.png");
+		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
 

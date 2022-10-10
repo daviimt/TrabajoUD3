@@ -1,15 +1,15 @@
 package app;
 
-public class Asignatura {
+public class Subject {
 	private int codigo;
 	private String nombre;
 	private int horas;
 	private String dni_Prof;
 	
-	public Asignatura() {
+	public Subject() {
 		super();
 	}
-	public Asignatura(int codigo, String nombre, int horas, String dni_Prof) {
+	public Subject(int codigo, String nombre, int horas, String dni_Prof) {
 		super();
 		this.codigo = codigo;
 		this.nombre = nombre;

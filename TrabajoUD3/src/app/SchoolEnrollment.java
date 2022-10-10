@@ -1,12 +1,12 @@
 package app;
 
-public class Matricula {
+public class SchoolEnrollment {
 	private String dni_Alumno;
 	private int cod_Asig;
-	public Matricula() {
+	public SchoolEnrollment() {
 		super();
 	}
-	public Matricula(String dni_Alumno, int cod_Asig) {
+	public SchoolEnrollment(String dni_Alumno, int cod_Asig) {
 		super();
 		this.dni_Alumno = dni_Alumno;
 		this.cod_Asig = cod_Asig;
