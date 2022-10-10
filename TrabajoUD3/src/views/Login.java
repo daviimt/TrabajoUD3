@@ -75,7 +75,7 @@ public class Login extends JFrame {
 		jltitle.setVerticalAlignment(SwingConstants.BOTTOM);
 		jltitle.setHorizontalAlignment(SwingConstants.CENTER);
 		jltitle.setForeground(new Color(0, 70, 101));
-		jltitle.setIcon(new ImageIcon("images/CoinMarket.png"));
+		jltitle.setIcon(new ImageIcon("images/School.png"));
 		jltitle.setFont(new Font("Microsoft Himalaya", Font.BOLD, 25));
 		jpanel1.add(jltitle);
 
