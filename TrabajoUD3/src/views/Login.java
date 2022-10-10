@@ -106,7 +106,7 @@ public class Login extends JFrame {
 		jppassword.addActionListener(new Handler());
 		jpanel3.add(jppassword);
 
-		jbregister = new JButton("re");
+		jbregister = new JButton();
 		jbregister.setBounds(22, 93, 85, 21);
 		jbregister.setBackground(new Color(0, 176, 220));
 		jbregister.setToolTipText("Register");
@@ -123,7 +123,7 @@ public class Login extends JFrame {
 		});
 		jpanel4.add(jbregister);
 
-		jbaccess = new JButton("ac");
+		jbaccess = new JButton();
 		jbaccess.setBounds(128, 93, 85, 21);
 		jbaccess.setBackground(new Color(0, 176, 220));
 		jbaccess.setToolTipText("Login");
@@ -153,7 +153,7 @@ public class Login extends JFrame {
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
 		jf.setLayout(new GridLayout(4, 1));
-		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/CoinMarket.png");
+		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
 
