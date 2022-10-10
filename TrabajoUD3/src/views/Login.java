@@ -59,6 +59,8 @@ public class Login extends JFrame {
 		super("Login");
 		inicializate(Login.this);
 
+		Connect conn=new Connect();
+		
 		jpanel1 = new JPanel();
 		jpanel1.setBackground(new Color(0, 176, 220));
 		jpanel2 = new JPanel();
@@ -104,7 +106,7 @@ public class Login extends JFrame {
 		jppassword.addActionListener(new Handler());
 		jpanel3.add(jppassword);
 
-		jbregister = new JButton();
+		jbregister = new JButton("re");
 		jbregister.setBounds(22, 93, 85, 21);
 		jbregister.setBackground(new Color(0, 176, 220));
 		jbregister.setToolTipText("Register");
@@ -121,7 +123,7 @@ public class Login extends JFrame {
 		});
 		jpanel4.add(jbregister);
 
-		jbaccess = new JButton();
+		jbaccess = new JButton("ac");
 		jbaccess.setBounds(128, 93, 85, 21);
 		jbaccess.setBackground(new Color(0, 176, 220));
 		jbaccess.setToolTipText("Login");
@@ -151,7 +153,7 @@ public class Login extends JFrame {
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
 		jf.setLayout(new GridLayout(4, 1));
-		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
+		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/CoinMarket.png");
 		jf.setIconImage(icon1);
 	}
 
@@ -165,7 +167,7 @@ public class Login extends JFrame {
 		 *
 		 * @param e the e
 		 */
-		@SuppressWarnings({ "deprecation"})
+		@SuppressWarnings({ "deprecation", "unused" })
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			boolean existUser = false;
