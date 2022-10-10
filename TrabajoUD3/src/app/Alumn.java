@@ -2,14 +2,14 @@ package app;
 
 import java.sql.Date;
 
-public class Alumno {
+public class Alumn {
 	private String dni, nombre, apellidos, telefono,foto;
 	private Date fecha_nac;
 	
-	public Alumno() {
+	public Alumn() {
 		super();
 	}
-	public Alumno(String dni, String nombre, String apellidos, String telefono, String foto, Date fecha_nac) {
+	public Alumn(String dni, String nombre, String apellidos, String telefono, String foto, Date fecha_nac) {
 		super();
 		this.dni = dni;
 		this.nombre = nombre;

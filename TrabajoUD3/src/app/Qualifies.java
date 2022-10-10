@@ -1,13 +1,13 @@
 package app;
 
-public class Califica {
+public class Qualifies {
 	private String dni_Alumno;
 	private int id_RA;
 	private float nota;
-	public Califica() {
+	public Qualifies() {
 		super();
 	}
-	public Califica(String dni_Alumno, int id_RA, float nota) {
+	public Qualifies(String dni_Alumno, int id_RA, float nota) {
 		super();
 		this.dni_Alumno = dni_Alumno;
 		this.id_RA = id_RA;

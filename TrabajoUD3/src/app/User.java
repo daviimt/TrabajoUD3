@@ -1,13 +1,13 @@
 package app;
 
-public class Usuario {
+public class User {
 	private String codigo, password, rol;
 
-	public Usuario() {
+	public User() {
 		super();
 	}
 
-	public Usuario(String codigo, String password, String rol) {
+	public User(String codigo, String password, String rol) {
 		super();
 		this.codigo = codigo;
 		this.password = password;
