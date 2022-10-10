@@ -59,6 +59,8 @@ public class Login extends JFrame {
 		super("Login");
 		inicializate(Login.this);
 
+		Connect conn=new Connect();
+		
 		jpanel1 = new JPanel();
 		jpanel1.setBackground(new Color(0, 176, 220));
 		jpanel2 = new JPanel();
