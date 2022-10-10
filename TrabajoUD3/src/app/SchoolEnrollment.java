@@ -1,33 +1,38 @@
 package app;
 
 public class SchoolEnrollment {
-	private String dni_Alumno;
-	private int cod_Asig;
+	private String dni_student;
+	private int id_subject;
+
 	public SchoolEnrollment() {
 		super();
 	}
-	public SchoolEnrollment(String dni_Alumno, int cod_Asig) {
+
+	public SchoolEnrollment(String dni_student, int id_subject) {
 		super();
-		this.dni_Alumno = dni_Alumno;
-		this.cod_Asig = cod_Asig;
+		this.dni_student = dni_student;
+		this.id_subject = id_subject;
 	}
-	public String getDni_Alumno() {
-		return dni_Alumno;
+
+	public String getDni_student() {
+		return dni_student;
 	}
-	public void setDni_Alumno(String dni_Alumno) {
-		this.dni_Alumno = dni_Alumno;
+
+	public void setDni_student(String dni_student) {
+		this.dni_student = dni_student;
 	}
-	public int getCod_Asig() {
-		return cod_Asig;
+
+	public int getId_subject() {
+		return id_subject;
 	}
-	public void setCod_Asig(int cod_Asig) {
-		this.cod_Asig = cod_Asig;
+
+	public void setId_subject(int id_subject) {
+		this.id_subject = id_subject;
 	}
+
 	@Override
 	public String toString() {
-		return "Matricula [dni_Alumno=" + dni_Alumno + ", cod_Asig=" + cod_Asig + ", getDni_Alumno()=" + getDni_Alumno()
-				+ ", getCod_Asig()=" + getCod_Asig() + "]";
+		return "SchoolEnrollment [dni_student=" + dni_student + ", id_subject=" + id_subject + "]";
 	}
-	
-	
+
 }

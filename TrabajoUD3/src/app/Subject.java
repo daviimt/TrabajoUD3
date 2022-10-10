@@ -1,53 +1,56 @@
 package app;
 
 public class Subject {
-	private int codigo;
-	private String nombre;
-	private int horas;
-	private String dni_Prof;
-	
+	private int id, hours;
+	private String name, dni_teacher;
+
 	public Subject() {
 		super();
 	}
-	public Subject(int codigo, String nombre, int horas, String dni_Prof) {
+
+	public Subject(int id, int hours, String name, String dni_teacher) {
 		super();
-		this.codigo = codigo;
-		this.nombre = nombre;
-		this.horas = horas;
-		this.dni_Prof = dni_Prof;
+		this.id = id;
+		this.hours = hours;
+		this.name = name;
+		this.dni_teacher = dni_teacher;
 	}
-	
-	public int getCodigo() {
-		return codigo;
+
+	public int getId() {
+		return id;
 	}
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
+
+	public void setId(int id) {
+		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
+
+	public int getHours() {
+		return hours;
 	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+
+	public void setHours(int hours) {
+		this.hours = hours;
 	}
-	public int getHoras() {
-		return horas;
+
+	public String getName() {
+		return name;
 	}
-	public void setHoras(int horas) {
-		this.horas = horas;
+
+	public void setName(String name) {
+		this.name = name;
 	}
-	public String getDni_Prof() {
-		return dni_Prof;
+
+	public String getDni_teacher() {
+		return dni_teacher;
 	}
-	public void setDni_Prof(String dni_Prof) {
-		this.dni_Prof = dni_Prof;
+
+	public void setDni_teacher(String dni_teacher) {
+		this.dni_teacher = dni_teacher;
 	}
+
 	@Override
 	public String toString() {
-		return "Asignatura [codigo=" + codigo + ", nombre=" + nombre + ", horas=" + horas + ", dni_Prof=" + dni_Prof
-				+ ", getCodigo()=" + getCodigo() + ", getNombre()=" + getNombre() + ", getHoras()=" + getHoras()
-				+ ", getDni_Prof()=" + getDni_Prof() + "]";
+		return "Subject [id=" + id + ", hours=" + hours + ", name=" + name + ", dni_teacher=" + dni_teacher + "]";
 	}
 
-
-	
 }

@@ -1,20 +1,20 @@
 package app;
 
 public class Teacher {
-	private String dni, nombre, apellidos, email;
+	private String dni, name, lastname, email;
 
 	public Teacher() {
 		super();
 	}
 
-	public Teacher(String dni, String nombre, String apellidos, String email) {
+	public Teacher(String dni, String name, String lastname, String email) {
 		super();
 		this.dni = dni;
-		this.nombre = nombre;
-		this.apellidos = apellidos;
+		this.name = name;
+		this.lastname = lastname;
 		this.email = email;
 	}
-	
+
 	public String getDni() {
 		return dni;
 	}
@@ -23,20 +23,20 @@ public class Teacher {
 		this.dni = dni;
 	}
 
-	public String getNombre() {
-		return nombre;
+	public String getName() {
+		return name;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getApellidos() {
-		return apellidos;
+	public String getLastname() {
+		return lastname;
 	}
 
-	public void setApellidos(String apellidos) {
-		this.apellidos = apellidos;
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getEmail() {
@@ -49,11 +49,7 @@ public class Teacher {
 
 	@Override
 	public String toString() {
-		return "Profesor [dni=" + dni + ", nombre=" + nombre + ", apellidos=" + apellidos + ", email=" + email
-				+ ", getDni()=" + getDni() + ", getNombre()=" + getNombre() + ", getApellidos()=" + getApellidos()
-				+ ", getEmail()=" + getEmail() + "]";
+		return "Teacher [dni=" + dni + ", name=" + name + ", lastname=" + lastname + ", email=" + email + "]";
 	}
 
-
-	
 }

@@ -2,56 +2,66 @@ package app;
 
 public class RA {
 	private int id;
-	private String nombre, descripcion;
-	private int ponderacion, id_Asig;
+	private String name, description;
+	private int weighing, id_subject;
+
 	public RA() {
 		super();
 	}
-	public RA(int id, String nombre, String descripcion, int ponderacion, int id_Asig) {
+
+	public RA(int id, String name, String description, int weighing, int id_subject) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
-		this.descripcion = descripcion;
-		this.ponderacion = ponderacion;
-		this.id_Asig = id_Asig;
+		this.name = name;
+		this.description = description;
+		this.weighing = weighing;
+		this.id_subject = id_subject;
 	}
+
 	public int getId() {
 		return id;
 	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
-	public String getDescripcion() {
-		return descripcion;
-	}
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-	public int getPonderacion() {
-		return ponderacion;
-	}
-	public void setPonderacion(int ponderacion) {
-		this.ponderacion = ponderacion;
-	}
-	public int getId_Asig() {
-		return id_Asig;
-	}
-	public void setId_Asig(int id_Asig) {
-		this.id_Asig = id_Asig;
-	}
-	@Override
-	public String toString() {
-		return "RA [id=" + id + ", nombre=" + nombre + ", descripcion=" + descripcion + ", ponderacion=" + ponderacion
-				+ ", id_Asig=" + id_Asig + ", getId()=" + getId() + ", getNombre()=" + getNombre()
-				+ ", getDescripcion()=" + getDescripcion() + ", getPonderacion()=" + getPonderacion()
-				+ ", getId_Asig()=" + getId_Asig() + "]";
+
+	public String getName() {
+		return name;
 	}
 
-	
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public int getWeighing() {
+		return weighing;
+	}
+
+	public void setWeighing(int weighing) {
+		this.weighing = weighing;
+	}
+
+	public int getId_subject() {
+		return id_subject;
+	}
+
+	public void setId_subject(int id_subject) {
+		this.id_subject = id_subject;
+	}
+
+	@Override
+	public String toString() {
+		return "RA [id=" + id + ", name=" + name + ", description=" + description + ", weighing=" + weighing
+				+ ", id_subject=" + id_subject + "]";
+	}
+
 }
