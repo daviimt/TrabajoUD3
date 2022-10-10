@@ -1,25 +1,26 @@
 package app;
 
 public class User {
-	private String codigo, password, rol;
+	private int id;
+	private String password, role;
 
 	public User() {
 		super();
 	}
 
-	public User(String codigo, String password, String rol) {
+	public User(int id, String password, String role) {
 		super();
-		this.codigo = codigo;
+		this.id = id;
 		this.password = password;
-		this.rol = rol;
+		this.role = role;
 	}
 
-	public String getCodigo() {
-		return codigo;
+	public int getId() {
+		return id;
 	}
 
-	public void setCodigo(String codigo) {
-		this.codigo = codigo;
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getPassword() {
@@ -30,18 +31,19 @@ public class User {
 		this.password = password;
 	}
 
-	public String getRol() {
-		return rol;
+	public String getRole() {
+		return role;
 	}
 
-	public void setRol(String rol) {
-		this.rol = rol;
+	public void setRole(String role) {
+		this.role = role;
 	}
 
 	@Override
 	public String toString() {
-		return "Usuario [codigo=" + codigo + ", password=" + password + ", rol=" + rol + ", getCodigo()=" + getCodigo()
-				+ ", getPassword()=" + getPassword() + ", getRol()=" + getRol() + "]";
+		return "User [id=" + id + ", password=" + password + ", role=" + role + "]";
 	}
+
+	
 	
 }

@@ -30,10 +30,10 @@ import java.awt.Font;
 public class Register extends JFrame {
 
 	/** The jlpassword 2. */
-	private JLabel jlusername, jlname, jldni, jlemail, jlpassword, jlpassword2;
+	private JLabel  jldni,jlname, jllastname, jldate, jlphone, jlphoto,jlid, jlpassword, jlpassword2;
 
 	/** The jtemail. */
-	private JTextField jtusername, jtname, jtdni, jtemail;
+	private JTextField jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto,jtid, jtrole = new JTextField("Student");;
 
 	/** The jppassword 2. */
 	private JPasswordField jppassword, jppassword2;
@@ -45,7 +45,7 @@ public class Register extends JFrame {
 	private Icon icon;
 
 	/** The sdni. */
-	private String sdni = "[0-9]{8}[A-Za-z]";
+	private String sdni = "[0-9]{8}[A-Z]";
 
 	/** The semail. */
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
@@ -64,42 +64,14 @@ public class Register extends JFrame {
 		super("Register an user");
 		getContentPane().setBackground(new Color(102, 204, 153));
 		inicializate(Register.this);
-
-		jlusername = new JLabel("Username:");
-		jlusername.setBackground(new Color(252, 228, 163));
-		jlusername.setBounds(24, 30, 94, 13);
-		jlusername.setHorizontalAlignment(SwingConstants.CENTER);
-		jlusername.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlusername);
-
-		jtusername = new JTextField();
-		jtusername.setBounds(119, 27, 114, 19);
-		jtusername.setBackground(new Color(0, 176, 220));
-		jtusername.setColumns(10);
-		jtusername.setToolTipText("Introduce your user");
-		getContentPane().add(jtusername);
-
-		jlname = new JLabel("Name: ");
-		jlname.setBackground(new Color(0, 176, 220));
-		jlname.setBounds(24, 53, 94, 13);
-		jlname.setHorizontalAlignment(SwingConstants.CENTER);
-		jlname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlname);
-
-		jtname = new JTextField();
-		jtname.setBounds(119, 50, 114, 19);
-		jtname.setBackground(new Color(0, 176, 220));
-		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce your name");
-		getContentPane().add(jtname);
-
+		
 		jldni = new JLabel("D.N.I. : ");
 		jldni.setBackground(new Color(0, 176, 220));
 		jldni.setBounds(24, 122, 94, 13);
 		jldni.setHorizontalAlignment(SwingConstants.CENTER);
 		jldni.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldni);
-
+		
 		jtdni = new JTextField();
 		jtdni.setBounds(119, 119, 114, 19);
 		jtdni.setBackground(new Color(0, 176, 220));
@@ -107,20 +79,90 @@ public class Register extends JFrame {
 		jtdni.setToolTipText("Introduce your DNI");
 		getContentPane().add(jtdni);
 
-		jlemail = new JLabel("Email: ");
-		jlemail.setBackground(new Color(0, 176, 220));
-		jlemail.setBounds(24, 145, 94, 13);
-		jlemail.setHorizontalAlignment(SwingConstants.CENTER);
-		jlemail.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlemail);
+		jlname = new JLabel("Name: ");
+		jlname.setBackground(new Color(0, 176, 220));
+		jlname.setBounds(24, 53, 94, 13);
+		jlname.setHorizontalAlignment(SwingConstants.CENTER);
+		jlname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlname);
+		
+		jtname = new JTextField();
+		jtname.setBounds(119, 50, 114, 19);
+		jtname.setBackground(new Color(0, 176, 220));
+		jtname.setColumns(10);
+		jtname.setToolTipText("Introduce your name");
+		getContentPane().add(jtname);
+		
+		jllastname = new JLabel("Last name:");
+		jllastname.setBackground(new Color(252, 228, 163));
+		jllastname.setBounds(24, 30, 94, 13);
+		jllastname.setHorizontalAlignment(SwingConstants.CENTER);
+		jllastname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jllastname);
 
-		jtemail = new JTextField();
-		jtemail.setBounds(119, 142, 114, 19);
-		jtemail.setBackground(new Color(0, 176, 220));
-		jtemail.setColumns(13);
-		jtemail.setToolTipText("Introduce your email");
-		getContentPane().add(jtemail);
+		jtlastname = new JTextField();
+		jtlastname.setBounds(119, 27, 114, 19);
+		jtlastname.setBackground(new Color(0, 176, 220));
+		jtlastname.setColumns(10);
+		jtlastname.setToolTipText("Introduce your last name");
+		getContentPane().add(jtlastname);
 
+		jldate = new JLabel("Date: ");
+		jldate.setBackground(new Color(0, 176, 220));
+		jldate.setBounds(24, 145, 94, 13);
+		jldate.setHorizontalAlignment(SwingConstants.CENTER);
+		jldate.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jldate);
+
+		jtdate = new JTextField();
+		jtdate.setBounds(119, 142, 114, 19);
+		jtdate.setBackground(new Color(0, 176, 220));
+		jtdate.setColumns(13);
+		jtdate.setToolTipText("Introduce your date");
+		getContentPane().add(jtdate);
+
+		jlphone = new JLabel("Phone: ");
+		jlphone.setBackground(new Color(0, 176, 220));
+		jlphone.setBounds(24, 145, 94, 13);
+		jlphone.setHorizontalAlignment(SwingConstants.CENTER);
+		jlphone.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlphone);
+
+		jtphone = new JTextField();
+		jtphone.setBounds(119, 142, 114, 19);
+		jtphone.setBackground(new Color(0, 176, 220));
+		jtphone.setColumns(13);
+		jtphone.setToolTipText("Introduce your phone");
+		getContentPane().add(jtphone);
+		
+		jlphoto = new JLabel("Photo: ");
+		jlphoto.setBackground(new Color(0, 176, 220));
+		jlphoto.setBounds(24, 145, 94, 13);
+		jlphoto.setHorizontalAlignment(SwingConstants.CENTER);
+		jlphoto.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlphoto);
+
+		jtphoto = new JTextField();
+		jtphoto.setBounds(119, 142, 114, 19);
+		jtphoto.setBackground(new Color(0, 176, 220));
+		jtphoto.setColumns(13);
+		jtphoto.setToolTipText("Introduce your phone");
+		getContentPane().add(jtphoto);
+
+		jlid = new JLabel("Id: ");
+		jlid.setBackground(new Color(0, 176, 220));
+		jlid.setBounds(24, 145, 94, 13);
+		jlid.setHorizontalAlignment(SwingConstants.CENTER);
+		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlid);
+
+		jtid = new JTextField();
+		jtid.setBounds(119, 142, 114, 19);
+		jtid.setBackground(new Color(0, 176, 220));
+		jtid.setColumns(13);
+		jtid.setToolTipText("Introduce your Id");
+		getContentPane().add(jtid);
+		
 		jlpassword = new JLabel("Password: ");
 		jlpassword.setBackground(new Color(0, 176, 220));
 		jlpassword.setBounds(24, 191, 94, 13);
@@ -148,7 +190,7 @@ public class Register extends JFrame {
 		jppassword2.setColumns(10);
 		jppassword2.setToolTipText("Confirm your password");
 		getContentPane().add(jppassword2);
-
+		
 		jbconfirm = new JButton("");
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
 		jbconfirm.setToolTipText("Confirm");
@@ -162,7 +204,7 @@ public class Register extends JFrame {
 
 				boolean verification = true;
 
-				JTextField[] group = { jtusername, jtname, jtdni, jtemail, jppassword, jppassword2 };
+				JTextField[] group = {jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto, jppassword, jppassword2 };
 
 				for (JTextField j : group) {
 					if (j.getText().isBlank()) {
@@ -174,16 +216,18 @@ public class Register extends JFrame {
 
 				if (verification) {
 					if (jtdni.getText().matches(sdni)) {
-						if (jtemail.getText().matches(semail)) {
+						if (jtphone.getText().matches(semail)) {
 							if (jppassword.getText().matches(spassw)) {
 								if (jppassword2.getText().equals(jppassword.getText())) {
 
 									try {
-										FileWriter fw = new FileWriter(fusers, true);
-										fw.write(jtusername.getText() + ";" + jtname.getText() + ";" + jtdni.getText()
-												+ ";" + jtemail.getText() + ";" + jppassword.getText() + "\n");
-										fw.close();
-									} catch (IOException e1) {
+//										FileWriter fw = new FileWriter(fusers, true);
+//										fw.write(jtusername.getText() + ";" + jtname.getText() + ";" + jtdni.getText()
+//												+ ";" + jtemail.getText() + ";" + jppassword.getText() + "\n");
+//										fw.close();
+										Functions f=new Functions();
+										f.Write(Integer.parseInt(jtdni.getText()), jppassword.getText(), jtphone.getText());
+									} catch (Exception e1) {
 										e1.printStackTrace();
 									}
 									icon = new ImageIcon("images/check.png");
@@ -258,7 +302,7 @@ public class Register extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(7, 2));
+		jf.getContentPane().setLayout(new GridLayout(10, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
