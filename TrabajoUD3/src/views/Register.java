@@ -23,6 +23,7 @@ import javax.swing.SwingConstants;
 
 import java.awt.Color;
 import java.awt.Font;
+import com.toedter.calendar.JDateChooser;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -58,6 +59,7 @@ public class Register extends JFrame {
 
 	/** The fusers. */
 	private File fusers = new File("files/Users");
+	private JDateChooser dateChooser;
 
 	/**
 	 * Instantiates a new register.
@@ -97,7 +99,7 @@ public class Register extends JFrame {
 		getContentPane().add(jtname);
 		
 		jllastname = new JLabel("Last name:");
-		jllastname.setBackground(new Color(252, 228, 163));
+		jllastname.setBackground(new Color(0, 176, 220));
 		jllastname.setBounds(24, 30, 94, 13);
 		jllastname.setHorizontalAlignment(SwingConstants.CENTER);
 		jllastname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
@@ -116,13 +118,17 @@ public class Register extends JFrame {
 		jldate.setHorizontalAlignment(SwingConstants.CENTER);
 		jldate.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldate);
-
-		jtdate = new JTextField();
-		jtdate.setBounds(119, 142, 114, 19);
-		jtdate.setBackground(new Color(0, 176, 220));
-		jtdate.setColumns(13);
-		jtdate.setToolTipText("Introduce your date");
-		getContentPane().add(jtdate);
+		
+		dateChooser = new JDateChooser();
+		dateChooser.setBackground(Color.CYAN);
+		dateChooser.getCalendarButton().setBackground(new Color(0, 176, 220));
+		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		getContentPane().add(dateChooser);
+		
+		jtdate = new JTextField(String.valueOf(dateChooser.getDate()));
 
 		jlphone = new JLabel("Phone: ");
 		jlphone.setBackground(new Color(0, 176, 220));
@@ -193,7 +199,7 @@ public class Register extends JFrame {
 
 				boolean verification = true;
 
-				JTextField[] group = {jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto, jppassword, jppassword2 };
+				JTextField[] group = {jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto, jppassword, jppassword2 };
 
 				for (JTextField j : group) {
 					if (j.getText().isBlank()) {
