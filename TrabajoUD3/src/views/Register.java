@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -225,7 +226,8 @@ public class Register extends JFrame {
 									try {
 
 										Functions f=new Functions();
-										f.Write(Integer.parseInt(jtid.getText()), jppassword.getText(),jtrole.getText());
+										f.WriteUser(Integer.parseInt(jtid.getText()), jppassword.getText(),jtrole.getText());
+										//f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(), jtdate.getText(),jtphone.getText(),jtphoto.getText());
 										dispose();
 										Login log=new Login();
 									
