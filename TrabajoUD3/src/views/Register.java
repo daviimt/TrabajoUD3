@@ -24,6 +24,7 @@ import javax.swing.SwingConstants;
 import java.awt.Color;
 import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 
 // TODO: Auto-generated Javadoc
 /**
@@ -122,10 +123,9 @@ public class Register extends JFrame {
 		dateChooser = new JDateChooser();
 		dateChooser.setBackground(Color.CYAN);
 		dateChooser.getCalendarButton().setBackground(new Color(0, 176, 220));
-		dateChooser.getCalendarButton().addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
+		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
+		editor.setToolTipText("Introduce your birth date");
+		editor.setEditable(false);
 		getContentPane().add(dateChooser);
 		
 		jtdate = new JTextField(String.valueOf(dateChooser.getDate()));
