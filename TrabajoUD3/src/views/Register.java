@@ -32,10 +32,10 @@ import java.awt.Font;
 public class Register extends JFrame {
 
 	/** The jlpassword 2. */
-	private JLabel  jldni,jlname, jllastname, jldate, jlphone, jlphoto,jlid, jlpassword, jlpassword2;
+	private JLabel  jldni,jlname, jllastname, jldate, jlphone, jlphoto, jlpassword, jlpassword2;
 
 	/** The jtemail. */
-	private JTextField jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto,jtid, jtrole = new JTextField("Student");;
+	private JTextField jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");;
 
 	/** The jppassword 2. */
 	private JPasswordField jppassword, jppassword2;
@@ -151,20 +151,6 @@ public class Register extends JFrame {
 		jtphoto.setColumns(13);
 		jtphoto.setToolTipText("Introduce your phone");
 		getContentPane().add(jtphoto);
-
-		jlid = new JLabel("Id: ");
-		jlid.setBackground(new Color(0, 176, 220));
-		jlid.setBounds(24, 145, 94, 13);
-		jlid.setHorizontalAlignment(SwingConstants.CENTER);
-		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlid);
-
-		jtid = new JTextField();
-		jtid.setBounds(119, 142, 114, 19);
-		jtid.setBackground(new Color(0, 176, 220));
-		jtid.setColumns(13);
-		jtid.setToolTipText("Introduce your Id");
-		getContentPane().add(jtid);
 		
 		jlpassword = new JLabel("Password: ");
 		jlpassword.setBackground(new Color(0, 176, 220));
@@ -226,8 +212,8 @@ public class Register extends JFrame {
 									try {
 
 										Functions f=new Functions();
-										f.WriteUser(Integer.parseInt(jtid.getText()), jppassword.getText(),jtrole.getText());
-										//f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(), jtdate.getText(),jtphone.getText(),jtphoto.getText());
+										f.WriteUser(f.generateID(), jppassword.getText(),jtrole.getText());
+										f.WriteStudent(f.generateID(),jtdni.getText(), jtname.getText(), jtlastname.getText(),java.sql.Date.valueOf( jtdate.getText()),jtphone.getText(),jtphoto.getText());
 										dispose();
 										Login log=new Login();
 									
@@ -252,7 +238,7 @@ public class Register extends JFrame {
 
 						} else {
 							icon = new ImageIcon("images/warning.png");
-							JOptionPane.showMessageDialog(null, "Email does not meet the required parameters", "Error",
+							JOptionPane.showMessageDialog(null, "Phone does not meet the required parameters", "Error",
 									JOptionPane.INFORMATION_MESSAGE, icon);
 						}
 					} else {
@@ -304,7 +290,7 @@ public class Register extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(10, 2));
+		jf.getContentPane().setLayout(new GridLayout(9, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
