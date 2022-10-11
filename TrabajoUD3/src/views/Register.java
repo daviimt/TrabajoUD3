@@ -8,6 +8,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -48,7 +49,8 @@ public class Register extends JFrame {
 	private String sdni = "[0-9]{8}[A-Z]";
 
 	/** The semail. */
-	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
+	//private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
+	private String sphone= "[0-9]{9}";
 
 	/** The spassw. */
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
@@ -216,26 +218,24 @@ public class Register extends JFrame {
 
 				if (verification) {
 					if (jtdni.getText().matches(sdni)) {
-						if (jtphone.getText().matches(semail)) {
+						if (jtphone.getText().matches(sphone)) {
 							if (jppassword.getText().matches(spassw)) {
 								if (jppassword2.getText().equals(jppassword.getText())) {
 
 									try {
-//										FileWriter fw = new FileWriter(fusers, true);
-//										fw.write(jtusername.getText() + ";" + jtname.getText() + ";" + jtdni.getText()
-//												+ ";" + jtemail.getText() + ";" + jppassword.getText() + "\n");
-//										fw.close();
-										Functions f=new Functions();
-										f.Write(Integer.parseInt(jtdni.getText()), jppassword.getText(), jtphone.getText());
-									} catch (Exception e1) {
-										e1.printStackTrace();
-									}
-									icon = new ImageIcon("images/check.png");
-									JOptionPane.showMessageDialog(null, "User creation complete.", "Complete",
-											JOptionPane.INFORMATION_MESSAGE, icon);
-									dispose();
-									Login login = new Login();
 
+										Functions f=new Functions();
+										f.Write(Integer.parseInt(jtid.getText()), jppassword.getText(),jtrole.getText());
+										dispose();
+										Login log=new Login();
+									
+									 }catch(SQLException e1){
+								        	Icon icon = new ImageIcon("images/warning.png");
+											JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
+													JOptionPane.WARNING_MESSAGE, icon);
+								        
+									}
+									
 								} else {
 									icon = new ImageIcon("images/warning.png");
 									JOptionPane.showMessageDialog(null, "Passwords don't match", "Error",

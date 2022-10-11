@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import app.User;
@@ -26,26 +28,32 @@ public class Functions {
 			String password = "";
 
 			connection = DriverManager.getConnection(url, username, password);
+			statement = connection.createStatement();
 
 		} catch (Exception ex) {
 			System.out.println("Error, no se ha podido cargar MySQL JDBC Driver");
 		}
 	}
 
-	public void Read() {
+	public User Read(int id) {
+		boolean exit=false;
+		User u=new User();
 		try {
 
-			statement = connection.createStatement();
 			ResultSet rs = statement.executeQuery("SELECT * FROM usuarios");
 
 			while (rs.next()) {
 
-				String nombre = rs.getString("nombre");
-				String apellido = rs.getString("apellido");
-
-				System.out.println(String.format("%s %s", nombre, apellido));
+				if(id==rs.getInt("Codigo")) {
+					int cod=rs.getInt("Codigo");
+					String contra=rs.getString("Password");
+					String rol=rs.getString("Rol");
+					u.setId(cod);
+					u.setPassword(contra);
+					u.setRole(rol);
+				}
 			}
-
+			
 			rs.close();
 			statement.close();
 			connection.close();
@@ -53,9 +61,10 @@ public class Functions {
 		} catch (SQLException ex) {
 			System.out.println(ex);
 		}
+		return u;
 	}
 
-	public void Write(int id, String password, String role) {
+	public void Write(int id, String password, String role) throws SQLException {
 		
 	        PreparedStatement ps;
 	        String sql;
@@ -63,7 +72,7 @@ public class Functions {
 	        user.setId(id);
 	        user.setPassword(password);
 	        user.setRole(role);
-	        try{
+	        
 	            sql = "insert into usuarios(Codigo, Password, Rol) values(?,?,?)";
 	            ps = connection.prepareStatement(sql);
 	            ps.setInt(1, user.getId());
@@ -71,10 +80,12 @@ public class Functions {
 	            ps.setString(3, user.getRole());
 	            ps.executeUpdate();
 	            
-	            JOptionPane.showMessageDialog(null, "Data inserted");
-	        }catch(SQLException e){
-	            JOptionPane.showMessageDialog(null, "Connection error: " + e.getMessage());
-	        }
+	            Icon icon = new ImageIcon("images/check.png");
+				JOptionPane.showMessageDialog(null, "Data inserted", "Completed",
+						JOptionPane.INFORMATION_MESSAGE, icon);
+				
+	       
 	    
 	}
+	
 }
