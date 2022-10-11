@@ -4,20 +4,20 @@ import java.sql.Date;
 
 public class Student {
 	private String dni, name, lastname, phone, photo;
-	private Date fecha_nac;
+	private Date birth_date;
 
 	public Student() {
 		super();
 	}
 
-	public Student(String dni, String name, String lastname, String phone, String photo, Date fecha_nac) {
+	public Student(String dni, String name, String lastname, String phone, String photo, Date birth_date) {
 		super();
 		this.dni = dni;
 		this.name = name;
 		this.lastname = lastname;
 		this.phone = phone;
 		this.photo = photo;
-		this.fecha_nac = fecha_nac;
+		this.birth_date = birth_date;
 	}
 
 	public String getDni() {
@@ -60,18 +60,19 @@ public class Student {
 		this.photo = photo;
 	}
 
-	public Date getFecha_nac() {
-		return fecha_nac;
+	public Date getBirth_date() {
+		return birth_date;
 	}
 
-	public void setFecha_nac(Date fecha_nac) {
-		this.fecha_nac = fecha_nac;
+	public void setBirth_date(Date birth_date) {
+		this.birth_date = birth_date;
 	}
 
 	@Override
 	public String toString() {
 		return "Student [dni=" + dni + ", name=" + name + ", lastname=" + lastname + ", phone=" + phone + ", photo="
-				+ photo + ", fecha_nac=" + fecha_nac + "]";
+				+ photo + ", birth_date=" + birth_date + "]";
 	}
 
+	
 }
