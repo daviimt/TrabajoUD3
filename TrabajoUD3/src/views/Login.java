@@ -72,22 +72,21 @@ public class Login extends JFrame {
 		jtid.setColumns(10);
 		jtid.setToolTipText("Introduce your id");
 		getContentPane().add(jtid);
-				
-				
-						jltitle = new JLabel("School");
-						jltitle.setBounds(87, 21, 96, 36);
-						jltitle.setVerticalAlignment(SwingConstants.BOTTOM);
-						jltitle.setHorizontalAlignment(SwingConstants.CENTER);
-						jltitle.setForeground(new Color(0, 70, 101));
-						jltitle.setIcon(new ImageIcon("images/School.png"));
-						jltitle.setFont(new Font("Microsoft Himalaya", Font.BOLD, 25));
-						getContentPane().add(jltitle);
-		
-				jlid = new JLabel("User ID:");
-				jlid.setBounds(53, 69, 70, 21);
-				jlid.setHorizontalAlignment(SwingConstants.CENTER);
-				jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-				getContentPane().add(jlid);
+
+		jltitle = new JLabel("School");
+		jltitle.setBounds(87, 21, 96, 36);
+		jltitle.setVerticalAlignment(SwingConstants.BOTTOM);
+		jltitle.setHorizontalAlignment(SwingConstants.CENTER);
+		jltitle.setForeground(new Color(0, 70, 101));
+		jltitle.setIcon(new ImageIcon("images/School.png"));
+		jltitle.setFont(new Font("Microsoft Himalaya", Font.BOLD, 25));
+		getContentPane().add(jltitle);
+
+		jlid = new JLabel("User ID:");
+		jlid.setBounds(53, 69, 70, 21);
+		jlid.setHorizontalAlignment(SwingConstants.CENTER);
+		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlid);
 
 		jlpassword = new JLabel("Password:");
 		jlpassword.setBounds(53, 100, 70, 21);
@@ -183,7 +182,7 @@ public class Login extends JFrame {
 
 							if (passwordCorrect == true) {
 								if (us.getRole().equals("Student")) {
-									//MainWindowStudent mainStudent = new MainWindowStudent(jtid.getText());
+									// MainWindowStudent mainStudent = new MainWindowStudent(jtid.getText());
 
 								} else if (us.getRole().equals("Teacher")) {
 									MainWindowTeacher mainTeacher = new MainWindowTeacher(jtid.getText());
@@ -200,10 +199,10 @@ public class Login extends JFrame {
 							JOptionPane.showMessageDialog(null, "The user doesn't exists", "Error",
 									JOptionPane.WARNING_MESSAGE, icon);
 						}
-					}else {
+					} else {
 						icon = new ImageIcon("images/warning.png");
-						JOptionPane.showMessageDialog(null, "ID is not numeric", "Error",
-								JOptionPane.WARNING_MESSAGE, icon);
+						JOptionPane.showMessageDialog(null, "ID is not numeric", "Error", JOptionPane.WARNING_MESSAGE,
+								icon);
 					}
 				}
 			} else {
