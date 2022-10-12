@@ -52,7 +52,7 @@ public class MainWindowTeacher extends JFrame {
 	private JPanel panel, panel_1;
 	private JButton jbupdate, jbclose;
 	private JLabel jluser;
-	String[] nameColums = { "Subject", "RA", "Mark" };
+	String[] nameColums = { "Student","Subject", "RA", "Mark" };
 	private Icon icon;
 	Student s = new Student();
 
