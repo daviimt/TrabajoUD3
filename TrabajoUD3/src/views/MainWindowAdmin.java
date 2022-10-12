@@ -48,12 +48,11 @@ import java.awt.FlowLayout;
 @SuppressWarnings("serial")
 public class MainWindowAdmin extends JFrame {
 
-
 	private JTable table;
 	private JPanel panel, panel_1;
-	private JButton jbupdate,jbinsert, jbdelete ,jbclose;
+	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose;
 	private JLabel jluser;
-	String[] nameColums = { "ID", "Name", "LastName","Email" };
+	String[] nameColums = { "ID", "Name", "LastName", "Email" };
 	private Icon icon;
 	Student s = new Student();
 
@@ -89,38 +88,38 @@ public class MainWindowAdmin extends JFrame {
 
 		createJTable();
 		// Termina el JTable
-		
+
 		panel_1 = new JPanel();
-		panel_1.setBackground(new Color(8, 116, 247 ));
+		panel_1.setBackground(new Color(8, 116, 247));
 		panel_1.setOpaque(true);
 		add(panel_1, BorderLayout.SOUTH);
 
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		panel = new JPanel();
-		panel.setBackground(new Color(8, 116, 247 ));
+		panel.setBackground(new Color(8, 116, 247));
 		panel_1.add(panel);
-		
+
 		jbinsert = new JButton("");
-		jbinsert.setBackground(new Color(8, 116, 247 ));
+		jbinsert.setBackground(new Color(8, 116, 247));
 		jbinsert.setToolTipText("Insert teacher");
 		jbinsert.setBorderPainted(false);
 		jbinsert.setIcon(new ImageIcon("images/insert.png"));
 		jbinsert.addActionListener(new ActionListener() {
-			
+
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				InsertTeacher insert=new InsertTeacher(s);
-				
+				InsertTeacher insert = new InsertTeacher(s);
+
 			}
 		});
-		
+
 		panel.add(jbinsert);
 
 		jbupdate = new JButton("");
-		jbupdate.setBackground(new Color(8, 116, 247 ));
+		jbupdate.setBackground(new Color(8, 116, 247));
 		jbupdate.setToolTipText("Update teacher");
 		jbupdate.setBorderPainted(false);
 		jbupdate.setIcon(new ImageIcon("images/update.png"));
@@ -137,9 +136,8 @@ public class MainWindowAdmin extends JFrame {
 
 		panel.add(jbupdate);
 
-		
 		jbdelete = new JButton("");
-		jbdelete.setBackground(new Color(8, 116, 247 ));
+		jbdelete.setBackground(new Color(8, 116, 247));
 		jbdelete.setToolTipText("Delete teacher");
 		jbdelete.setBorderPainted(false);
 		jbdelete.setIcon(new ImageIcon("images/delete.png"));
@@ -148,7 +146,7 @@ public class MainWindowAdmin extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				
+
 				int option = JOptionPane.showOptionDialog(MainWindowAdmin.this, "Are you sure?", "Confirm",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
@@ -156,7 +154,24 @@ public class MainWindowAdmin extends JFrame {
 		});
 
 		panel.add(jbdelete);
-		
+
+		jbdetails = new JButton("");
+		jbdetails.setBackground(new Color(8, 116, 247));
+		jbdetails.setToolTipText("Details");
+		jbdetails.setBorderPainted(false);
+		jbdetails.setIcon(new ImageIcon("images/details.png"));
+		/*jbdetails.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				DetailsTeacher details = new DetailsTeacher();
+
+			}
+		});*/
+
+		panel.add(jbdetails);
+
 		jbclose = new JButton("");
 		jbclose.setBackground(new Color(8, 116, 247));
 		jbclose.setToolTipText("Log Out");
