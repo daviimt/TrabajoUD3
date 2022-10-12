@@ -151,18 +151,18 @@ public class Register extends JFrame {
 		jtphone.setToolTipText("Introduce your phone");
 		getContentPane().add(jtphone);
 		
-//		jlphoto = new JLabel("Photo: ");
-//		jlphoto.setBackground(new Color(0, 176, 220));
-//		jlphoto.setBounds(24, 145, 94, 13);
-//		jlphoto.setHorizontalAlignment(SwingConstants.CENTER);
-//		jlphoto.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-//		getContentPane().add(jlphoto);
-		imagen = new ImageIcon("images/"+jtdni.getText()).getImage();
-		img2=new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
-		
-		jlbphoto.setIcon(img2);
-		jlbphoto.setBounds(207, 210, 133, 120);
-		getContentPane().add(jlbphoto);
+		jlphoto = new JLabel("Photo: ");
+		jlphoto.setBackground(new Color(0, 176, 220));
+		jlphoto.setBounds(24, 145, 94, 13);
+		jlphoto.setHorizontalAlignment(SwingConstants.CENTER);
+		jlphoto.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlphoto);
+//		imagen = new ImageIcon("images/"+jtdni.getText()).getImage();
+//		img2=new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
+//		
+//		jlbphoto.setIcon(img2);
+//		jlbphoto.setBounds(207, 210, 133, 120);
+//		getContentPane().add(jlbphoto);
 		
 		jtphoto = new JTextField();
 		jtphoto.setBounds(119, 142, 114, 19);
@@ -171,14 +171,14 @@ public class Register extends JFrame {
 		jtphoto.setToolTipText("Introduce your phone");
 		getContentPane().add(jtphoto);
 		
-		jbphoto = new JButton("Imagen");
-		jbphoto.setToolTipText("Buscar archivo");
-		jbphoto.setBackground(new Color(238,238,238));
-		jbphoto.setBorderPainted(true);
-		jbphoto.setBounds(116, 222, 51, 46);
-		getContentPane().add(jbphoto);
-		InsertImg insertImg = new InsertImg();
-		jbphoto.addActionListener(insertImg);
+//		jbphoto = new JButton("Imagen");
+//		jbphoto.setToolTipText("Buscar archivo");
+//		jbphoto.setBackground(new Color(238,238,238));
+//		jbphoto.setBorderPainted(true);
+//		jbphoto.setBounds(116, 222, 51, 46);
+//		getContentPane().add(jbphoto);
+//		InsertImg insertImg = new InsertImg();
+//		jbphoto.addActionListener(insertImg);
 		
 		jlpassword = new JLabel("Password: ");
 		jlpassword.setBackground(new Color(0, 176, 220));
@@ -348,7 +348,7 @@ public class Register extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(10, 2));
+		jf.getContentPane().setLayout(new GridLayout(9, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}

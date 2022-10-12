@@ -66,6 +66,46 @@ public class Functions {
 		}
 		return u;
 	}
+	
+//	public User ReadStudent(User u) {
+//
+//		Student  s = new Student();
+//		try {
+//
+//			ResultSet rs = statement.executeQuery("SELECT * FROM alumno");
+//
+//			while (rs.next()) {
+//
+//				if (u.getId() == rs.getInt("ID")) {
+//					student = new Student();
+//					student.setId(u.getId());
+//					student.setDni(dni);
+//					student.setName(name);
+//					student.setLastname(lastname);
+//					student.setBirth_date(birth_date);
+//					student.setPhone(phone);
+//					student.setPhoto(photo);
+//
+//					ps.setInt(1, student.getId());
+//					ps.setString(2, student.getDni());
+//					ps.setString(3, student.getName());
+//					ps.setString(4, student.getLastname());
+//					ps.setDate(5, student.getBirth_date());
+//					ps.setString(6, student.getPhone());
+//					ps.setString(7, student.getPhoto());
+//				}
+//			}
+//
+//			rs.close();
+//			statement.close();
+//			connection.close();
+//
+//		} catch (SQLException ex) {
+//			System.out.println(ex);
+//		}
+//		return u;
+//	}
+	
 
 	public void WriteUser(int id, String password, String role) throws SQLException {
 

@@ -41,7 +41,6 @@ import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
-import Entities.Crypto;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
@@ -59,31 +58,22 @@ public class MainWindowStudent extends JFrame {
 	private JPanel panel, panel_1;
 
 	/** The jButtons. */
-	private JButton jbdetails, jbinsert, jbupdate, jbclose, jbstatistics, jbdelete;
+	private JButton jbupdate, jbclose;
 
 	/** The jluser. */
 	private JLabel jluser;
-
-	/** The jcbfilter. */
-	private JComboBox<Object> jcbfilter;
-
-	/** The is. */
-	private ObjectInputStream is;
-
-	/** The os. */
-	private ObjectOutputStream os;
 
 	/** The f. */
 	private File f = new File("files/Cryptos");
 
 	/** The name colums. */
-	String[] nameColums = { "Name", "Value", "Market Cap", "Creator" };
+	String[] nameColums = { "Subject", "RA", "Mark" };
 
 	/** The list C. */
-	static List<Crypto> listC;
+	//static List<Crypto> listC;
 
 	/** The list order. */
-	static List<Crypto> listOrder;
+	//static List<Crypto> listOrder;
 
 	/** The icon. */
 	private Icon icon;
@@ -98,130 +88,15 @@ public class MainWindowStudent extends JFrame {
 		super("Menu");
 		inicializate(MainWindowStudent.this);
 
-		listOrder = new ArrayList<>();
-		listC = new ArrayList<>();
-		try {
-			is = new ObjectInputStream(new FileInputStream(f));
-			Crypto c = (Crypto) is.readObject();
-			while (c != null) {
-				listC.add(c);
-				c = (Crypto) is.readObject();
-			}
-			is.close();
-		} catch (Exception e) {
-		}
-
 		jluser = new JLabel("Username: " + name);
 		jluser.setBackground(Color.GRAY);
 		jluser.setHorizontalAlignment(SwingConstants.CENTER);
 		jluser.setFont(new Font("Poor Richard", Font.BOLD, 18));
 
-		String[] filters = { "Default", "Name A-Z", "Name Z-A", "Value >", "Value <", "MarketCap >", "MarketCap <",
-				"Creator A-Z", "Creator Z-A" };
-
 		JPanel jpupper = new JPanel();
 		jpupper.setBackground(new Color(243, 189, 109));
-		jcbfilter = new JComboBox(filters);
-		jcbfilter.setBackground(new Color(196, 172, 148));
-		jcbfilter.setToolTipText("Filters");
-		jcbfilter.setUI(new BasicComboBoxUI() {
-            @Override
-            protected ComboPopup createPopup() {
-                return new BasicComboPopup(comboBox) {
-                    @Override
-                    protected JScrollPane createScroller() {
-                        JScrollPane scroller = new JScrollPane(list, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-                                JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-                        scroller.getVerticalScrollBar().setUI(new BasicScrollBarUI() {
-                            @Override
-                            protected JButton createDecreaseButton(int orientation) {
-                                return createZeroButton();
-                            }
-
-                            @Override
-                            protected JButton createIncreaseButton(int orientation) {
-                                return createZeroButton();
-                            }
-
-                            @Override
-                            public Dimension getPreferredSize(JComponent c) {
-                                return new Dimension(10, super.getPreferredSize(c).height);
-                            }
-
-                            private JButton createZeroButton() {
-                                return new JButton() {
-                                    @Override
-                                    public Dimension getMinimumSize() {
-                                        return new Dimension(new Dimension(0, 0));
-                                    }
-
-                                    @Override
-                                    public Dimension getPreferredSize() {
-                                        return new Dimension(new Dimension(0, 0));
-                                    }
-
-                                    @Override
-                                    public Dimension getMaximumSize() {
-                                        return new Dimension(new Dimension(0, 0));
-                                    }
-                                };
-                            }
-                        });
-                        return scroller;
-                    }
-                };
-            }
-        });
-		jcbfilter.addItemListener(new ItemListener() {
-			@Override
-			public void itemStateChanged(ItemEvent evento) {
-				if (jcbfilter.getSelectedItem().equals("Default")) {
-					listOrder = listC;
-					createJTable();
-
-				} else if (jcbfilter.getSelectedItem().equals("Name A-Z")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getName))
-							.collect(Collectors.toList());
-					createJTable();
-
-				} else if (jcbfilter.getSelectedItem().equals("Name Z-A")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getName).reversed())
-							.collect(Collectors.toList());
-					createJTable();
-				} else if (jcbfilter.getSelectedItem().equals("Value >")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getValue).reversed())
-							.collect(Collectors.toList());
-					createJTable();
-
-				} else if (jcbfilter.getSelectedItem().equals("Value <")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getValue))
-							.collect(Collectors.toList());
-					createJTable();
-
-				} else if (jcbfilter.getSelectedItem().equals("MarketCap >")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getMarketCap).reversed())
-							.collect(Collectors.toList());
-					createJTable();
-
-				} else if (jcbfilter.getSelectedItem().equals("MarketCap <")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getMarketCap))
-							.collect(Collectors.toList());
-					createJTable();
-
-				} else if (jcbfilter.getSelectedItem().equals("Creator A-Z")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getCreator))
-							.collect(Collectors.toList());
-					createJTable();
-				} else if (jcbfilter.getSelectedItem().equals("Creator Z-A")) {
-					listOrder = listC.stream().sorted(Comparator.comparing(Crypto::getCreator).reversed())
-							.collect(Collectors.toList());
-					createJTable();
-				}
-			}
-		});
 		
 		jpupper.add(jluser);
-		jpupper.add(jcbfilter);
 		add(jpupper, BorderLayout.NORTH);
 
 		// JTable Prueba (con defaulttablemade)
@@ -238,7 +113,7 @@ public class MainWindowStudent extends JFrame {
 		scrollPane.getViewport().setBackground(new Color(252, 228, 163));
 		add(scrollPane, BorderLayout.CENTER);
 
-		listOrder = listC;
+
 		createJTable();
 		// Termina el JTable
 
@@ -247,172 +122,22 @@ public class MainWindowStudent extends JFrame {
 		panel_1.setOpaque(true);
 		add(panel_1, BorderLayout.SOUTH);
 
-		jbstatistics = new JButton("");
-		jbstatistics.setBackground(new Color(196, 172, 148));
-		jbstatistics.setToolTipText("Statistics");
-		jbstatistics.setBorderPainted(false);
-		jbstatistics.setIcon(new ImageIcon("images/statistics.png"));
-		jbstatistics.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("unused")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				Stadistics statistics = new Stadistics(name);
-
-			}
-		});
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		panel_1.add(jbstatistics);
 
 		panel = new JPanel();
 		panel.setBackground(new Color(196, 172, 148));
 		panel_1.add(panel);
 
-		jbinsert = new JButton("");
-		jbinsert.setBackground(new Color(196, 172, 148));
-		jbinsert.setToolTipText("Insert");
-		jbinsert.setBorderPainted(false);
-		jbinsert.setIcon(new ImageIcon("images/Insert.png"));
-		jbinsert.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("unused")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				Insert statistics = new Insert(name);
-				dispose();
-
-			}
-		});
-		panel.add(jbinsert);
-
-		jbdetails = new JButton("");
-		jbdetails.setIcon(new ImageIcon("images/details.png"));
-		jbdetails.setToolTipText("Details");
-		jbdetails.setBackground(new Color(196, 172, 148));
-		jbdetails.setBorderPainted(false);
-		jbdetails.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("unused")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				if (table.getSelectedRow() < 0) {
-					icon = new ImageIcon("images/warning.png");
-					JOptionPane.showMessageDialog(null, "You have to select a crypto", "Error",
-							JOptionPane.WARNING_MESSAGE, icon);
-				} else {
-					Crypto c = getListC().get(table.getSelectedRow());
-					dispose();
-					Details.cryp = c;
-					Details details = new Details(name);
-				}
-
-			}
-		});
-		panel.add(jbdetails);
-
-		jbupdate = new JButton("");
+	
+		jbupdate = new JButton("Update data");
 		jbupdate.setBackground(new Color(196, 172, 148));
-		jbupdate.setToolTipText("Update");
+		jbupdate.setToolTipText("Update your data");
 		jbupdate.setBorderPainted(false);
 		jbupdate.setIcon(new ImageIcon("images/update.png"));
-		jbupdate.addActionListener(new ActionListener() {
-			@SuppressWarnings("unused")
-			@Override
-			public void actionPerformed(ActionEvent e) {
 
-				if (table.getSelectedRow() >= 0) {
-					Crypto c = getListC().get(table.getSelectedRow());
-					if (c.getCreator().equals(name) || name.equals("admin")) {
-
-						dispose();
-						Update.cryp = c;
-						Update update = new Update(name, table.getSelectedRow());
-					} else {
-						icon = new ImageIcon("images/warning.png");
-						JOptionPane.showMessageDialog(MainWindow.this, "You aren't creator", "Error",
-								JOptionPane.WARNING_MESSAGE, icon);
-					}
-
-				} else {
-					icon = new ImageIcon("images/warning.png");
-					JOptionPane.showMessageDialog(null, "You have to select a crypto", "Error",
-							JOptionPane.WARNING_MESSAGE, icon);
-				}
-			}
-		});
 		panel.add(jbupdate);
 
-		jbdelete = new JButton("");
-		jbdelete.setBackground(new Color(196, 172, 148));
-		jbdelete.setToolTipText("Delete");
-		jbdelete.setBorderPainted(false);
-		jbdelete.setIcon(new ImageIcon("images/delete.png"));
-		jbdelete.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("unused")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				icon = new ImageIcon("images/warning.png");
-				int contCrypto = (int) getListC().stream().count();
-
-				if (table.getSelectedRow() >= 0) {
-					Crypto cryp = getListC().get(table.getSelectedRow());
-					if (cryp.getCreator().equals(name) || name.equals("admin")) {
-						int option = JOptionPane.showOptionDialog(MainWindow.this, "Are you sure?", "Confirm",
-								JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, icon, null, null);
-						if (option == 0) {
-							if (contCrypto != 1) {
-								getListC().remove(table.getSelectedRow());
-								int cont = 0;
-								for (Crypto c : getListC()) {
-									Crypto crypto = new Crypto(c.getName(), c.getValue(), c.getMarketCap(),
-											c.getSupply(), c.getDescription(), c.getIcon(), c.getCreator(),
-											c.getMonth());
-									try {
-										if (cont == 0) {
-											os = new ObjectOutputStream(new FileOutputStream(f));
-										} else {
-											os = new AddObjectOutputStream(new FileOutputStream(f, true));
-										}
-										os.writeObject(crypto);
-										os.close();
-									} catch (FileNotFoundException e1) {
-										e1.printStackTrace();
-									} catch (IOException e1) {
-										e1.printStackTrace();
-									}
-									cont++;
-								}
-								dispose();
-								MainWindowTeacher main = new MainWindowTeacher(name);
-							} else {
-								f.delete();
-								dispose();
-								MainWindowTeacher main = new MainWindowTeacher(name);
-							}
-
-						} else {
-							dispose();
-							MainWindowTeacher main = new MainWindowTeacher(name);
-						}
-					} else {
-						icon = new ImageIcon("images/warning.png");
-						JOptionPane.showMessageDialog(MainWindowTeacher.this, "You dont be creator", "Error",
-								JOptionPane.WARNING_MESSAGE, icon);
-					}
-				} else {
-					icon = new ImageIcon("images/warning.png");
-					JOptionPane.showMessageDialog(MainWindowTeacher.this, "You haven't to select a crypto", "Error",
-							JOptionPane.WARNING_MESSAGE, icon);
-				}
-
-			}
-		});
-		panel.add(jbdelete);
-
-		jbclose = new JButton("");
+		jbclose = new JButton("Back");
 		jbclose.setBackground(new Color(196, 172, 148));
 		jbclose.setToolTipText("Log Out");
 		jbclose.setBorderPainted(false);
@@ -462,33 +187,8 @@ public class MainWindowStudent extends JFrame {
 		dtmCrypto.setColumnIdentifiers(nameColums);
 		table.setModel(dtmCrypto);
 
-		for (Crypto c : listOrder) {
-			Object[] row = new Object[4];
-			row[0] = c.getName();
-			row[1] = c.getValue();
-			row[2] = c.getMarketCap();
-			row[3] = c.getCreator();
-			dtmCrypto.addRow(row);
-		}
-		table.setModel(dtmCrypto);
 	}
 
-	/**
-	 * Gets the list C.
-	 *
-	 * @return the list C
-	 */
-	public static List<Crypto> getListC() {
-		return listC;
-	}
 
-	/**
-	 * Sets the list C.
-	 *
-	 * @param listC the new list C
-	 */
-	public static void setListC(List<Crypto> listC) {
-		MainWindowTeacher.listC = listC;
-	}
 
 }
