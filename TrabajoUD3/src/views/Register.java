@@ -1,6 +1,5 @@
 package views;
 
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -30,48 +29,22 @@ import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
-
-// TODO: Auto-generated Javadoc
-/**
- * The Class Register.
- */
-@SuppressWarnings("serial")
 public class Register extends JFrame {
 
-	/** The jlpassword 2. */
 	private JLabel  jldni,jlname, jllastname, jldate, jlphone, jlphoto, jlpassword, jlpassword2,jlbphoto;
-
-	/** The jtemail. */
 	private JTextField jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");;
-
-	/** The jppassword 2. */
 	private JPasswordField jppassword, jppassword2;
-
-	/** The jbcancel. */
 	private JButton jbconfirm, jbcancel,jbphoto;
-
-	/** The icon. */
 	private Icon icon;
-
 	static Image imagen;
 	ImageIcon img2;
-	/** The sdni. */
 	private String sdni = "[0-9]{8}[A-Z]";
-
-	/** The semail. */
 	//private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
 	private String sphone= "[0-9]{9}";
-
-	/** The spassw. */
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
-
-	/** The fusers. */
 	private File fusers = new File("files/Users");
 	private JDateChooser dateChooser;
 
-	/**
-	 * Instantiates a new register.
-	 */
 	public Register() {
 
 		super("Register an user");
@@ -80,49 +53,49 @@ public class Register extends JFrame {
 		
 		jldni = new JLabel("D.N.I. : ");
 		jldni.setBackground(new Color(0, 176, 220));
-		jldni.setBounds(24, 122, 94, 13);
+		jldni.setBounds(147, 122, 84, 13);
 		jldni.setHorizontalAlignment(SwingConstants.CENTER);
 		jldni.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldni);
 		
 		jtdni = new JTextField();
-		jtdni.setBounds(119, 119, 114, 19);
-		jtdni.setBackground(new Color(0, 176, 220));
+		jtdni.setBounds(241, 119, 167, 19);
+		jtdni.setBackground(Color.WHITE);
 		jtdni.setColumns(12);
 		jtdni.setToolTipText("Introduce your DNI");
 		getContentPane().add(jtdni);
 
 		jlname = new JLabel("Name: ");
 		jlname.setBackground(new Color(0, 176, 220));
-		jlname.setBounds(24, 53, 94, 13);
+		jlname.setBounds(147, 62, 72, 13);
 		jlname.setHorizontalAlignment(SwingConstants.CENTER);
 		jlname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlname);
 		
 		jtname = new JTextField();
-		jtname.setBounds(119, 50, 114, 19);
-		jtname.setBackground(new Color(0, 176, 220));
+		jtname.setBounds(242, 59, 167, 19);
+		jtname.setBackground(Color.WHITE);
 		jtname.setColumns(10);
 		jtname.setToolTipText("Introduce your name");
 		getContentPane().add(jtname);
 		
 		jllastname = new JLabel("Last name:");
 		jllastname.setBackground(new Color(0, 176, 220));
-		jllastname.setBounds(24, 30, 94, 13);
+		jllastname.setBounds(137, 92, 94, 13);
 		jllastname.setHorizontalAlignment(SwingConstants.CENTER);
 		jllastname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jllastname);
 
 		jtlastname = new JTextField();
-		jtlastname.setBounds(119, 27, 114, 19);
-		jtlastname.setBackground(new Color(0, 176, 220));
+		jtlastname.setBounds(242, 89, 167, 19);
+		jtlastname.setBackground(Color.WHITE);
 		jtlastname.setColumns(10);
 		jtlastname.setToolTipText("Introduce your last name");
 		getContentPane().add(jtlastname);
 
 		jldate = new JLabel("Date: ");
 		jldate.setBackground(new Color(0, 176, 220));
-		jldate.setBounds(24, 145, 94, 13);
+		jldate.setBounds(137, 145, 94, 20);
 		jldate.setHorizontalAlignment(SwingConstants.CENTER);
 		jldate.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldate);
@@ -139,14 +112,14 @@ public class Register extends JFrame {
 
 		jlphone = new JLabel("Phone: ");
 		jlphone.setBackground(new Color(0, 176, 220));
-		jlphone.setBounds(24, 145, 94, 13);
+		jlphone.setBounds(137, 179, 94, 13);
 		jlphone.setHorizontalAlignment(SwingConstants.CENTER);
 		jlphone.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlphone);
 
 		jtphone = new JTextField();
-		jtphone.setBounds(119, 142, 114, 19);
-		jtphone.setBackground(new Color(0, 176, 220));
+		jtphone.setBounds(241, 176, 167, 19);
+		jtphone.setBackground(Color.WHITE);
 		jtphone.setColumns(13);
 		jtphone.setToolTipText("Introduce your phone");
 		getContentPane().add(jtphone);
@@ -165,8 +138,8 @@ public class Register extends JFrame {
 //		getContentPane().add(jlbphoto);
 		
 		jtphoto = new JTextField();
-		jtphoto.setBounds(119, 142, 114, 19);
-		jtphoto.setBackground(new Color(0, 176, 220));
+		jtphoto.setBounds(16, 27, 102, 111);
+		jtphoto.setBackground(Color.WHITE);
 		jtphoto.setColumns(13);
 		jtphoto.setToolTipText("Introduce your phone");
 		getContentPane().add(jtphoto);
@@ -182,28 +155,28 @@ public class Register extends JFrame {
 		
 		jlpassword = new JLabel("Password: ");
 		jlpassword.setBackground(new Color(0, 176, 220));
-		jlpassword.setBounds(24, 191, 94, 13);
+		jlpassword.setBounds(137, 209, 94, 13);
 		jlpassword.setHorizontalAlignment(SwingConstants.CENTER);
 		jlpassword.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlpassword);
 
 		jppassword = new JPasswordField();
-		jppassword.setBounds(119, 188, 114, 19);
-		jppassword.setBackground(new Color(0, 176, 220));
+		jppassword.setBounds(241, 206, 167, 19);
+		jppassword.setBackground(Color.WHITE);
 		jppassword.setColumns(10);
 		jppassword.setToolTipText("Introduce your password");
 		getContentPane().add(jppassword);
 
 		jlpassword2 = new JLabel("Repeat Pass.: ");
 		jlpassword2.setBackground(new Color(0, 176, 220));
-		jlpassword2.setBounds(24, 214, 94, 13);
+		jlpassword2.setBounds(137, 239, 94, 13);
 		jlpassword2.setHorizontalAlignment(SwingConstants.CENTER);
 		jlpassword2.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlpassword2);
 
 		jppassword2 = new JPasswordField();
-		jppassword2.setBounds(119, 211, 114, 19);
-		jppassword2.setBackground(new Color(0, 176, 220));
+		jppassword2.setBounds(241, 236, 167, 19);
+		jppassword2.setBackground(Color.WHITE);
 		jppassword2.setColumns(10);
 		jppassword2.setToolTipText("Confirm your password");
 		getContentPane().add(jppassword2);
@@ -212,7 +185,7 @@ public class Register extends JFrame {
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
 		jbconfirm.setToolTipText("Confirm");
 		jbconfirm.setBackground(new Color(0, 153, 0));
-		jbconfirm.setBounds(150, 364, 85, 21);
+		jbconfirm.setBounds(276, 302, 115, 37);
 		jbconfirm.addActionListener(new ActionListener() {
 
 			@SuppressWarnings({ "unused", "deprecation" })
@@ -285,7 +258,7 @@ public class Register extends JFrame {
 		getContentPane().add(jbconfirm);
 
 		jbcancel = new JButton("");
-		jbcancel.setBounds(342, 364, 85, 21);
+		jbcancel.setBounds(48, 302, 112, 37);
 		jbcancel.setBackground(new Color(153, 0, 0));
 		jbcancel.setToolTipText("Cancel");
 		jbcancel.setIcon(new ImageIcon("images/Cross.png"));
@@ -300,57 +273,55 @@ public class Register extends JFrame {
 			}
 		});
 		getContentPane().add(jbcancel);
+		
+		JDateChooser dateChooser_1 = new JDateChooser();
+		dateChooser_1.setBounds(241, 145, 167, 20);
+		getContentPane().add(dateChooser_1);
 
 		setVisible(true);
 	}
 	
-	public class InsertImg implements ActionListener {
+//	public class InsertImg implements ActionListener {
+//
+//		@Override
+//		public void actionPerformed(ActionEvent e) {
+//			AbstractButton bt = (AbstractButton) e.getSource();
+//			JFileChooser fileChooser = new JFileChooser();
+//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+//
+//			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+//			fileChooser.setFileFilter(soloImg);
+//
+//			fileChooser.showSaveDialog(null);
+//			
+//			String ficheroNombre = fileChooser.getSelectedFile().getName();
+//
+//			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
+//			
+//			jtphoto.setText("images/" + ficheroNombre);
+//			
+//			File imagenes = new File(jtphoto.getText());
+//			bt.setText("Insertar Imagen");
+//			Path destination = imagenes.toPath();
+//			try {
+//				Files.copy(sourcer, destination);
+//			} catch (IOException e1) {
+//				e1.printStackTrace();
+//			}
+//		}
+//	}
 
-		@Override
-		public void actionPerformed(ActionEvent e) {
-			AbstractButton bt = (AbstractButton) e.getSource();
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
-			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
-			fileChooser.setFileFilter(soloImg);
-
-			fileChooser.showSaveDialog(null);
-			
-			String ficheroNombre = fileChooser.getSelectedFile().getName();
-
-			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
-			
-			jtphoto.setText("images/" + ficheroNombre);
-			
-			File imagenes = new File(jtphoto.getText());
-			bt.setText("Insertar Imagen");
-			Path destination = imagenes.toPath();
-			try {
-				Files.copy(sourcer, destination);
-			} catch (IOException e1) {
-				//e1.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * Inicializate.
-	 *
-	 * @param jf the jf
-	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setBackground(new Color(0, 176, 220));
 		jf.getContentPane().setBackground(new Color(0, 176, 220));
-		jf.setSize(300, 285);
+		jf.setSize(475, 400);
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(9, 2));
+		jf.getContentPane().setLayout(null);
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
-
 }

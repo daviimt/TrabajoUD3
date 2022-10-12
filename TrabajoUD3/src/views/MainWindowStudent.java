@@ -59,17 +59,17 @@ public class MainWindowStudent extends JFrame {
 	Student s = new Student();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public MainWindowStudent(String name) {
-		super("Menu");
+	public MainWindowStudent(Student s) {
+		super("Student menu");
 		inicializate(MainWindowStudent.this);
 
-		jluser = new JLabel("Username: " + name);
+		jluser = new JLabel("Username: " + s.getName());
 		jluser.setBackground(Color.GRAY);
 		jluser.setHorizontalAlignment(SwingConstants.CENTER);
 		jluser.setFont(new Font("Poor Richard", Font.BOLD, 18));
 
 		JPanel jpupper = new JPanel();
-		jpupper.setBackground(new Color(243, 189, 109));
+		jpupper.setBackground(new Color(8, 116, 247 ));
 
 		jpupper.add(jluser);
 		add(jpupper, BorderLayout.NORTH);
@@ -77,33 +77,33 @@ public class MainWindowStudent extends JFrame {
 		// JTable Prueba (con defaulttablemade)
 
 		table = new JTable();
-		table.setBackground(new Color(182, 147, 164));
+		table.setBackground(new Color(0, 176, 220));
 		table.setOpaque(true);
 		table.getTableHeader().setForeground(Color.WHITE);
 		table.getTableHeader().setBackground(new Color(32, 32, 32));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBackground(new Color(252, 228, 163));
-		scrollPane.getViewport().setBackground(new Color(252, 228, 163));
+		scrollPane.setBackground(new Color(0, 176, 220));
+		scrollPane.getViewport().setBackground(new Color(0, 176, 220));
 		add(scrollPane, BorderLayout.CENTER);
 
 		createJTable();
 		// Termina el JTable
 		
 		panel_1 = new JPanel();
-		panel_1.setBackground(new Color(196, 172, 148));
+		panel_1.setBackground(new Color(8, 116, 247 ));
 		panel_1.setOpaque(true);
 		add(panel_1, BorderLayout.SOUTH);
 
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		panel = new JPanel();
-		panel.setBackground(new Color(196, 172, 148));
+		panel.setBackground(new Color(8, 116, 247 ));
 		panel_1.add(panel);
 
 		jbupdate = new JButton("");
-		jbupdate.setBackground(new Color(196, 172, 148));
+		jbupdate.setBackground(new Color(8, 116, 247 ));
 		jbupdate.setToolTipText("Update your data");
 		jbupdate.setBorderPainted(false);
 		jbupdate.setIcon(new ImageIcon("images/update.png"));
@@ -121,7 +121,7 @@ public class MainWindowStudent extends JFrame {
 		panel.add(jbupdate);
 
 		jbclose = new JButton("");
-		jbclose.setBackground(new Color(196, 172, 148));
+		jbclose.setBackground(new Color(8, 116, 247));
 		jbclose.setToolTipText("Log Out");
 		jbclose.setBorderPainted(false);
 		jbclose.setIcon(new ImageIcon("images/logout.png"));
@@ -143,11 +143,11 @@ public class MainWindowStudent extends JFrame {
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setBackground(new Color(146, 104, 124));
+		jf.setBackground(new Color(0, 176, 220));
 		jf.setBounds(100, 100, 600, 400);
 		jf.setMinimumSize(getSize());
 		jf.setLocationRelativeTo(null);
-		jf.setLayout(new BorderLayout(0, 0));
+		jf.setLayout(new BorderLayout());
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}

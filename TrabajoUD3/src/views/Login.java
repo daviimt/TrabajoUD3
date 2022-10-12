@@ -61,57 +61,50 @@ public class Login extends JFrame {
 	 */
 	public Login() {
 		super("Login");
+		getContentPane().setBackground(new Color(0, 176, 220));
 		inicializate(Login.this);
 
 		Functions conn = new Functions();
 
-		jpanel1 = new JPanel();
-		jpanel1.setBackground(new Color(0, 176, 220));
-		jpanel2 = new JPanel();
-		jpanel2.setBackground(new Color(0, 176, 220));
-		jpanel3 = new JPanel();
-		jpanel3.setBackground(new Color(0, 176, 220));
-		jpanel4 = new JPanel();
-		jpanel4.setBackground(new Color(0, 176, 220));
-
-		jltitle = new JLabel("School");
-		jltitle.setBounds(25, 32, 70, 21);
-		jltitle.setVerticalAlignment(SwingConstants.BOTTOM);
-		jltitle.setHorizontalAlignment(SwingConstants.CENTER);
-		jltitle.setForeground(new Color(0, 70, 101));
-		jltitle.setIcon(new ImageIcon("images/School.png"));
-		jltitle.setFont(new Font("Microsoft Himalaya", Font.BOLD, 25));
-		jpanel1.add(jltitle);
-
-		jlid = new JLabel("User ID:");
-		jlid.setBounds(25, 32, 70, 21);
-		jlid.setHorizontalAlignment(SwingConstants.CENTER);
-		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		jpanel2.add(jlid);
-
 		jtid = new JTextField();
-		jtid.setBounds(118, 29, 96, 19);
-		jtid.setBackground(new Color(0, 176, 220));
+		jtid.setBounds(133, 68, 96, 19);
+		jtid.setBackground(Color.WHITE);
 		jtid.setColumns(10);
 		jtid.setToolTipText("Introduce your id");
-		jpanel2.add(jtid);
+		getContentPane().add(jtid);
+				
+				
+						jltitle = new JLabel("School");
+						jltitle.setBounds(87, 21, 96, 36);
+						jltitle.setVerticalAlignment(SwingConstants.BOTTOM);
+						jltitle.setHorizontalAlignment(SwingConstants.CENTER);
+						jltitle.setForeground(new Color(0, 70, 101));
+						jltitle.setIcon(new ImageIcon("images/School.png"));
+						jltitle.setFont(new Font("Microsoft Himalaya", Font.BOLD, 25));
+						getContentPane().add(jltitle);
+		
+				jlid = new JLabel("User ID:");
+				jlid.setBounds(53, 69, 70, 21);
+				jlid.setHorizontalAlignment(SwingConstants.CENTER);
+				jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+				getContentPane().add(jlid);
 
 		jlpassword = new JLabel("Password:");
-		jlpassword.setBounds(25, 58, 70, 21);
+		jlpassword.setBounds(53, 100, 70, 21);
 		jlpassword.setHorizontalAlignment(SwingConstants.CENTER);
 		jlpassword.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		jpanel3.add(jlpassword);
+		getContentPane().add(jlpassword);
 
 		jppassword = new JPasswordField();
-		jppassword.setBounds(118, 52, 96, 21);
-		jppassword.setBackground(new Color(0, 176, 220));
+		jppassword.setBounds(133, 98, 96, 21);
+		jppassword.setBackground(Color.WHITE);
 		jppassword.setColumns(10);
 		jppassword.setToolTipText("Introduce your password");
 		jppassword.addActionListener(new Handler());
-		jpanel3.add(jppassword);
+		getContentPane().add(jppassword);
 
 		jbregister = new JButton();
-		jbregister.setBounds(22, 93, 85, 21);
+		jbregister.setBounds(38, 144, 85, 36);
 		jbregister.setBackground(new Color(0, 176, 220));
 		jbregister.setToolTipText("Register");
 		jbregister.setBorderPainted(false);
@@ -125,21 +118,17 @@ public class Login extends JFrame {
 				dispose();
 			}
 		});
-		jpanel4.add(jbregister);
+		getContentPane().add(jbregister);
 
 		jbaccess = new JButton();
-		jbaccess.setBounds(128, 93, 85, 21);
+		jbaccess.setBounds(153, 144, 85, 36);
 		jbaccess.setBackground(new Color(0, 176, 220));
 		jbaccess.setToolTipText("Login");
 		jbaccess.setBorderPainted(false);
 		jbaccess.setIcon(new ImageIcon("images/login.png"));
 		jbaccess.addActionListener(new Handler());
-		jpanel4.add(jbaccess);
+		getContentPane().add(jbaccess);
 
-		add(jpanel1);
-		add(jpanel2);
-		add(jpanel3);
-		add(jpanel4);
 		setVisible(true);
 	}
 
@@ -156,7 +145,7 @@ public class Login extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.setLayout(new GridLayout(4, 1));
+		jf.getContentPane().setLayout(null);
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
@@ -179,7 +168,7 @@ public class Login extends JFrame {
 			Functions f = new Functions();
 			if (jtid.getText().isBlank() == false) {
 				if (jtid.getText().equals("admin") && jppassword.getText().equals("admin")) {
-					MainWindowStudent mainAdmin = new MainWindowStudent(jtid.getText());
+					MainWindowAdmin mainAdmin = new MainWindowAdmin(jtid.getText());
 					dispose();
 				} else {
 					if (jtid.getText().matches(sid)) {
@@ -194,7 +183,7 @@ public class Login extends JFrame {
 
 							if (passwordCorrect == true) {
 								if (us.getRole().equals("Student")) {
-									MainWindowStudent mainStudent = new MainWindowStudent(jtid.getText());
+									//MainWindowStudent mainStudent = new MainWindowStudent(jtid.getText());
 
 								} else if (us.getRole().equals("Teacher")) {
 									MainWindowTeacher mainTeacher = new MainWindowTeacher(jtid.getText());
