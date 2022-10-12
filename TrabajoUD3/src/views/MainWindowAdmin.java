@@ -105,7 +105,7 @@ public class MainWindowAdmin extends JFrame {
 		jbinsert.setBackground(new Color(8, 116, 247 ));
 		jbinsert.setToolTipText("Insert teacher");
 		jbinsert.setBorderPainted(false);
-		jbinsert.setIcon(new ImageIcon("images/update.png"));
+		jbinsert.setIcon(new ImageIcon("images/insert.png"));
 		jbinsert.addActionListener(new ActionListener() {
 			
 			@SuppressWarnings("unused")
@@ -140,9 +140,9 @@ public class MainWindowAdmin extends JFrame {
 		
 		jbdelete = new JButton("");
 		jbdelete.setBackground(new Color(8, 116, 247 ));
-		jbdelete.setToolTipText("delete teacher");
+		jbdelete.setToolTipText("Delete teacher");
 		jbdelete.setBorderPainted(false);
-		jbdelete.setIcon(new ImageIcon("images/update.png"));
+		jbdelete.setIcon(new ImageIcon("images/delete.png"));
 		jbdelete.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("unused")
