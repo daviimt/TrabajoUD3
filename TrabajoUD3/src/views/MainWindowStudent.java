@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -35,6 +34,8 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.table.DefaultTableModel;
 
+import app.Student;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -44,45 +45,19 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class MainWindow.
- */
 @SuppressWarnings("serial")
 public class MainWindowStudent extends JFrame {
 
-	/** The table. */
+
 	private JTable table;
-
-	/** The jPanels. */
 	private JPanel panel, panel_1;
-
-	/** The jButtons. */
 	private JButton jbupdate, jbclose;
-
-	/** The jluser. */
 	private JLabel jluser;
-
-	/** The f. */
 	private File f = new File("files/Cryptos");
-
-	/** The name colums. */
 	String[] nameColums = { "Subject", "RA", "Mark" };
-
-	/** The list C. */
-	//static List<Crypto> listC;
-
-	/** The list order. */
-	//static List<Crypto> listOrder;
-
-	/** The icon. */
 	private Icon icon;
+	Student s = new Student();
 
-	/**
-	 * Instantiates a new main window.
-	 *
-	 * @param name the name
-	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowStudent(String name) {
 		super("Menu");
@@ -95,7 +70,7 @@ public class MainWindowStudent extends JFrame {
 
 		JPanel jpupper = new JPanel();
 		jpupper.setBackground(new Color(243, 189, 109));
-		
+
 		jpupper.add(jluser);
 		add(jpupper, BorderLayout.NORTH);
 
@@ -107,16 +82,15 @@ public class MainWindowStudent extends JFrame {
 		table.getTableHeader().setForeground(Color.WHITE);
 		table.getTableHeader().setBackground(new Color(32, 32, 32));
 		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		
+
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(new Color(252, 228, 163));
 		scrollPane.getViewport().setBackground(new Color(252, 228, 163));
 		add(scrollPane, BorderLayout.CENTER);
 
-
 		createJTable();
 		// Termina el JTable
-
+		
 		panel_1 = new JPanel();
 		panel_1.setBackground(new Color(196, 172, 148));
 		panel_1.setOpaque(true);
@@ -128,16 +102,25 @@ public class MainWindowStudent extends JFrame {
 		panel.setBackground(new Color(196, 172, 148));
 		panel_1.add(panel);
 
-	
-		jbupdate = new JButton("Update data");
+		jbupdate = new JButton("");
 		jbupdate.setBackground(new Color(196, 172, 148));
 		jbupdate.setToolTipText("Update your data");
 		jbupdate.setBorderPainted(false);
 		jbupdate.setIcon(new ImageIcon("images/update.png"));
+		jbupdate.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				UpdateStudent update = new UpdateStudent(s);
+
+			}
+		});
 
 		panel.add(jbupdate);
 
-		jbclose = new JButton("Back");
+		jbclose = new JButton("");
 		jbclose.setBackground(new Color(196, 172, 148));
 		jbclose.setToolTipText("Log Out");
 		jbclose.setBorderPainted(false);
@@ -157,11 +140,6 @@ public class MainWindowStudent extends JFrame {
 		setVisible(true);
 	}
 
-	/**
-	 * Inicializate.
-	 *
-	 * @param jf the jf
-	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -170,13 +148,10 @@ public class MainWindowStudent extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setLocationRelativeTo(null);
 		jf.setLayout(new BorderLayout(0, 0));
-		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/CoinMarket.png");
+		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
 
-	/**
-	 * Creates the J table.
-	 */
 	public void createJTable() {
 		DefaultTableModel dtmCrypto = new DefaultTableModel() {
 			@Override
@@ -188,7 +163,5 @@ public class MainWindowStudent extends JFrame {
 		table.setModel(dtmCrypto);
 
 	}
-
-
 
 }
