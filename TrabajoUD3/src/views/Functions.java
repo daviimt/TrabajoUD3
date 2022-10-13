@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 import app.Student;
+import app.Teacher;
 import app.User;
 
 public class Functions {
@@ -21,6 +22,7 @@ public class Functions {
 	Connection connection;
 	User user;
 	Student student;
+	Teacher teacher;
 
 	public Functions() {
 		try {
@@ -147,6 +149,30 @@ public class Functions {
 		ps.setString(4, student.getBirth_date());
 		ps.setString(5, student.getPhone());
 		ps.setString(6, student.getPhoto());
+		ps.executeUpdate();
+
+		Icon icon = new ImageIcon("images/check.png");
+		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
+
+	}
+	
+	public void WriteTeacher(String dni, String name, String lastname, String email)
+			throws SQLException {
+
+		PreparedStatement ps;
+		String sql;
+		teacher = new Teacher();
+		teacher.setDni(dni);
+		teacher.setName(name);
+		teacher.setLastname(lastname);
+		teacher.setEmail(email);
+
+		sql = "insert into profesor(DNI, Nombre, Apellidos, Email) values(?,?,?,?)";
+		ps = connection.prepareStatement(sql);
+		ps.setString(1, teacher.getDni());
+		ps.setString(2, teacher.getName());
+		ps.setString(3, teacher.getLastname());
+		ps.setString(4, teacher.getEmail());
 		ps.executeUpdate();
 
 		Icon icon = new ImageIcon("images/check.png");

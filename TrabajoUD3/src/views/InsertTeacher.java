@@ -11,6 +11,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
 
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
@@ -30,7 +31,7 @@ import com.toedter.calendar.JDateChooser;
 public class InsertTeacher extends JFrame {
 
 	private JLabel  jldni,jlname, jllastname,jlemail,jlpassword,jlpassword2;
-	private JTextField jtdni, jtname, jtlastname, jtemail, jtrole = new JTextField("Student");;
+	private JTextField jtdni, jtname, jtlastname, jtemail, jtrole = new JTextField("Teacher");;
 	private JPasswordField jppassword, jppassword2;
 	private JButton jbconfirm, jbcancel;
 	private Icon icon;
@@ -38,7 +39,6 @@ public class InsertTeacher extends JFrame {
 	ImageIcon img2;
 	private String sdni = "[0-9]{8}[A-Z]";
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
-	private String sphone= "[0-9]{9}";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
 	public InsertTeacher(String s) {
@@ -136,6 +136,74 @@ public class InsertTeacher extends JFrame {
 		jbconfirm.setToolTipText("Confirm");
 		jbconfirm.setBackground(new Color(0, 153, 0));
 		jbconfirm.setBounds(276, 302, 115, 37);
+		jbconfirm.addActionListener(new ActionListener() {
+
+			@SuppressWarnings({ "unused", "deprecation" })
+			@Override
+			public void actionPerformed(ActionEvent e) {
+
+				boolean verification = true;
+
+				JTextField[] group = {jtdni, jtname, jtlastname,jtemail, jppassword, jppassword2 };
+
+				for (JTextField j : group) {
+					if (j.getText().isBlank()) {
+						verification = false;
+						break;
+					}
+
+				}
+
+				if (verification) {
+					if (jtdni.getText().matches(sdni)) {
+						if (jtemail.getText().matches(semail)) {
+							if (jppassword.getText().matches(spassw)) {
+								if (jppassword2.getText().equals(jppassword.getText())) {
+
+									try {
+
+										Functions f=new Functions();
+										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
+										f.WriteTeacher(jtdni.getText(), jtname.getText(), jtlastname.getText(),jtemail.getText());
+										dispose();
+										Login log=new Login();
+									
+									 }catch(SQLException e1){
+								        	Icon icon = new ImageIcon("images/warning.png");
+											JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
+													JOptionPane.WARNING_MESSAGE, icon);
+									}
+									
+								} else {
+									icon = new ImageIcon("images/warning.png");
+									JOptionPane.showMessageDialog(null, "Passwords don't match", "Error",
+											JOptionPane.WARNING_MESSAGE, icon);
+								}
+
+							} else {
+								icon = new ImageIcon("images/warning.png");
+								JOptionPane.showMessageDialog(null, "Password does not meet the required parameters",
+										"Error", JOptionPane.WARNING_MESSAGE, icon);
+							}
+
+						} else {
+							icon = new ImageIcon("images/warning.png");
+							JOptionPane.showMessageDialog(null, "Email does not meet the required parameters", "Error",
+									JOptionPane.INFORMATION_MESSAGE, icon);
+						}
+					} else {
+						icon = new ImageIcon("images/warning.png");
+						JOptionPane.showMessageDialog(null, "DNI does not meet the required parameters", "Error",
+								JOptionPane.INFORMATION_MESSAGE, icon);
+					}
+				} else {
+					icon = new ImageIcon("images/warning.png");
+					JOptionPane.showMessageDialog(null, "Fill every required field to create the user.", "Error",
+							JOptionPane.WARNING_MESSAGE, icon);
+				}
+
+			}
+		});
 		getContentPane().add(jbconfirm);
 
 		// Boton cancel
