@@ -1,31 +1,25 @@
 package views;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 
-
-import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import java.awt.Color;
-import java.awt.Font;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
@@ -44,7 +38,7 @@ public class Register extends JFrame {
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 	private File fusers = new File("files/Users");
 	private JDateChooser dateChooser;
-
+	private String date_birth;
 	public Register() {
 
 		super("Register an user");
@@ -101,11 +95,9 @@ public class Register extends JFrame {
 		getContentPane().add(jldate);
 		
 		dateChooser = new JDateChooser();
-		dateChooser.setBackground(Color.CYAN);
-		dateChooser.getCalendarButton().setBackground(new Color(0, 176, 220));
-		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
-		editor.setToolTipText("Introduce your birth date");
-		editor.setEditable(false);
+		dateChooser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+		dateChooser.setDateFormatString("yyyy/dd/MM");
+		dateChooser.setBounds(241, 149, 167, 20);
 		getContentPane().add(dateChooser);
 		
 		jtdate = new JTextField(String.valueOf(dateChooser.getDate()));
@@ -203,7 +195,8 @@ public class Register extends JFrame {
 					}
 
 				}
-
+				
+				
 				if (verification) {
 					if (jtdni.getText().matches(sdni)) {
 						if (jtphone.getText().matches(sphone)) {
@@ -211,12 +204,17 @@ public class Register extends JFrame {
 								if (jppassword2.getText().equals(jppassword.getText())) {
 
 									try {
-
+										System.out.println(dateChooser.getDate());
+										SimpleDateFormat sdf = new SimpleDateFormat(dateChooser.getDateFormatString());
+										date_birth = dateChooser.getDateFormatString();
+										date_birth = sdf.format(dateChooser.getDate());
+										System.out.println(date_birth);
+										
 										Functions f=new Functions();
 										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
 										System.out.println(jtdate.getText());
-										System.out.println(dateChooser.getDate());
-										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(), jtdate.getText(),jtphone.getText(),jtphoto.getText());
+
+										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(), date_birth,jtphone.getText(),jtphoto.getText());
 										dispose();
 										Login log=new Login();
 									
@@ -275,10 +273,6 @@ public class Register extends JFrame {
 			}
 		});
 		getContentPane().add(jbcancel);
-		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(241, 145, 167, 20);
-		getContentPane().add(dateChooser_1);
 
 		setVisible(true);
 	}
