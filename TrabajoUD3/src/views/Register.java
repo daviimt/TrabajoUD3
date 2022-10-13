@@ -218,11 +218,11 @@ public class Register extends JFrame {
 										dispose();
 										Login log=new Login();
 									
-									 }catch(SQLException e1){
-//								        	Icon icon = new ImageIcon("images/warning.png");
-//											JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
-//													JOptionPane.WARNING_MESSAGE, icon);
-								        System.out.println(e1);
+									 }catch(SQLException e1) {
+										Icon icon = new ImageIcon("images/warning.png");
+										JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
+										JOptionPane.WARNING_MESSAGE, icon);
+
 									}
 									
 								} else {
