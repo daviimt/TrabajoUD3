@@ -7,51 +7,58 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
+import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 public class Register extends JFrame {
 
-	private JLabel  jldni,jlname, jllastname, jldate, jlphone, jlphoto, jlpassword, jlpassword2,jlbphoto;
-	private JTextField jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");;
+	private JLabel jldni, jlname, jllastname, jldate, jlphone, jlphoto, jlpassword, jlpassword2, jlImage;
+	private JTextField jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");
 	private JPasswordField jppassword, jppassword2;
-	private JButton jbconfirm, jbcancel,jbphoto;
+	private JButton jbconfirm, jbcancel, jbphoto;
 	private Icon icon;
 	static Image imagen;
 	ImageIcon img2;
 	private String sdni = "[0-9]{8}[A-Z]";
-	//private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
-	private String sphone= "[0-9]{9}";
+	// private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
+	private String sphone = "[0-9]{9}";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 	private File fusers = new File("files/Users");
 	private JDateChooser dateChooser;
 	private String date_birth;
+
 	public Register() {
 
 		super("Register an user");
 		getContentPane().setBackground(new Color(102, 204, 153));
 		inicializate(Register.this);
-		
+
 		jldni = new JLabel("D.N.I. : ");
 		jldni.setBackground(new Color(0, 176, 220));
 		jldni.setBounds(147, 122, 84, 13);
 		jldni.setHorizontalAlignment(SwingConstants.CENTER);
 		jldni.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldni);
-		
+
 		jtdni = new JTextField();
 		jtdni.setBounds(241, 119, 167, 19);
 		jtdni.setBackground(Color.WHITE);
@@ -65,14 +72,14 @@ public class Register extends JFrame {
 		jlname.setHorizontalAlignment(SwingConstants.CENTER);
 		jlname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlname);
-		
+
 		jtname = new JTextField();
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(Color.WHITE);
 		jtname.setColumns(10);
 		jtname.setToolTipText("Introduce your name");
 		getContentPane().add(jtname);
-		
+
 		jllastname = new JLabel("Last name:");
 		jllastname.setBackground(new Color(0, 176, 220));
 		jllastname.setBounds(137, 92, 94, 13);
@@ -93,15 +100,15 @@ public class Register extends JFrame {
 		jldate.setHorizontalAlignment(SwingConstants.CENTER);
 		jldate.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldate);
-		
+
 		dateChooser = new JDateChooser();
 		dateChooser.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 		dateChooser.setDateFormatString("yyyy/dd/MM");
 		dateChooser.setBounds(241, 149, 167, 20);
 		getContentPane().add(dateChooser);
-		
+
 		jtdate = new JTextField(String.valueOf(dateChooser.getDate()));
-		
+
 		jlphone = new JLabel("Phone: ");
 		jlphone.setBackground(new Color(0, 176, 220));
 		jlphone.setBounds(137, 179, 94, 13);
@@ -115,36 +122,31 @@ public class Register extends JFrame {
 		jtphone.setColumns(13);
 		jtphone.setToolTipText("Introduce your phone");
 		getContentPane().add(jtphone);
-		
+
 		jlphoto = new JLabel("Photo: ");
 		jlphoto.setBackground(new Color(0, 176, 220));
-		jlphoto.setBounds(24, 145, 94, 13);
+		jlphoto.setBounds(23, 62, 94, 13);
 		jlphoto.setHorizontalAlignment(SwingConstants.CENTER);
 		jlphoto.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlphoto);
-//		imagen = new ImageIcon("images/"+jtdni.getText()).getImage();
-//		img2=new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
-//		
-//		jlbphoto.setIcon(img2);
-//		jlbphoto.setBounds(207, 210, 133, 120);
-//		getContentPane().add(jlbphoto);
-		
+
+		jlImage = new JLabel();
+		jlImage.setBounds(10, 95, 130, 117);
+		getContentPane().add(jlImage);
+
+		jbphoto = new JButton("Select Image:");
+		jbphoto.setToolTipText("Select a image");
+		jbphoto.setBackground(new Color(238, 238, 238));
+		jbphoto.setBorderPainted(true);
+		jbphoto.setBounds(15, 223, 116, 29);
+		getContentPane().add(jbphoto);
+
 		jtphoto = new JTextField();
-		jtphoto.setBounds(16, 27, 102, 111);
-		jtphoto.setBackground(Color.WHITE);
-		jtphoto.setColumns(13);
-		jtphoto.setToolTipText("Introduce your phone");
-		getContentPane().add(jtphoto);
-		
-//		jbphoto = new JButton("Imagen");
-//		jbphoto.setToolTipText("Buscar archivo");
-//		jbphoto.setBackground(new Color(238,238,238));
-//		jbphoto.setBorderPainted(true);
-//		jbphoto.setBounds(116, 222, 51, 46);
-//		getContentPane().add(jbphoto);
-//		InsertImg insertImg = new InsertImg();
-//		jbphoto.addActionListener(insertImg);
-		
+
+		// Button select image event handler
+		InsertImg insertImg = new InsertImg();
+		jbphoto.addActionListener(insertImg);
+
 		jlpassword = new JLabel("Password: ");
 		jlpassword.setBackground(new Color(0, 176, 220));
 		jlpassword.setBounds(137, 209, 94, 13);
@@ -172,7 +174,7 @@ public class Register extends JFrame {
 		jppassword2.setColumns(10);
 		jppassword2.setToolTipText("Confirm your password");
 		getContentPane().add(jppassword2);
-		
+
 		jbconfirm = new JButton("");
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
 		jbconfirm.setToolTipText("Confirm");
@@ -186,7 +188,7 @@ public class Register extends JFrame {
 
 				boolean verification = true;
 
-				JTextField[] group = {jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto, jppassword, jppassword2 };
+				JTextField[] group = { jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto, jppassword, jppassword2 };
 
 				for (JTextField j : group) {
 					if (j.getText().isBlank()) {
@@ -195,8 +197,7 @@ public class Register extends JFrame {
 					}
 
 				}
-				
-				
+
 				if (verification) {
 					if (jtdni.getText().matches(sdni)) {
 						if (jtphone.getText().matches(sphone)) {
@@ -209,22 +210,21 @@ public class Register extends JFrame {
 										date_birth = dateChooser.getDateFormatString();
 										date_birth = sdf.format(dateChooser.getDate());
 										System.out.println(date_birth);
-										
-										Functions f=new Functions();
-										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
-										System.out.println(jtdate.getText());
 
-										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(), date_birth,jtphone.getText(),jtphoto.getText());
+										Functions f = new Functions();
+										f.WriteUser(jtdni.getText(), jppassword.getText(), jtrole.getText());
+										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(),
+												date_birth, jtphone.getText(), jtphoto.getText());
 										dispose();
-										Login log=new Login();
-									
-									 }catch(SQLException e1) {
+										Login log = new Login();
+
+									} catch (SQLException e1) {
 										Icon icon = new ImageIcon("images/warning.png");
 										JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
-										JOptionPane.WARNING_MESSAGE, icon);
+												JOptionPane.WARNING_MESSAGE, icon);
 
 									}
-									
+
 								} else {
 									icon = new ImageIcon("images/warning.png");
 									JOptionPane.showMessageDialog(null, "Passwords don't match", "Error",
@@ -276,36 +276,36 @@ public class Register extends JFrame {
 
 		setVisible(true);
 	}
-	
-//	public class InsertImg implements ActionListener {
-//
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			AbstractButton bt = (AbstractButton) e.getSource();
-//			JFileChooser fileChooser = new JFileChooser();
-//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//
-//			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
-//			fileChooser.setFileFilter(soloImg);
-//
-//			fileChooser.showSaveDialog(null);
-//			
-//			String ficheroNombre = fileChooser.getSelectedFile().getName();
-//
-//			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
-//			
-//			jtphoto.setText("images/" + ficheroNombre);
-//			
-//			File imagenes = new File(jtphoto.getText());
-//			bt.setText("Insertar Imagen");
-//			Path destination = imagenes.toPath();
-//			try {
-//				Files.copy(sourcer, destination);
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
-//		}
-//	}
+
+	// Insert Image Method
+	public class InsertImg implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			AbstractButton btn = (AbstractButton) e.getSource();
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+			int sel = fileChooser.showSaveDialog(null);
+			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+			fileChooser.setFileFilter(soloImg);
+			// Obtiene el archivo seleccionado y establece las rutas de origen y destino
+			String ficheroNombre = fileChooser.getSelectedFile().getName();
+			File imagenes = new File("images/" + ficheroNombre);
+			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
+			Path destination = imagenes.toPath();
+			if (fileChooser.APPROVE_OPTION == sel) {
+				Image imagen = new ImageIcon(fileChooser.getSelectedFile().toString()).getImage();
+				ImageIcon img2 = new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
+				jlImage.setIcon(img2);
+				jtphoto.setText("images/" + ficheroNombre);
+				try {
+					Files.copy(sourcer, destination);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}
+		}
+	}
 
 	private void inicializate(JFrame jf) {
 
