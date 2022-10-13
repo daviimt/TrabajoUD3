@@ -125,7 +125,7 @@ public class Functions {
 
 	}
 
-	public void WriteStudent(String dni, String name, String lastname, Date birth_date, String phone, String photo)
+	public void WriteStudent(String dni, String name, String lastname, String birth_date, String phone, String photo)
 			throws SQLException {
 
 		PreparedStatement ps;
@@ -143,7 +143,8 @@ public class Functions {
 		ps.setString(1, student.getDni());
 		ps.setString(2, student.getName());
 		ps.setString(3, student.getLastname());
-		ps.setDate(4, student.getBirth_date());
+		System.out.println(student.getBirth_date());
+		ps.setString(4, student.getBirth_date());
 		ps.setString(5, student.getPhone());
 		ps.setString(6, student.getPhoto());
 		ps.executeUpdate();

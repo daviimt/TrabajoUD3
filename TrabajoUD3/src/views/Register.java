@@ -109,7 +109,7 @@ public class Register extends JFrame {
 		getContentPane().add(dateChooser);
 		
 		jtdate = new JTextField(String.valueOf(dateChooser.getDate()));
-
+		
 		jlphone = new JLabel("Phone: ");
 		jlphone.setBackground(new Color(0, 176, 220));
 		jlphone.setBounds(137, 179, 94, 13);
@@ -213,16 +213,18 @@ public class Register extends JFrame {
 									try {
 
 										Functions f=new Functions();
-										f.WriteUser(jtdate.getText(), jppassword.getText(),jtrole.getText());
-										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(),java.sql.Date.valueOf( jtdate.getText()),jtphone.getText(),jtphoto.getText());
+										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
+										System.out.println(jtdate.getText());
+										System.out.println(dateChooser.getDate());
+										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(), jtdate.getText(),jtphone.getText(),jtphoto.getText());
 										dispose();
 										Login log=new Login();
 									
 									 }catch(SQLException e1){
-								        	Icon icon = new ImageIcon("images/warning.png");
-											JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
-													JOptionPane.WARNING_MESSAGE, icon);
-								        
+//								        	Icon icon = new ImageIcon("images/warning.png");
+//											JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
+//													JOptionPane.WARNING_MESSAGE, icon);
+								        System.out.println(e1);
 									}
 									
 								} else {

@@ -171,7 +171,7 @@ public class Login extends JFrame {
 					dispose();
 				} else {
 					if (jtid.getText().matches(sid)) {
-
+						
 						User us = f.Read(jtid.getText());
 						System.out.println(us);
 						if (us.getDni().equals(jtid.getText())) {

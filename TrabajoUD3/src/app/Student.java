@@ -3,14 +3,13 @@ package app;
 import java.sql.Date;
 
 public class Student {
-	private String dni, name, lastname, phone, photo;
-	private Date birth_date;
+	private String dni, name, lastname, birth_date,phone, photo;
 
 	public Student() {
 		super();
 	}
 
-	public Student(String dni, String name, String lastname, String phone, String photo, Date birth_date) {
+	public Student(String dni, String name, String lastname, String birth_date,String phone, String photo) {
 		super();
 		this.dni = dni;
 		this.name = name;
@@ -60,11 +59,11 @@ public class Student {
 		this.photo = photo;
 	}
 
-	public Date getBirth_date() {
+	public String getBirth_date() {
 		return birth_date;
 	}
 
-	public void setBirth_date(Date birth_date) {
+	public void setBirth_date(String birth_date) {
 		this.birth_date = birth_date;
 	}
 

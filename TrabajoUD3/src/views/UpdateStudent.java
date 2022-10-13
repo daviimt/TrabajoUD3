@@ -213,7 +213,7 @@ public class UpdateStudent extends JFrame {
 
 										Functions f=new Functions();
 										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
-										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(),java.sql.Date.valueOf( jtdate.getText()),jtphone.getText(),jtphoto.getText());
+										f.WriteStudent(jtdni.getText(),jtname.getText(), jtlastname.getText(), jtdate.getText(),jtphone.getText(),jtphoto.getText());
 										dispose();
 										Login log=new Login();
 									
