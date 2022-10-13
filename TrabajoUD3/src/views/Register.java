@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -31,7 +32,7 @@ import com.toedter.calendar.JTextFieldDateEditor;
 
 public class Register extends JFrame {
 
-	private JLabel jldni, jlname, jllastname, jldate, jlphone, jlphoto, jlpassword, jlpassword2, jlImage;
+	private JLabel jldni, jlname, jllastname, jldate, jlphone, jlpassword, jlpassword2, jlImage;
 	private JTextField jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");
 	private JPasswordField jppassword, jppassword2;
 	private JButton jbconfirm, jbcancel, jbphoto;
@@ -123,22 +124,18 @@ public class Register extends JFrame {
 		jtphone.setToolTipText("Introduce your phone");
 		getContentPane().add(jtphone);
 
-		jlphoto = new JLabel("Photo: ");
-		jlphoto.setBackground(new Color(0, 176, 220));
-		jlphoto.setBounds(23, 62, 94, 13);
-		jlphoto.setHorizontalAlignment(SwingConstants.CENTER);
-		jlphoto.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlphoto);
-
-		jlImage = new JLabel();
-		jlImage.setBounds(10, 95, 130, 117);
+		jlImage = new JLabel("IMAGE");
+		jlImage.setBounds(21, 36, 116, 139);
+		jlImage.setBorder(BorderFactory.createLineBorder(Color.black));
+		jlImage.setVerticalAlignment(SwingConstants.CENTER);
+		jlImage.setHorizontalAlignment(SwingConstants.CENTER);
 		getContentPane().add(jlImage);
 
 		jbphoto = new JButton("Select Image:");
 		jbphoto.setToolTipText("Select a image");
 		jbphoto.setBackground(new Color(238, 238, 238));
 		jbphoto.setBorderPainted(true);
-		jbphoto.setBounds(15, 223, 116, 29);
+		jbphoto.setBounds(21, 193, 116, 29);
 		getContentPane().add(jbphoto);
 
 		jtphoto = new JTextField();
