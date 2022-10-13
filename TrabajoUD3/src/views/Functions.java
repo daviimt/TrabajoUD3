@@ -110,20 +110,19 @@ public class Functions {
 //		return u;
 //	}
 
-	public List<Teacher> ReadTeacher() {
+	public List<User> ReadUsers() {
 
-		List<Teacher> listTeacher = new ArrayList<Teacher>();
+		List<User> listUsers = new ArrayList<User>();
 		try {
 
-			ResultSet rs = statement.executeQuery("SELECT * FROM profesor");
+			ResultSet rs = statement.executeQuery("SELECT * FROM usuarios");
 
 			while (rs.next()) {
-				teacher = new Teacher();
-				teacher.setDni(rs.getString("DNI"));
-				teacher.setName(rs.getString("Nombre"));
-				teacher.setLastname(rs.getString("Apellidos"));
-				teacher.setEmail(rs.getString("email"));
-				listTeacher.add(teacher);
+				user = new User();
+				user.setDni(rs.getString("ID"));
+				user.setPassword(rs.getString("Password"));
+				user.setRole(rs.getString("Rol"));
+				listUsers.add(user);
 			}
 
 			rs.close();
@@ -133,7 +132,7 @@ public class Functions {
 		} catch (SQLException ex) {
 			System.out.println(ex);
 		}
-		return listTeacher;
+		return listUsers;
 	}
 
 	public void WriteUser(String dni, String password, String role) throws SQLException {
@@ -172,7 +171,6 @@ public class Functions {
 		ps.setString(1, student.getDni());
 		ps.setString(2, student.getName());
 		ps.setString(3, student.getLastname());
-		System.out.println(student.getBirth_date());
 		ps.setString(4, student.getBirth_date());
 		ps.setString(5, student.getPhone());
 		ps.setString(6, student.getPhoto());

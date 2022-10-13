@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import app.Teacher;
+import app.User;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -36,9 +37,9 @@ public class MainWindowAdmin extends JFrame {
 	private JPanel panel, panel_1;
 	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose;
 	private JLabel jluser;
-	String[] nameColums = { "ID", "Name", "LastName", "Email" };
+	String[] nameColums = { "ID", "Role" };
 	private Icon icon;
-	Teacher t = new Teacher();
+	User u = new User();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowAdmin(String s) {
@@ -198,12 +199,10 @@ public class MainWindowAdmin extends JFrame {
 		table.setModel(dtm);
 		Functions f=new Functions();
 		
-		for (Teacher te : f.ReadTeacher()) {
+		for (User u : f.ReadUsers()) {
 			Object[] row = new Object[4];
-			row[0] = te.getDni();
-			row[1] = te.getName();
-			row[2] = te.getLastname();
-			row[3] = te.getEmail();
+			row[0] = u.getDni();
+			row[1] = u.getRole();
 			dtm.addRow(row);
 		}
 	}

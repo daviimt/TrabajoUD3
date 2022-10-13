@@ -202,11 +202,9 @@ public class Register extends JFrame {
 								if (jppassword2.getText().equals(jppassword.getText())) {
 
 									try {
-										System.out.println(dateChooser.getDate());
 										SimpleDateFormat sdf = new SimpleDateFormat(dateChooser.getDateFormatString());
 										date_birth = dateChooser.getDateFormatString();
 										date_birth = sdf.format(dateChooser.getDate());
-										System.out.println(date_birth);
 
 										Functions f = new Functions();
 										f.WriteUser(jtdni.getText(), jppassword.getText(), jtrole.getText());
@@ -214,12 +212,11 @@ public class Register extends JFrame {
 												date_birth, jtphone.getText(), jtphoto.getText());
 										dispose();
 										Login log = new Login();
-
+										
 									} catch (SQLException e1) {
 										Icon icon = new ImageIcon("images/warning.png");
 										JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
 												JOptionPane.WARNING_MESSAGE, icon);
-
 									}
 
 								} else {
