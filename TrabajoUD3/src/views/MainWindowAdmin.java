@@ -2,24 +2,11 @@ package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
+
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
+
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -28,17 +15,14 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.plaf.basic.BasicComboPopup;
-import javax.swing.plaf.basic.BasicScrollBarUI;
-import javax.swing.plaf.basic.ComboPopup;
+
 import javax.swing.table.DefaultTableModel;
 
-import app.Student;
+import app.Teacher;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
+
 import java.awt.Image;
 import java.awt.Toolkit;
 
@@ -54,7 +38,7 @@ public class MainWindowAdmin extends JFrame {
 	private JLabel jluser;
 	String[] nameColums = { "ID", "Name", "LastName", "Email" };
 	private Icon icon;
-	Student s = new Student();
+	Teacher t = new Teacher();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowAdmin(String s) {
@@ -160,15 +144,14 @@ public class MainWindowAdmin extends JFrame {
 		jbdetails.setToolTipText("Details");
 		jbdetails.setBorderPainted(false);
 		jbdetails.setIcon(new ImageIcon("images/details.png"));
-		/*jbdetails.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				DetailsTeacher details = new DetailsTeacher();
-
-			}
-		});*/
+		/*
+		 * jbdetails.addActionListener(new ActionListener() {
+		 * 
+		 * @Override public void actionPerformed(ActionEvent e) { dispose();
+		 * DetailsTeacher details = new DetailsTeacher();
+		 * 
+		 * } });
+		 */
 
 		panel.add(jbdetails);
 
@@ -205,15 +188,24 @@ public class MainWindowAdmin extends JFrame {
 	}
 
 	public void createJTable() {
-		DefaultTableModel dtmCrypto = new DefaultTableModel() {
+		DefaultTableModel dtm = new DefaultTableModel() {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dtmCrypto.setColumnIdentifiers(nameColums);
-		table.setModel(dtmCrypto);
-
+		dtm.setColumnIdentifiers(nameColums);
+		table.setModel(dtm);
+		Functions f=new Functions();
+		
+		for (Teacher te : f.ReadTeacher()) {
+			Object[] row = new Object[4];
+			row[0] = te.getDni();
+			row[1] = te.getName();
+			row[2] = te.getLastname();
+			row[3] = te.getEmail();
+			dtm.addRow(row);
+		}
 	}
 
 }

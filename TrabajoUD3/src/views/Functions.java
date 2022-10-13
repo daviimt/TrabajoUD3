@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -68,7 +70,7 @@ public class Functions {
 		}
 		return u;
 	}
-	
+
 //	public User ReadStudent(User u) {
 //
 //		Student  s = new Student();
@@ -107,9 +109,34 @@ public class Functions {
 //		}
 //		return u;
 //	}
-	
 
-	public void WriteUser(String dni,  String password, String role) throws SQLException {
+	public List<Teacher> ReadTeacher() {
+
+		List<Teacher> listTeacher = new ArrayList<Teacher>();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM profesor");
+
+			while (rs.next()) {
+				teacher = new Teacher();
+				teacher.setDni(rs.getString("DNI"));
+				teacher.setName(rs.getString("Nombre"));
+				teacher.setLastname(rs.getString("Apellidos"));
+				teacher.setEmail(rs.getString("email"));
+				listTeacher.add(teacher);
+			}
+
+			rs.close();
+			statement.close();
+			connection.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listTeacher;
+	}
+
+	public void WriteUser(String dni, String password, String role) throws SQLException {
 
 		PreparedStatement ps;
 		String sql;
@@ -155,9 +182,8 @@ public class Functions {
 		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
 
 	}
-	
-	public void WriteTeacher(String dni, String name, String lastname, String email)
-			throws SQLException {
+
+	public void WriteTeacher(String dni, String name, String lastname, String email) throws SQLException {
 
 		PreparedStatement ps;
 		String sql;

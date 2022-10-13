@@ -166,7 +166,7 @@ public class InsertTeacher extends JFrame {
 										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
 										f.WriteTeacher(jtdni.getText(), jtname.getText(), jtlastname.getText(),jtemail.getText());
 										dispose();
-										Login log=new Login();
+										MainWindowAdmin mainAdmin=new MainWindowAdmin("admin");
 									
 									 }catch(SQLException e1){
 								        	Icon icon = new ImageIcon("images/warning.png");
