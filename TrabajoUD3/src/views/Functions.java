@@ -14,6 +14,8 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+import com.mysql.cj.xdevapi.Result;
+
 import app.Student;
 import app.Teacher;
 import app.User;
@@ -204,4 +206,16 @@ public class Functions {
 
 	}
 
+	public User Delete(String id) {
+
+		User u = new User();
+		try {
+			statement.execute("DELETE FROM USUARIOS WHERE ID= '"+id+"'");
+			statement.close();
+			connection.close();
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return u;
+	}
 }

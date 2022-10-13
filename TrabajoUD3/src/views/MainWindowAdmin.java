@@ -39,6 +39,7 @@ public class MainWindowAdmin extends JFrame {
 	private JLabel jluser;
 	String[] nameColums = { "ID", "Role" };
 	private Icon icon;
+	DefaultTableModel dtm;
 	User u = new User();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -135,6 +136,13 @@ public class MainWindowAdmin extends JFrame {
 				int option = JOptionPane.showOptionDialog(MainWindowAdmin.this, "Are you sure?", "Confirm",
 						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
+				if(option==0) {
+					Functions f=new Functions();
+					System.out.println();
+					f.Delete(String.valueOf(dtm.getValueAt(table.getSelectedRow(),0)));
+					dispose();
+					MainWindowAdmin mainAdmin=new MainWindowAdmin(s);
+				}
 			}
 		});
 
@@ -189,7 +197,7 @@ public class MainWindowAdmin extends JFrame {
 	}
 
 	public void createJTable() {
-		DefaultTableModel dtm = new DefaultTableModel() {
+		dtm = new DefaultTableModel() {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
