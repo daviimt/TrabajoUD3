@@ -1,28 +1,18 @@
 package app;
 
 public class Teacher {
-	int id;
 	private String dni, name, lastname, email;
 
 	public Teacher() {
 		super();
 	}
 
-	public Teacher(int id,String dni, String name, String lastname, String email) {
+	public Teacher(String dni, String name, String lastname, String email) {
 		super();
-		this.id=id;
 		this.dni = dni;
 		this.name = name;
 		this.lastname = lastname;
 		this.email = email;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getDni() {

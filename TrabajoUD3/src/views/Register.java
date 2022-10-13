@@ -213,8 +213,8 @@ public class Register extends JFrame {
 									try {
 
 										Functions f=new Functions();
-										f.WriteUser(f.generateID(), jppassword.getText(),jtrole.getText());
-										f.WriteStudent(f.generateID(),jtdni.getText(), jtname.getText(), jtlastname.getText(),java.sql.Date.valueOf( jtdate.getText()),jtphone.getText(),jtphoto.getText());
+										f.WriteUser(jtdate.getText(), jppassword.getText(),jtrole.getText());
+										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(),java.sql.Date.valueOf( jtdate.getText()),jtphone.getText(),jtphoto.getText());
 										dispose();
 										Login log=new Login();
 									

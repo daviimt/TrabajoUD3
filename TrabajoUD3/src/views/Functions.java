@@ -38,7 +38,7 @@ public class Functions {
 		}
 	}
 
-	public User Read(int id) {
+	public User Read(String id) {
 
 		User u = new User();
 		try {
@@ -47,13 +47,13 @@ public class Functions {
 
 			while (rs.next()) {
 
-				if (id == rs.getInt("ID")) {
-					int cod = rs.getInt("ID");
-					String contra = rs.getString("Password");
-					String rol = rs.getString("Rol");
-					u.setId(cod);
-					u.setPassword(contra);
-					u.setRole(rol);
+				if (id.equals(rs.getString("ID"))) {
+					String code = rs.getString("ID");
+					String passw = rs.getString("Password");
+					String role = rs.getString("Rol");
+					u.setDni(code);
+					u.setPassword(passw);
+					u.setRole(role);
 				}
 			}
 
@@ -107,31 +107,30 @@ public class Functions {
 //	}
 	
 
-	public void WriteUser(int id, String password, String role) throws SQLException {
+	public void WriteUser(String dni,  String password, String role) throws SQLException {
 
 		PreparedStatement ps;
 		String sql;
 		user = new User();
-		user.setId(id);
+		user.setDni(dni);
 		user.setPassword(password);
 		user.setRole(role);
 
 		sql = "insert into usuarios(ID, Password, Rol) values(?,?,?)";
 		ps = connection.prepareStatement(sql);
-		ps.setInt(1, user.getId());
+		ps.setString(1, user.getDni());
 		ps.setString(2, user.getPassword());
 		ps.setString(3, user.getRole());
 		ps.executeUpdate();
 
 	}
 
-	public void WriteStudent(int id,String dni, String name, String lastname, Date birth_date, String phone, String photo)
+	public void WriteStudent(String dni, String name, String lastname, Date birth_date, String phone, String photo)
 			throws SQLException {
 
 		PreparedStatement ps;
 		String sql;
 		student = new Student();
-		student.setId(id);
 		student.setDni(dni);
 		student.setName(name);
 		student.setLastname(lastname);
@@ -139,50 +138,19 @@ public class Functions {
 		student.setPhone(phone);
 		student.setPhoto(photo);
 
-		sql = "insert into alumno(ID ,DNI, Nombre, Apellidos, Fecha_Nac, Telefono, Foto) values(?,?,?,?,?,?,?)";
+		sql = "insert into alumno(DNI, Nombre, Apellidos, Fecha_Nac, Telefono, Foto) values(?,?,?,?,?,?)";
 		ps = connection.prepareStatement(sql);
-		ps.setInt(1, student.getId());
-		ps.setString(2, student.getDni());
-		ps.setString(3, student.getName());
-		ps.setString(4, student.getLastname());
-		ps.setDate(5, student.getBirth_date());
-		ps.setString(6, student.getPhone());
-		ps.setString(7, student.getPhoto());
+		ps.setString(1, student.getDni());
+		ps.setString(2, student.getName());
+		ps.setString(3, student.getLastname());
+		ps.setDate(4, student.getBirth_date());
+		ps.setString(5, student.getPhone());
+		ps.setString(6, student.getPhoto());
 		ps.executeUpdate();
 
 		Icon icon = new ImageIcon("images/check.png");
 		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
 
-	}
-	
-	public int generateID() {
-		User u = new User();
-		try {
-
-			ResultSet rs = statement.executeQuery("SELECT * FROM usuarios");
-			while (rs.next()) {
-				ResultSet rs2=rs;
-				
-				if (rs2.next()==false) {
-					int cod = rs.getInt("ID");
-					String contra = rs.getString("Password");
-					String rol = rs.getString("Rol");
-					u.setId(cod);
-					u.setPassword(contra);
-					u.setRole(rol);
-				}
-				rs2.close();
-			}
-
-			rs.close();
-			statement.close();
-			connection.close();
-
-		} catch (SQLException ex) {
-			System.out.println(ex);
-		}
-		
-		return u.getId()+1;
 	}
 
 }

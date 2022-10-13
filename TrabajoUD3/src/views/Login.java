@@ -172,9 +172,9 @@ public class Login extends JFrame {
 				} else {
 					if (jtid.getText().matches(sid)) {
 
-						User us = f.Read(Integer.parseInt(jtid.getText()));
+						User us = f.Read(jtid.getText());
 						System.out.println(us);
-						if (us.getId() == Integer.parseInt(jtid.getText())) {
+						if (us.getDni().equals(jtid.getText())) {
 							existUser = true;
 							if (us.getPassword().equals(jppassword.getText())) {
 								passwordCorrect = true;

@@ -3,7 +3,6 @@ package app;
 import java.sql.Date;
 
 public class Student {
-	private int id;
 	private String dni, name, lastname, phone, photo;
 	private Date birth_date;
 
@@ -11,23 +10,14 @@ public class Student {
 		super();
 	}
 
-	public Student(int id, String dni, String name, String lastname, String phone, String photo, Date birth_date) {
+	public Student(String dni, String name, String lastname, String phone, String photo, Date birth_date) {
 		super();
-		this.id = id;
 		this.dni = dni;
 		this.name = name;
 		this.lastname = lastname;
 		this.phone = phone;
 		this.photo = photo;
 		this.birth_date = birth_date;
-	}
-
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) {
-		this.id = id;
 	}
 
 	public String getDni() {
@@ -80,7 +70,7 @@ public class Student {
 
 	@Override
 	public String toString() {
-		return "Student [id=" + id + ", dni=" + dni + ", name=" + name + ", lastname=" + lastname + ", phone=" + phone
+		return "Student [dni=" + dni + ", name=" + name + ", lastname=" + lastname + ", phone=" + phone
 				+ ", photo=" + photo + ", birth_date=" + birth_date + "]";
 	}
 

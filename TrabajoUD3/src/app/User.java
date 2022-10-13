@@ -1,26 +1,25 @@
 package app;
 
 public class User {
-	private int id;
-	private String password, role;
+	private String dni, password, role;
 
 	public User() {
 		super();
 	}
 
-	public User(int id, String password, String role) {
+	public User(String dni, String password, String role) {
 		super();
-		this.id = id;
+		this.dni = dni;
 		this.password = password;
 		this.role = role;
 	}
 
-	public int getId() {
-		return id;
+	public String getDni() {
+		return dni;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setDni(String dni) {
+		this.dni = dni;
 	}
 
 	public String getPassword() {
@@ -41,9 +40,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", password=" + password + ", role=" + role + "]";
+		return "User [dni=" + dni + ", password=" + password + ", role=" + role + "]";
 	}
-
-	
 	
 }
