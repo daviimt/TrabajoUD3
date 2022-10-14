@@ -267,7 +267,7 @@ public class UpdateStudent extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowStudent main = new MainWindowStudent(s);
+				MainWindowStudent main = new MainWindowStudent();
 
 			}
 		});

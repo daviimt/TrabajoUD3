@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -54,7 +55,7 @@ public class Login extends JFrame {
 	/** The fusers. */
 	private File fusers = new File("files/Users");
 
-	private String sid = "[0-9]*";
+	private String sid = "[0-9]{8}[A-Z]";
 
 	/**
 	 * Instantiates a new login.
@@ -63,8 +64,6 @@ public class Login extends JFrame {
 		super("Login");
 		getContentPane().setBackground(new Color(0, 176, 220));
 		inicializate(Login.this);
-
-		Functions conn = new Functions();
 
 		jtid = new JTextField();
 		jtid.setBounds(133, 68, 96, 19);
@@ -164,50 +163,57 @@ public class Login extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			boolean existUser = false;
 			boolean passwordCorrect = false;
-			Functions f = new Functions();
-			if (jtid.getText().isBlank() == false) {
-				if (jtid.getText().equals("admin") && jppassword.getText().equals("admin")) {
-					MainWindowAdmin mainAdmin = new MainWindowAdmin(jtid.getText());
-					dispose();
-				} else {
-					if (jtid.getText().matches(sid)) {
-						
-						User us = f.Read(jtid.getText());
-						System.out.println(us);
-						if (us.getDni().equals(jtid.getText())) {
-							existUser = true;
-							if (us.getPassword().equals(jppassword.getText())) {
-								passwordCorrect = true;
-							}
+			try {
+				Functions f = new Functions();
+				if (jtid.getText().isBlank() == false) {
+					if (jtid.getText().equals("admin") && jppassword.getText().equals("admin")) {
+						MainWindowAdmin mainAdmin = new MainWindowAdmin(jtid.getText());
+						dispose();
+					} else {
+						if (jtid.getText().matches(sid)) {
 
-							if (passwordCorrect == true) {
-								if (us.getRole().equals("Student")) {
-									// MainWindowStudent mainStudent = new MainWindowStudent(jtid.getText());
-
-								} else if (us.getRole().equals("Teacher")) {
-									MainWindowTeacher mainTeacher = new MainWindowTeacher(jtid.getText());
+							User us = f.Read(jtid.getText());
+							System.out.println(us);
+							if (us.getDni().equals(jtid.getText())) {
+								existUser = true;
+								if (us.getPassword().equals(jppassword.getText())) {
+									passwordCorrect = true;
 								}
-								dispose();
+
+								if (passwordCorrect == true) {
+									if (us.getRole().equals("Student")) {
+										MainWindowStudent mainStudent = new MainWindowStudent();
+
+									} else if (us.getRole().equals("Teacher")) {
+										MainWindowTeacher mainTeacher = new MainWindowTeacher(jtid.getText());
+									}
+									dispose();
+								} else {
+									icon = new ImageIcon("images/warning.png");
+									JOptionPane.showMessageDialog(null, "Incorrect password", "Error",
+											JOptionPane.WARNING_MESSAGE, icon);
+								}
+
 							} else {
 								icon = new ImageIcon("images/warning.png");
-								JOptionPane.showMessageDialog(null, "Incorrect password", "Error",
+								JOptionPane.showMessageDialog(null, "The user doesn't exists", "Error",
 										JOptionPane.WARNING_MESSAGE, icon);
 							}
-
 						} else {
 							icon = new ImageIcon("images/warning.png");
-							JOptionPane.showMessageDialog(null, "The user doesn't exists", "Error",
-									JOptionPane.WARNING_MESSAGE, icon);
+							JOptionPane.showMessageDialog(null, "DNI not valid", "Error", JOptionPane.WARNING_MESSAGE,
+									icon);
 						}
-					} else {
-						icon = new ImageIcon("images/warning.png");
-						JOptionPane.showMessageDialog(null, "ID is not numeric", "Error", JOptionPane.WARNING_MESSAGE,
-								icon);
 					}
+				} else {
+					icon = new ImageIcon("images/warning.png");
+					JOptionPane.showMessageDialog(null, "User name is empty", "Error", JOptionPane.WARNING_MESSAGE,
+							icon);
 				}
-			} else {
-				icon = new ImageIcon("images/warning.png");
-				JOptionPane.showMessageDialog(null, "User name is empty", "Error", JOptionPane.WARNING_MESSAGE, icon);
+				f.close();
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
 		}
 

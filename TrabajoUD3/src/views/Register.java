@@ -40,10 +40,8 @@ public class Register extends JFrame {
 	static Image imagen;
 	ImageIcon img2;
 	private String sdni = "[0-9]{8}[A-Z]";
-	// private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
 	private String sphone = "[0-9]{9}";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
-	private File fusers = new File("files/Users");
 	private JDateChooser dateChooser;
 	private String date_birth;
 
@@ -211,6 +209,7 @@ public class Register extends JFrame {
 										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(),
 												date_birth, jtphone.getText(), jtphoto.getText());
 										dispose();
+										f.close();
 										Login log = new Login();
 										
 									} catch (SQLException e1) {

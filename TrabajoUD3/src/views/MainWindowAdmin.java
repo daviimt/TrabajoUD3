@@ -2,6 +2,7 @@ package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -114,8 +115,22 @@ public class MainWindowAdmin extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				UpdateTeacher update = new UpdateTeacher(s);
+
+				if (table.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
+
+					if (String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)).equals("Student")) {
+						icon = new ImageIcon("images/warning.png");
+						JOptionPane.showMessageDialog(null, "You can't change student data", "Error",
+								JOptionPane.INFORMATION_MESSAGE, icon);
+					} else {
+						UpdateTeacher update = new UpdateTeacher(
+								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+
+					}
+
+				}
 
 			}
 		});
@@ -133,15 +148,25 @@ public class MainWindowAdmin extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 
-				int option = JOptionPane.showOptionDialog(MainWindowAdmin.this, "Are you sure?", "Confirm",
-						JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+				if (table.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
 
-				if(option==0) {
-					Functions f=new Functions();
-					System.out.println();
-					f.Delete(String.valueOf(dtm.getValueAt(table.getSelectedRow(),0)));
-					dispose();
-					MainWindowAdmin mainAdmin=new MainWindowAdmin(s);
+					int option = JOptionPane.showOptionDialog(MainWindowAdmin.this, "Are you sure?", "Confirm",
+							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
+
+					if (option == 0) {
+						try {
+							Functions f = new Functions();
+							f.Delete(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+							f.close();
+						} catch (SQLException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+						dispose();
+						MainWindowAdmin mainAdmin = new MainWindowAdmin(s);
+					}
 				}
 			}
 		});
@@ -153,14 +178,27 @@ public class MainWindowAdmin extends JFrame {
 		jbdetails.setToolTipText("Details");
 		jbdetails.setBorderPainted(false);
 		jbdetails.setIcon(new ImageIcon("images/details.png"));
-		/*
-		 * jbdetails.addActionListener(new ActionListener() {
-		 * 
-		 * @Override public void actionPerformed(ActionEvent e) { dispose();
-		 * DetailsTeacher details = new DetailsTeacher();
-		 * 
-		 * } });
-		 */
+
+		jbdetails.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
+					if (String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)).equals("Student")) {
+						icon = new ImageIcon("images/warning.png");
+						JOptionPane.showMessageDialog(null, "You can't see student data", "Error",
+								JOptionPane.INFORMATION_MESSAGE, icon);
+					} else {
+						dispose();
+						DetailsTeacher details = new DetailsTeacher();
+					}
+
+				}
+
+			}
+		});
 
 		panel.add(jbdetails);
 
@@ -205,13 +243,20 @@ public class MainWindowAdmin extends JFrame {
 		};
 		dtm.setColumnIdentifiers(nameColums);
 		table.setModel(dtm);
-		Functions f=new Functions();
-		
-		for (User u : f.ReadUsers()) {
-			Object[] row = new Object[4];
-			row[0] = u.getDni();
-			row[1] = u.getRole();
-			dtm.addRow(row);
+		try {
+			Functions f = new Functions();
+
+			for (User u : f.ReadUsers()) {
+				Object[] row = new Object[4];
+				row[0] = u.getDni();
+				row[1] = u.getRole();
+				dtm.addRow(row);
+			}
+
+			f.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 

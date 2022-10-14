@@ -44,7 +44,7 @@ public class Functions {
 		}
 	}
 
-	public User Read(String id) {
+	public User Read(String dni) {
 
 		User u = new User();
 		try {
@@ -53,19 +53,15 @@ public class Functions {
 
 			while (rs.next()) {
 
-				if (id.equals(rs.getString("ID"))) {
-					String code = rs.getString("ID");
-					String passw = rs.getString("Password");
-					String role = rs.getString("Rol");
-					u.setDni(code);
-					u.setPassword(passw);
-					u.setRole(role);
+				if (dni.equals(rs.getString("ID"))) {
+					u=new User();
+					u.setDni(rs.getString("ID"));
+					u.setPassword(rs.getString("Password"));
+					u.setRole(rs.getString("Rol"));
 				}
 			}
 
 			rs.close();
-			statement.close();
-			connection.close();
 
 		} catch (SQLException ex) {
 			System.out.println(ex);
@@ -103,8 +99,6 @@ public class Functions {
 //			}
 //
 //			rs.close();
-//			statement.close();
-//			connection.close();
 //
 //		} catch (SQLException ex) {
 //			System.out.println(ex);
@@ -112,6 +106,33 @@ public class Functions {
 //		return u;
 //	}
 
+	public Teacher ReadTeacher(String dni) {
+
+		Teacher  teacher=new Teacher();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM profesor");
+
+			while (rs.next()) {
+
+				if (dni.equals(rs.getString("DNI"))) {
+					teacher = new Teacher();
+					teacher.setDni(rs.getString("DNI"));
+					teacher.setName(rs.getString("Nombre"));
+					teacher.setLastname(rs.getString("Apellidos"));
+					teacher.setEmail(rs.getString("email"));
+				}
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return teacher;
+	}
+	
+	
 	public List<User> ReadUsers() {
 
 		List<User> listUsers = new ArrayList<User>();
@@ -128,8 +149,6 @@ public class Functions {
 			}
 
 			rs.close();
-			statement.close();
-			connection.close();
 
 		} catch (SQLException ex) {
 			System.out.println(ex);
@@ -177,7 +196,7 @@ public class Functions {
 		ps.setString(5, student.getPhone());
 		ps.setString(6, student.getPhoto());
 		ps.executeUpdate();
-
+		
 		Icon icon = new ImageIcon("images/check.png");
 		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
 
@@ -211,11 +230,14 @@ public class Functions {
 		User u = new User();
 		try {
 			statement.execute("DELETE FROM USUARIOS WHERE ID= '"+id+"'");
-			statement.close();
-			connection.close();
 		} catch (SQLException ex) {
 			System.out.println(ex);
 		}
 		return u;
+	}
+	
+	public void close() throws SQLException {
+		statement.close();
+		connection.close();
 	}
 }

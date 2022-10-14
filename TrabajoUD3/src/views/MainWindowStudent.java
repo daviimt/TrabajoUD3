@@ -59,7 +59,7 @@ public class MainWindowStudent extends JFrame {
 	Student s = new Student();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public MainWindowStudent(Student s) {
+	public MainWindowStudent( ) {
 		super("Student menu");
 		inicializate(MainWindowStudent.this);
 

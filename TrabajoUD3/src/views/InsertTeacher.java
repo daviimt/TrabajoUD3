@@ -165,6 +165,7 @@ public class InsertTeacher extends JFrame {
 										Functions f=new Functions();
 										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
 										f.WriteTeacher(jtdni.getText(), jtname.getText(), jtlastname.getText(),jtemail.getText());
+										f.close();
 										dispose();
 										MainWindowAdmin mainAdmin=new MainWindowAdmin("admin");
 									
