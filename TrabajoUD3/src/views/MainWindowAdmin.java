@@ -192,7 +192,7 @@ public class MainWindowAdmin extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
 						dispose();
-						DetailsTeacher details = new DetailsTeacher();
+						DetailsTeacher details = new DetailsTeacher(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
 					}
 
 				}

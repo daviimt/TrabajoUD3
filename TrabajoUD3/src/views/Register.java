@@ -211,7 +211,7 @@ public class Register extends JFrame {
 										dispose();
 										f.close();
 										Login log = new Login();
-										
+
 									} catch (SQLException e1) {
 										Icon icon = new ImageIcon("images/warning.png");
 										JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
@@ -274,28 +274,42 @@ public class Register extends JFrame {
 	public class InsertImg implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			AbstractButton btn = (AbstractButton) e.getSource();
-			JFileChooser fileChooser = new JFileChooser();
-			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-			int sel = fileChooser.showSaveDialog(null);
-			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
-			fileChooser.setFileFilter(soloImg);
-			// Obtiene el archivo seleccionado y establece las rutas de origen y destino
-			String ficheroNombre = fileChooser.getSelectedFile().getName();
-			File imagenes = new File("images/alumn/" + ficheroNombre);
-			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
-			Path destination = imagenes.toPath();
-			if (fileChooser.APPROVE_OPTION == sel) {
-				Image imagen = new ImageIcon(fileChooser.getSelectedFile().toString()).getImage();
-				ImageIcon img2 = new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
-				jlImage.setIcon(img2);
-				jtphoto.setText("images/alumn/" + ficheroNombre);
-				try {
-					Files.copy(sourcer, destination);
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+			File photo = new File("images/alumn/" + jtdni.getText());
+
+			if (!jtdni.getText().isBlank()) {
+
+				if (!photo.exists()) {
+
+					AbstractButton btn = (AbstractButton) e.getSource();
+					JFileChooser fileChooser = new JFileChooser();
+					fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+					int sel = fileChooser.showSaveDialog(null);
+					FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+					fileChooser.setFileFilter(soloImg);
+					// Obtiene el archivo seleccionado y establece las rutas de origen y destino
+					String ficheroNombre = jtdni.getText();
+					File imagenes = new File("images/alumn/" + ficheroNombre);
+					Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
+					Path destination = imagenes.toPath();
+					if (fileChooser.APPROVE_OPTION == sel) {
+						Image imagen = new ImageIcon(fileChooser.getSelectedFile().toString()).getImage();
+						ImageIcon img2 = new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
+						jlImage.setIcon(img2);
+						jtphoto.setText("images/alumn/" + ficheroNombre);
+						try {
+							Files.copy(sourcer, destination);
+						} catch (IOException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
+					}
+				} else {
+					icon = new ImageIcon("images/warning.png");
+					JOptionPane.showMessageDialog(null, "The photo exist", "Error", JOptionPane.WARNING_MESSAGE, icon);
 				}
+			}else {
+				icon = new ImageIcon("images/warning.png");
+				JOptionPane.showMessageDialog(null, "The dni can´t be empty", "Error", JOptionPane.WARNING_MESSAGE, icon);
 			}
 		}
 	}
