@@ -283,14 +283,14 @@ public class Register extends JFrame {
 			fileChooser.setFileFilter(soloImg);
 			// Obtiene el archivo seleccionado y establece las rutas de origen y destino
 			String ficheroNombre = fileChooser.getSelectedFile().getName();
-			File imagenes = new File("images/" + ficheroNombre);
+			File imagenes = new File("images/alumn" + ficheroNombre);
 			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
 			Path destination = imagenes.toPath();
 			if (fileChooser.APPROVE_OPTION == sel) {
 				Image imagen = new ImageIcon(fileChooser.getSelectedFile().toString()).getImage();
 				ImageIcon img2 = new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
 				jlImage.setIcon(img2);
-				jtphoto.setText("images/" + ficheroNombre);
+				jtphoto.setText("images/alumn" + ficheroNombre);
 				try {
 					Files.copy(sourcer, destination);
 				} catch (IOException e1) {
