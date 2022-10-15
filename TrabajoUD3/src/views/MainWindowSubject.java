@@ -26,7 +26,7 @@ import javax.swing.table.DefaultTableModel;
 import app.Subject;
 import app.User;
 
-public class MainWindowSubject extends JFrame{
+public class MainWindowSubject extends JFrame {
 	private JTable table;
 	private JPanel panel, panel_1;
 	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbsubject;
@@ -112,8 +112,7 @@ public class MainWindowSubject extends JFrame{
 				if (table.getSelectedRow() < 0) {
 					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
 				} else {
-						//UpdateTeacher update = new UpdateTeacher(
-								//String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+					UpdateSubject update = new UpdateSubject(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 
 				}
 
@@ -143,7 +142,7 @@ public class MainWindowSubject extends JFrame{
 					if (option == 0) {
 						try {
 							Functions f = new Functions();
-							f.DeleteSubject(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+							f.DeleteSubject(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 							f.close();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
@@ -177,7 +176,8 @@ public class MainWindowSubject extends JFrame{
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
 						dispose();
-						DetailsTeacher details = new DetailsTeacher(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+						DetailsTeacher details = new DetailsTeacher(
+								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
 					}
 
 				}

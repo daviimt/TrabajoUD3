@@ -260,6 +260,32 @@ public class Functions {
 		return listSubjects;
 	}
 
+	public Subject ReadSubject(int id) {
+
+		Subject subject = new Subject();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM asignatura");
+
+			while (rs.next()) {
+
+				if (id == rs.getInt("Codigo")) {
+					subject = new Subject();
+					subject.setId(rs.getInt("Codigo"));
+					subject.setName(rs.getString("Nombre"));
+					subject.setHours(rs.getInt("Horas"));
+					subject.setDni_teacher(rs.getString("DNI_Profesor"));
+				}
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return subject;
+	}
+
 	public void WriteSubject(int id, String name, int hours, String dni_teacher) throws SQLException {
 
 		PreparedStatement ps;
@@ -280,7 +306,7 @@ public class Functions {
 
 	}
 
-	public Subject DeleteSubject(String id) {
+	public Subject DeleteSubject(int id) {
 
 		Subject s = new Subject();
 		try {

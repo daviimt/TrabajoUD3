@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
+
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -24,11 +25,16 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
+
 import com.toedter.calendar.JDateChooser;
 
-public class InsertSubject extends JFrame {
+import app.Subject;
+import app.Teacher;
+import app.User;
 
-	private JLabel jlid, jlname, jlhours, jldni_teacher;
+public class UpdateSubject extends JFrame {
+
+	private JLabel jlname, jlhours, jldni_teacher;
 	private JTextField jtid, jtname, jthours, jtdni_teacher;
 	private JButton jbconfirm, jbcancel;
 	private Icon icon;
@@ -38,24 +44,21 @@ public class InsertSubject extends JFrame {
 	private String sdni_teacher = "[0-9]{8}[A-Z]";
 	private String shours = "[0-9]+";
 
-	public InsertSubject(String s) {
-		// creamos el frame insertar
-		super("Insert Subject");
-		inicializate(InsertSubject.this);
+	public UpdateSubject(int idSubject) {
+		super("Update Subject");
+		inicializate(UpdateSubject.this);
+		Subject subject = new Subject();
 
-		jlid = new JLabel("ID : ");
-		jlid.setBackground(new Color(0, 176, 220));
-		jlid.setBounds(147, 122, 84, 13);
-		jlid.setHorizontalAlignment(SwingConstants.CENTER);
-		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlid);
+		try {
+			Functions f = new Functions();
+			subject = f.ReadSubject(idSubject);
+			f.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 
-		jtid = new JTextField();
-		jtid.setBounds(241, 119, 167, 19);
-		jtid.setBackground(new Color(0, 176, 220));
-		jtid.setColumns(12);
-		jtid.setToolTipText("Introduce the ID");
-		getContentPane().add(jtid);
+		jtid = new JTextField(String.valueOf(subject.getId()));
 
 		jlname = new JLabel("Name: ");
 		jlname.setBackground(new Color(0, 176, 220));
@@ -64,11 +67,11 @@ public class InsertSubject extends JFrame {
 		jlname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlname);
 
-		jtname = new JTextField();
+		jtname = new JTextField(subject.getName());
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce subject's name");
+		jtname.setToolTipText("Modify the name");
 		getContentPane().add(jtname);
 
 		jlhours = new JLabel("Hours:");
@@ -78,25 +81,25 @@ public class InsertSubject extends JFrame {
 		jlhours.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlhours);
 
-		jthours = new JTextField();
+		jthours = new JTextField(String.valueOf(subject.getHours()));
 		jthours.setBounds(242, 89, 167, 19);
 		jthours.setBackground(new Color(0, 176, 220));
 		jthours.setColumns(10);
-		jthours.setToolTipText("Introduce the hours");
+		jthours.setToolTipText("Modify the hours");
 		getContentPane().add(jthours);
 
-		jldni_teacher = new JLabel("Teacher DNI:");
+		jldni_teacher = new JLabel("Teacher's DNI: ");
 		jldni_teacher.setBackground(new Color(0, 176, 220));
-		jldni_teacher.setBounds(137, 92, 94, 13);
+		jldni_teacher.setBounds(147, 62, 72, 13);
 		jldni_teacher.setHorizontalAlignment(SwingConstants.CENTER);
 		jldni_teacher.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldni_teacher);
 
-		jtdni_teacher = new JTextField();
-		jtdni_teacher.setBounds(242, 89, 167, 19);
+		jtdni_teacher = new JTextField(subject.getDni_teacher());
+		jtdni_teacher.setBounds(242, 59, 167, 19);
 		jtdni_teacher.setBackground(new Color(0, 176, 220));
 		jtdni_teacher.setColumns(10);
-		jtdni_teacher.setToolTipText("Introduce teacher's DNI");
+		jtdni_teacher.setToolTipText("Modify the teacher's DNI");
 		getContentPane().add(jtdni_teacher);
 
 		// Boton next
@@ -130,11 +133,20 @@ public class InsertSubject extends JFrame {
 							if (jtdni_teacher.getText().matches(sdni_teacher)) {
 								try {
 									if (f.ReadTeacher(jtdni_teacher.getText()).getDni() != null) {
-										f.WriteSubject(Integer.parseInt(jtid.getText()), jtname.getText(),
-												Integer.parseInt(jthours.getText()), jtdni_teacher.getText());
-										f.close();
-										dispose();
-										MainWindowSubject mainSubject = new MainWindowSubject(s);
+										//if (f.ReadSubject(Integer.parseInt(jtid.getText())).getName().equals(jtname.getText())) {
+											
+											f.DeleteSubject(idSubject);
+											f.WriteSubject(Integer.parseInt(jtid.getText()), jtname.getText(),
+													Integer.parseInt(jthours.getText()), jtdni_teacher.getText());
+											f.close();
+
+											dispose();
+											MainWindowSubject mainSubject = new MainWindowSubject("admin");
+										/*} else {
+											icon = new ImageIcon("images/warning.png");
+											JOptionPane.showMessageDialog(null, "Subject's name exist", "Error",
+													JOptionPane.INFORMATION_MESSAGE, icon);
+										}*/
 									} else {
 										icon = new ImageIcon("images/warning.png");
 										JOptionPane.showMessageDialog(null, "Teacher's DNI does not exist", "Error",
@@ -185,7 +197,7 @@ public class InsertSubject extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowSubject mainsub = new MainWindowSubject(s);
+				MainWindowAdmin mainteach = new MainWindowAdmin("admin");
 
 			}
 		});
@@ -202,7 +214,7 @@ public class InsertSubject extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(5, 2));
+		jf.getContentPane().setLayout(new GridLayout(4, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}

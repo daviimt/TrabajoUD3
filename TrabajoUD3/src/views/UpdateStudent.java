@@ -61,7 +61,7 @@ public class UpdateStudent extends JFrame {
 		jtdni.setBounds(241, 119, 167, 19);
 		jtdni.setBackground(Color.WHITE);
 		jtdni.setColumns(12);
-		jtdni.setToolTipText("Introduce your DNI");
+		jtdni.setToolTipText("Modify your DNI");
 		getContentPane().add(jtdni);
 
 		jlname = new JLabel("Name: ");
@@ -75,7 +75,7 @@ public class UpdateStudent extends JFrame {
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(Color.WHITE);
 		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce your name");
+		jtname.setToolTipText("Modify your name");
 		getContentPane().add(jtname);
 		
 		jllastname = new JLabel("Last name:");
@@ -89,7 +89,7 @@ public class UpdateStudent extends JFrame {
 		jtlastname.setBounds(242, 89, 167, 19);
 		jtlastname.setBackground(Color.WHITE);
 		jtlastname.setColumns(10);
-		jtlastname.setToolTipText("Introduce your last name");
+		jtlastname.setToolTipText("Modify your last name");
 		getContentPane().add(jtlastname);
 
 		jldate = new JLabel("Date: ");
@@ -103,7 +103,7 @@ public class UpdateStudent extends JFrame {
 		dateChooser.setBackground(Color.CYAN);
 		dateChooser.getCalendarButton().setBackground(new Color(0, 176, 220));
 		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
-		editor.setToolTipText("Introduce your birth date");
+		editor.setToolTipText("Modify your birth date");
 		editor.setEditable(false);
 		getContentPane().add(dateChooser);
 		
@@ -120,7 +120,7 @@ public class UpdateStudent extends JFrame {
 		jtphone.setBounds(241, 176, 167, 19);
 		jtphone.setBackground(Color.WHITE);
 		jtphone.setColumns(13);
-		jtphone.setToolTipText("Introduce your phone");
+		jtphone.setToolTipText("Modify your phone");
 		getContentPane().add(jtphone);
 		
 		jlphoto = new JLabel("Photo: ");
@@ -163,7 +163,7 @@ public class UpdateStudent extends JFrame {
 		jppassword.setBounds(241, 206, 167, 19);
 		jppassword.setBackground(Color.WHITE);
 		jppassword.setColumns(10);
-		jppassword.setToolTipText("Introduce your password");
+		jppassword.setToolTipText("Modify your password");
 		getContentPane().add(jppassword);
 
 		jlpassword2 = new JLabel("Repeat Pass.: ");
