@@ -36,7 +36,7 @@ public class MainWindowAdmin extends JFrame {
 
 	private JTable table;
 	private JPanel panel, panel_1;
-	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose;
+	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbsubject;
 	private JLabel jluser;
 	String[] nameColums = { "ID", "Role" };
 	private Icon icon;
@@ -158,7 +158,7 @@ public class MainWindowAdmin extends JFrame {
 					if (option == 0) {
 						try {
 							Functions f = new Functions();
-							f.Delete(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+							f.DeleteUser(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
 							f.close();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
@@ -218,6 +218,22 @@ public class MainWindowAdmin extends JFrame {
 			}
 		});
 		panel.add(jbclose);
+		
+		jbsubject = new JButton("Modify subjects");
+		jbsubject.setBackground(new Color(8, 116, 247));
+		jbsubject.setToolTipText("Modify subjects");
+		jbsubject.setBorderPainted(false);
+		jbsubject.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				MainWindowSubject main = new MainWindowSubject(s);
+
+			}
+		});
+		panel.add(jbsubject);
 
 		setVisible(true);
 	}
