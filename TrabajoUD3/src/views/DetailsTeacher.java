@@ -47,7 +47,7 @@ public class DetailsTeacher extends JFrame {
 
 	public DetailsTeacher(String idTeacher) {
 		// creamos el frame insertar
-		super("Update Teacher");
+		super("Details Teacher");
 		inicializate(DetailsTeacher.this);
 		Teacher teacher=new Teacher();
 		User user=new User();

@@ -71,42 +71,32 @@ public class Functions {
 		return u;
 	}
 
-//	public User ReadStudent(User u) {
-//
-//		Student  s = new Student();
-//		try {
-//
-//			ResultSet rs = statement.executeQuery("SELECT * FROM alumno");
-//
-//			while (rs.next()) {
-//
-//				if (u.getId() == rs.getInt("ID")) {
-//					student = new Student();
-//					student.setId(u.getId());
-//					student.setDni(dni);
-//					student.setName(name);
-//					student.setLastname(lastname);
-//					student.setBirth_date(birth_date);
-//					student.setPhone(phone);
-//					student.setPhoto(photo);
-//
-//					ps.setInt(1, student.getId());
-//					ps.setString(2, student.getDni());
-//					ps.setString(3, student.getName());
-//					ps.setString(4, student.getLastname());
-//					ps.setDate(5, student.getBirth_date());
-//					ps.setString(6, student.getPhone());
-//					ps.setString(7, student.getPhoto());
-//				}
-//			}
-//
-//			rs.close();
-//
-//		} catch (SQLException ex) {
-//			System.out.println(ex);
-//		}
-//		return u;
-//	}
+	public Student ReadStudent(String dni) {
+
+		Student  student = new Student();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM alumno");
+
+			while (rs.next()) {
+
+				if (dni.equals(rs.getString("DNI"))) {
+					student.setDni(rs.getString("DNI"));
+					student.setName(rs.getString("Nombre"));
+					student.setLastname(rs.getString("Apellidos"));
+					student.setBirth_date(rs.getString("Fecha_Nac"));
+					student.setPhone(rs.getString("Telefono"));
+					student.setPhoto(rs.getString("Foto"));
+				}
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return student;
+	}
 
 	public void WriteStudent(String dni, String name, String lastname, String birth_date, String phone, String photo)
 			throws SQLException {
@@ -145,7 +135,7 @@ public class Functions {
 			while (rs.next()) {
 
 				if (dni.equals(rs.getString("DNI"))) {
-					teacher = new Teacher();
+					//teacher = new Teacher();
 					teacher.setDni(rs.getString("DNI"));
 					teacher.setName(rs.getString("Nombre"));
 					teacher.setLastname(rs.getString("Apellidos"));
@@ -225,15 +215,12 @@ public class Functions {
 
 	}
 
-	public User DeleteUser(String id) {
-
-		User u = new User();
+	public void DeleteUser(String id) {
 		try {
-			statement.execute("DELETE FROM USUARIOS WHERE ID= '" + id + "'");
+			statement.execute("DELETE FROM usuarios WHERE ID= '" + id + "'");
 		} catch (SQLException ex) {
 			System.out.println(ex);
 		}
-		return u;
 	}
 
 	public List<Subject> ReadSubjects() {

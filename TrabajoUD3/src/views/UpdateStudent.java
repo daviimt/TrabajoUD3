@@ -9,7 +9,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.swing.AbstractButton;
+import javax.swing.BorderFactory;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -28,27 +33,39 @@ import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 
 import app.Student;
+import app.User;
 
 public class UpdateStudent extends JFrame {
 
-	private JLabel  jldni,jlname, jllastname, jldate, jlphone, jlphoto, jlpassword, jlpassword2,jlbphoto;
-	private JTextField jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");;
-	private JPasswordField jppassword, jppassword2;
+	private JLabel  jldni,jlname, jllastname, jldate, jlphone, jlImage, jlpassword;
+	private JTextField jtdni, jtname, jtlastname,jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");
+	private JPasswordField jppassword;
 	private JButton jbconfirm, jbcancel,jbphoto;
 	private Icon icon;
-	static Image imagen;
+	private Image imagen;
 	ImageIcon img2;
 	private String sdni = "[0-9]{8}[A-Z]";
 	private String sphone= "[0-9]{9}";
-	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
-	private File fusers = new File("files/Users");
 	private JDateChooser dateChooser;
+	private String date_birth;
+	private User u ;
+	private Student student;
+	String dateB;
 
 	public UpdateStudent(Student s) {
 
 		super("Update your data");
 		getContentPane().setBackground(new Color(102, 204, 153));
 		inicializate(UpdateStudent.this);
+		student = s;
+		try {
+			Functions f = new Functions();
+			u = f.Read(s.getDni());
+			f.close();
+		} catch (SQLException e2) {
+			// TODO Auto-generated catch block
+			e2.printStackTrace();
+		}
 		
 		jldni = new JLabel("D.N.I. : ");
 		jldni.setBackground(new Color(0, 176, 220));
@@ -57,7 +74,7 @@ public class UpdateStudent extends JFrame {
 		jldni.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldni);
 		
-		jtdni = new JTextField();
+		jtdni = new JTextField(s.getDni());
 		jtdni.setBounds(241, 119, 167, 19);
 		jtdni.setBackground(Color.WHITE);
 		jtdni.setColumns(12);
@@ -71,7 +88,7 @@ public class UpdateStudent extends JFrame {
 		jlname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlname);
 		
-		jtname = new JTextField();
+		jtname = new JTextField(s.getName());
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(Color.WHITE);
 		jtname.setColumns(10);
@@ -85,7 +102,7 @@ public class UpdateStudent extends JFrame {
 		jllastname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jllastname);
 
-		jtlastname = new JTextField();
+		jtlastname = new JTextField(s.getLastname());
 		jtlastname.setBounds(242, 89, 167, 19);
 		jtlastname.setBackground(Color.WHITE);
 		jtlastname.setColumns(10);
@@ -99,13 +116,19 @@ public class UpdateStudent extends JFrame {
 		jldate.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jldate);
 		
+
 		dateChooser = new JDateChooser();
+		dateChooser.setLocation(241, 146);
+		dateChooser.setSize(167, 19);
 		dateChooser.setBackground(Color.CYAN);
+		dateChooser.setDateFormatString("yyyy/dd/MM");
 		dateChooser.getCalendarButton().setBackground(new Color(0, 176, 220));
 		JTextFieldDateEditor editor = (JTextFieldDateEditor) dateChooser.getDateEditor();
+		editor.setText(s.getBirth_date());
 		editor.setToolTipText("Modify your birth date");
 		editor.setEditable(false);
 		getContentPane().add(dateChooser);
+		
 		
 		jtdate = new JTextField(String.valueOf(dateChooser.getDate()));
 
@@ -116,69 +139,46 @@ public class UpdateStudent extends JFrame {
 		jlphone.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlphone);
 
-		jtphone = new JTextField();
+		jtphone = new JTextField(s.getPhone());
 		jtphone.setBounds(241, 176, 167, 19);
 		jtphone.setBackground(Color.WHITE);
 		jtphone.setColumns(13);
 		jtphone.setToolTipText("Modify your phone");
 		getContentPane().add(jtphone);
 		
-		jlphoto = new JLabel("Photo: ");
-		jlphoto.setBackground(new Color(0, 176, 220));
-		jlphoto.setBounds(24, 145, 94, 13);
-		jlphoto.setHorizontalAlignment(SwingConstants.CENTER);
-		jlphoto.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlphoto);
-//		imagen = new ImageIcon("images/"+jtdni.getText()).getImage();
-//		img2=new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
-//		
-//		jlbphoto.setIcon(img2);
-//		jlbphoto.setBounds(207, 210, 133, 120);
-//		getContentPane().add(jlbphoto);
+		imagen = new ImageIcon(s.getPhoto()).getImage();
+		ImageIcon img2 = new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
+		jlImage = new JLabel();
+		jlImage.setIcon(img2);
+		jlImage.setBounds(21, 36, 116, 139);
+		getContentPane().add(jlImage);
 		
-		jtphoto = new JTextField();
-		jtphoto.setBounds(16, 27, 102, 111);
-		jtphoto.setBackground(Color.WHITE);
-		jtphoto.setColumns(13);
-		jtphoto.setToolTipText("Introduce your phone");
-		getContentPane().add(jtphoto);
-		
-//		jbphoto = new JButton("Imagen");
-//		jbphoto.setToolTipText("Buscar archivo");
-//		jbphoto.setBackground(new Color(238,238,238));
-//		jbphoto.setBorderPainted(true);
-//		jbphoto.setBounds(116, 222, 51, 46);
-//		getContentPane().add(jbphoto);
-//		InsertImg insertImg = new InsertImg();
-//		jbphoto.addActionListener(insertImg);
+		jtphoto = new JTextField(s.getPhoto());
+
+		jbphoto = new JButton("Select Image:");
+		jbphoto.setToolTipText("Select a image");
+		jbphoto.setBackground(new Color(238, 238, 238));
+		jbphoto.setBorderPainted(true);
+		jbphoto.setBounds(21, 193, 116, 29);
+		getContentPane().add(jbphoto);
+
+		// Button select image event handler
+		ActImage insertImg = new ActImage();
+		jbphoto.addActionListener(insertImg);
 		
 		jlpassword = new JLabel("Password: ");
 		jlpassword.setBackground(new Color(0, 176, 220));
 		jlpassword.setBounds(137, 209, 94, 13);
 		jlpassword.setHorizontalAlignment(SwingConstants.CENTER);
 		jlpassword.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlpassword);
+		//getContentPane().add(jlpassword);
 
-		jppassword = new JPasswordField();
+		jppassword = new JPasswordField(u.getPassword());
 		jppassword.setBounds(241, 206, 167, 19);
 		jppassword.setBackground(Color.WHITE);
 		jppassword.setColumns(10);
 		jppassword.setToolTipText("Modify your password");
-		getContentPane().add(jppassword);
-
-		jlpassword2 = new JLabel("Repeat Pass.: ");
-		jlpassword2.setBackground(new Color(0, 176, 220));
-		jlpassword2.setBounds(137, 239, 94, 13);
-		jlpassword2.setHorizontalAlignment(SwingConstants.CENTER);
-		jlpassword2.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlpassword2);
-
-		jppassword2 = new JPasswordField();
-		jppassword2.setBounds(241, 236, 167, 19);
-		jppassword2.setBackground(Color.WHITE);
-		jppassword2.setColumns(10);
-		jppassword2.setToolTipText("Confirm your password");
-		getContentPane().add(jppassword2);
+		//getContentPane().add(jppassword);
 		
 		jbconfirm = new JButton("");
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
@@ -193,7 +193,7 @@ public class UpdateStudent extends JFrame {
 
 				boolean verification = true;
 
-				JTextField[] group = {jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto, jppassword, jppassword2 };
+				JTextField[] group = {jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto };
 
 				for (JTextField j : group) {
 					if (j.getText().isBlank()) {
@@ -206,36 +206,24 @@ public class UpdateStudent extends JFrame {
 				if (verification) {
 					if (jtdni.getText().matches(sdni)) {
 						if (jtphone.getText().matches(sphone)) {
-							if (jppassword.getText().matches(spassw)) {
-								if (jppassword2.getText().equals(jppassword.getText())) {
-
-									try {
-
-										Functions f=new Functions();
-										f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
-										f.WriteStudent(jtdni.getText(),jtname.getText(), jtlastname.getText(), jtdate.getText(),jtphone.getText(),jtphoto.getText());
-										dispose();
-										Login log=new Login();
-									
-									 }catch(SQLException e1){
-								        	Icon icon = new ImageIcon("images/warning.png");
-											JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
-													JOptionPane.WARNING_MESSAGE, icon);
-								        
-									}
-									
-								} else {
-									icon = new ImageIcon("images/warning.png");
-									JOptionPane.showMessageDialog(null, "Passwords don't match", "Error",
+							try {
+								
+								SimpleDateFormat sdf = new SimpleDateFormat(dateChooser.getDateFormatString());
+								dateB = dateChooser.getDateFormatString();
+								dateB = sdf.format(dateChooser.getDate());
+								
+								Functions f=new Functions();
+								f.DeleteUser(u.getDni());
+								f.WriteUser(jtdni.getText(), jppassword.getText(),jtrole.getText());
+								f.WriteStudent(jtdni.getText(),jtname.getText(), jtlastname.getText(), dateB,jtphone.getText(),jtphoto.getText());
+								f.close();
+								dispose();
+								MainWindowStudent main = new MainWindowStudent(s.getDni());
+							 }catch(SQLException e1){
+						        	Icon icon = new ImageIcon("images/warning.png");
+									JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
 											JOptionPane.WARNING_MESSAGE, icon);
-								}
-
-							} else {
-								icon = new ImageIcon("images/warning.png");
-								JOptionPane.showMessageDialog(null, "Password does not meet the required parameters",
-										"Error", JOptionPane.WARNING_MESSAGE, icon);
 							}
-
 						} else {
 							icon = new ImageIcon("images/warning.png");
 							JOptionPane.showMessageDialog(null, "Phone does not meet the required parameters", "Error",
@@ -267,48 +255,55 @@ public class UpdateStudent extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowStudent main = new MainWindowStudent();
+				MainWindowStudent main = new MainWindowStudent(s.getDni());
 
 			}
 		});
 		getContentPane().add(jbcancel);
-		
-		JDateChooser dateChooser_1 = new JDateChooser();
-		dateChooser_1.setBounds(241, 145, 167, 20);
-		getContentPane().add(dateChooser_1);
 
 		setVisible(true);
 	}
 	
-//	public class InsertImg implements ActionListener {
-//
-//		@Override
-//		public void actionPerformed(ActionEvent e) {
-//			AbstractButton bt = (AbstractButton) e.getSource();
-//			JFileChooser fileChooser = new JFileChooser();
-//			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
-//
-//			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
-//			fileChooser.setFileFilter(soloImg);
-//
-//			fileChooser.showSaveDialog(null);
-//			
-//			String ficheroNombre = fileChooser.getSelectedFile().getName();
-//
-//			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
-//			
-//			jtphoto.setText("images/" + ficheroNombre);
-//			
-//			File imagenes = new File(jtphoto.getText());
-//			bt.setText("Insertar Imagen");
-//			Path destination = imagenes.toPath();
-//			try {
-//				Files.copy(sourcer, destination);
-//			} catch (IOException e1) {
-//				e1.printStackTrace();
-//			}
-//		}
-//	}
+	// MÉTODO INSERTAR IMÁGENES
+	public class ActImage implements ActionListener {
+
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			AbstractButton btn = (AbstractButton) e.getSource();
+			//Componente JFileChooser (Explorador archivos)
+			JFileChooser fileChooser = new JFileChooser();
+			int sel = fileChooser.showSaveDialog(null);
+			fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
+			FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
+			fileChooser.setFileFilter(soloImg);
+			//Obtiene el archivo seleccionado y establece las rutas de origen y destino
+			String ficheroNombre = jtdni.getText()+".png";
+			File imagenes = new File("images/alumn/" + ficheroNombre);
+			Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
+			Path destination = imagenes.toPath();
+			//Si selecciona un archivo borra la imagen anterior y establece la nueva
+			
+			if (fileChooser.APPROVE_OPTION == sel) {
+				System.out.println(student);
+				File imgOld = new File(student.getPhoto());
+				imgOld.delete();
+				
+				File imgNew = new File(fileChooser.getSelectedFile().toString());
+				
+				imagen = new ImageIcon(imgNew.toString()).getImage();
+				ImageIcon img2 = new ImageIcon(imagen.getScaledInstance(167, 232, Image.SCALE_SMOOTH));
+				jlImage.setIcon(img2);
+				jtphoto.setText(imagenes.toString());
+				try {
+					Files.copy(sourcer, destination);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+			}else if(fileChooser.CANCEL_OPTION == sel){}
+		}
+	}
 
 	private void inicializate(JFrame jf) {
 

@@ -125,6 +125,7 @@ public class MainWindowAdmin extends JFrame {
 						JOptionPane.showMessageDialog(null, "You can't change student data", "Error",
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
+						dispose();
 						UpdateTeacher update = new UpdateTeacher(
 								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
 

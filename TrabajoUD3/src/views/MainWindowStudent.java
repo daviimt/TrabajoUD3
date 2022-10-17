@@ -59,9 +59,12 @@ public class MainWindowStudent extends JFrame {
 	Student s = new Student();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public MainWindowStudent( ) {
+	public MainWindowStudent(String dni) {
 		super("Student menu");
 		inicializate(MainWindowStudent.this);
+		
+		Functions f = new Functions();
+		s = f.ReadStudent(dni);
 
 		jluser = new JLabel("Username: " + s.getName());
 		jluser.setBackground(Color.GRAY);
@@ -113,6 +116,7 @@ public class MainWindowStudent extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
+				System.out.println(s);
 				UpdateStudent update = new UpdateStudent(s);
 
 			}

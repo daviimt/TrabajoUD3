@@ -208,8 +208,8 @@ public class Register extends JFrame {
 										f.WriteUser(jtdni.getText(), jppassword.getText(), jtrole.getText());
 										f.WriteStudent(jtdni.getText(), jtname.getText(), jtlastname.getText(),
 												date_birth, jtphone.getText(), jtphoto.getText());
-										dispose();
 										f.close();
+										dispose();
 										Login log = new Login();
 
 									} catch (SQLException e1) {
@@ -274,7 +274,7 @@ public class Register extends JFrame {
 	public class InsertImg implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			File photo = new File("images/alumn/" + jtdni.getText());
+			File photo = new File("images/alumn/" + jtdni.getText()+"png");
 
 			if (!jtdni.getText().isBlank()) {
 
@@ -287,7 +287,7 @@ public class Register extends JFrame {
 					FileNameExtensionFilter soloImg = new FileNameExtensionFilter("JPG & PNG Images", "jpg", "png");
 					fileChooser.setFileFilter(soloImg);
 					// Obtiene el archivo seleccionado y establece las rutas de origen y destino
-					String ficheroNombre = jtdni.getText();
+					String ficheroNombre = jtdni.getText()+".png";
 					File imagenes = new File("images/alumn/" + ficheroNombre);
 					Path sourcer = fileChooser.getSelectedFile().getAbsoluteFile().toPath();
 					Path destination = imagenes.toPath();

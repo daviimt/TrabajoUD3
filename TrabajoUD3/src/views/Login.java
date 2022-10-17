@@ -173,7 +173,6 @@ public class Login extends JFrame {
 						if (jtid.getText().matches(sid)) {
 
 							User us = f.Read(jtid.getText());
-							System.out.println(us);
 							if (us.getDni().equals(jtid.getText())) {
 								existUser = true;
 								if (us.getPassword().equals(jppassword.getText())) {
@@ -182,7 +181,7 @@ public class Login extends JFrame {
 
 								if (passwordCorrect == true) {
 									if (us.getRole().equals("Student")) {
-										MainWindowStudent mainStudent = new MainWindowStudent();
+										MainWindowStudent mainStudent = new MainWindowStudent(jtid.getText());
 
 									} else if (us.getRole().equals("Teacher")) {
 										MainWindowTeacher mainTeacher = new MainWindowTeacher(jtid.getText());
