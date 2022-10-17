@@ -16,6 +16,9 @@ import javax.swing.JOptionPane;
 
 import com.mysql.cj.xdevapi.Result;
 
+import app.Qualifies;
+import app.RA;
+import app.SchoolEnrollment;
 import app.Student;
 import app.Subject;
 import app.Teacher;
@@ -29,7 +32,10 @@ public class Functions {
 	Student student;
 	Teacher teacher;
 	Subject subject;
-
+	Qualifies qualifie;
+	RA ra;
+	SchoolEnrollment schoolEnrollment;
+	
 	public Functions() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -302,6 +308,127 @@ public class Functions {
 			System.out.println(ex);
 		}
 		return s;
+	}
+	
+	public List<SchoolEnrollment> getSchoolEnrollment(String dni_alum) {
+
+		List<SchoolEnrollment> listSchoolEnrollment=new ArrayList<SchoolEnrollment>();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM MATRICULA WHERE DNI_ALUMNO= '" + dni_alum+ "'");
+
+			while (rs.next()) {
+				schoolEnrollment = new SchoolEnrollment();
+				schoolEnrollment.setDni_student(rs.getString("DNI_Alumno"));
+				schoolEnrollment.setId_subject(rs.getInt("Cod_Asig"));
+				listSchoolEnrollment.add(schoolEnrollment);
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listSchoolEnrollment;
+	}
+	
+	
+	//lectura mainwindows student
+	public List<Subject> getSubjects(int cod_asig) {
+
+		List<Subject> listSubjects = new ArrayList<Subject>();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM asignatura WHERE Codigo= '"+cod_asig+"'");
+
+			while (rs.next()) {
+				subject = new Subject();
+				subject.setId(rs.getInt("Codigo"));
+				subject.setName(rs.getString("Nombre"));
+				subject.setHours(rs.getInt("Horas"));
+				subject.setDni_teacher(rs.getString("DNI_Profesor"));
+				listSubjects.add(subject);
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listSubjects;
+	}
+	
+	public List<RA> getRAs(int id_asig) {
+
+		List<RA> listRA=new ArrayList<RA>();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM RA WHERE ID_ASIG= '" + id_asig+ "'");
+
+			while (rs.next()) {
+				ra = new RA();
+				ra.setId(rs.getInt("ID"));
+				ra.setName(rs.getString("Nombre"));
+				ra.setDescription(rs.getString("Descripcion"));
+				ra.setId(rs.getInt("Ponderacion"));
+				ra.setId(rs.getInt("ID_Asig"));
+				listRA.add(ra);
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listRA;
+	}
+	
+	public void WriteRA(int id, String name, String description, int weighing,int id_sub) throws SQLException {
+
+		PreparedStatement ps;
+		String sql;
+		ra = new RA();
+		ra.setId(id);
+		ra.setName(name);
+		ra.setDescription(description);
+		ra.setWeighing(weighing);
+		ra.setId_subject(id_sub);
+
+		sql = "insert into RA(ID, Nombre, Descripcion, Ponderacion, ID_Asig) values(?,?,?,?,?)";
+		ps = connection.prepareStatement(sql);
+		ps.setInt(1, ra.getId());
+		ps.setString(2, ra.getName());
+		ps.setString(3, ra.getDescription());
+		ps.setInt(4, ra.getWeighing());
+		ps.setInt(5, ra.getId_subject());
+		ps.executeUpdate();
+
+		Icon icon = new ImageIcon("images/check.png");
+		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
+
+	}
+	
+	public List<Qualifies> getQualifies(String dni,int id_ra) {
+
+		List<Qualifies> listQualifies=new ArrayList<Qualifies>();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM CALIFICA WHERE DNI_ALUMNO= '" + dni + "'"+" AND ID_RA= '"+id_ra+"'");
+
+			while (rs.next()) {
+				qualifie = new Qualifies();
+				qualifie.setDni_student(rs.getString("DNI_Alumno"));
+				qualifie.setId_RA(rs.getInt("ID_RA"));
+				qualifie.setMark(rs.getInt("Nota"));
+				listQualifies.add(qualifie);
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listQualifies;
 	}
 
 	public void close() throws SQLException {

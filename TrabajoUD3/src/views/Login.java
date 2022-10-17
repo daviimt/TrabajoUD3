@@ -167,7 +167,7 @@ public class Login extends JFrame {
 				Functions f = new Functions();
 				if (jtid.getText().isBlank() == false) {
 					if (jtid.getText().equals("admin") && jppassword.getText().equals("admin")) {
-						MainWindowAdmin mainAdmin = new MainWindowAdmin(jtid.getText());
+						MainWindowAdmin mainAdmin = new MainWindowAdmin();
 						dispose();
 					} else {
 						if (jtid.getText().matches(sid)) {

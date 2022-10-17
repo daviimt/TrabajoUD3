@@ -137,7 +137,7 @@ public class DetailsTeacher extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin(idTeacher);
+				MainWindowAdmin mainteach = new MainWindowAdmin();
 
 			}
 		});

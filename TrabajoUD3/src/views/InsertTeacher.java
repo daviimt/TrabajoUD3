@@ -41,7 +41,7 @@ public class InsertTeacher extends JFrame {
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
-	public InsertTeacher(String s) {
+	public InsertTeacher() {
 		// creamos el frame insertar
 		super("Insert Teacher");
 		inicializate(InsertTeacher.this);
@@ -167,7 +167,7 @@ public class InsertTeacher extends JFrame {
 										f.WriteTeacher(jtdni.getText(), jtname.getText(), jtlastname.getText(),jtemail.getText());
 										f.close();
 										dispose();
-										MainWindowAdmin mainAdmin=new MainWindowAdmin(s);
+										MainWindowAdmin mainAdmin=new MainWindowAdmin();
 									
 									 }catch(SQLException e1){
 								        	Icon icon = new ImageIcon("images/warning.png");
@@ -220,7 +220,7 @@ public class InsertTeacher extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin(s);
+				MainWindowAdmin mainteach = new MainWindowAdmin();
 
 			}
 		});

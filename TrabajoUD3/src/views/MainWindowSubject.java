@@ -23,13 +23,16 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import app.Qualifies;
+import app.RA;
+import app.SchoolEnrollment;
 import app.Subject;
 import app.User;
 
 public class MainWindowSubject extends JFrame {
 	private JTable table;
 	private JPanel panel, panel_1;
-	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbsubject;
+	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbra;
 	private JLabel jluser;
 	String[] nameColums = { "ID", "Name" };
 	private Icon icon;
@@ -37,11 +40,11 @@ public class MainWindowSubject extends JFrame {
 	User u = new User();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public MainWindowSubject(String s) {
+	public MainWindowSubject() {
 		super("Admin menu");
 		inicializate(MainWindowSubject.this);
 
-		jluser = new JLabel("Username: " + s);
+		jluser = new JLabel("Username: Admin");
 		jluser.setBackground(Color.GRAY);
 		jluser.setHorizontalAlignment(SwingConstants.CENTER);
 		jluser.setFont(new Font("Poor Richard", Font.BOLD, 18));
@@ -91,7 +94,7 @@ public class MainWindowSubject extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				InsertSubject insert = new InsertSubject(s);
+				InsertSubject insert = new InsertSubject();
 
 			}
 		});
@@ -149,7 +152,7 @@ public class MainWindowSubject extends JFrame {
 							e1.printStackTrace();
 						}
 						dispose();
-						MainWindowSubject mainAdmin = new MainWindowSubject(s);
+						MainWindowSubject mainAdmin = new MainWindowSubject();
 					}
 				}
 			}
@@ -198,11 +201,32 @@ public class MainWindowSubject extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin main = new MainWindowAdmin(s);
+				MainWindowAdmin main = new MainWindowAdmin();
 
 			}
 		});
 		panel.add(jbclose);
+		
+		jbra = new JButton("Modify RA'S");
+		jbra.setBackground(new Color(8, 116, 247));
+		jbra.setToolTipText("Modify RA'S");
+		jbra.setBorderPainted(false);
+		jbra.addActionListener(new ActionListener() {
+
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (table.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
+					dispose();
+					MainWindowRA main = new MainWindowRA(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
+					
+				}
+
+			}
+		});
+		panel.add(jbra);
 
 		setVisible(true);
 	}

@@ -141,7 +141,7 @@ public class UpdateSubject extends JFrame {
 											f.close();
 
 											dispose();
-											MainWindowSubject mainSubject = new MainWindowSubject("admin");
+											MainWindowSubject mainSubject = new MainWindowSubject();
 										/*} else {
 											icon = new ImageIcon("images/warning.png");
 											JOptionPane.showMessageDialog(null, "Subject's name exist", "Error",
@@ -197,7 +197,7 @@ public class UpdateSubject extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin("admin");
+				MainWindowAdmin mainteach = new MainWindowAdmin();
 
 			}
 		});

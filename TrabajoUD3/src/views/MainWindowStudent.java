@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -34,7 +35,11 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.table.DefaultTableModel;
 
+import app.Qualifies;
+import app.RA;
+import app.SchoolEnrollment;
 import app.Student;
+import app.Subject;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -62,11 +67,10 @@ public class MainWindowStudent extends JFrame {
 	public MainWindowStudent(String dni) {
 		super("Student menu");
 		inicializate(MainWindowStudent.this);
+		Functions f=new Functions();
+		s=f.ReadStudent(dni);
 		
-		Functions f = new Functions();
-		s = f.ReadStudent(dni);
-
-		jluser = new JLabel("Username: " + s.getName());
+		jluser = new JLabel("Username: " + s.getDni());
 		jluser.setBackground(Color.GRAY);
 		jluser.setHorizontalAlignment(SwingConstants.CENTER);
 		jluser.setFont(new Font("Poor Richard", Font.BOLD, 18));
@@ -157,14 +161,42 @@ public class MainWindowStudent extends JFrame {
 	}
 
 	public void createJTable() {
-		DefaultTableModel dtmCrypto = new DefaultTableModel() {
+		DefaultTableModel dtm = new DefaultTableModel() {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dtmCrypto.setColumnIdentifiers(nameColums);
-		table.setModel(dtmCrypto);
+		dtm.setColumnIdentifiers(nameColums);
+		table.setModel(dtm);
+		try {
+			Functions f = new Functions();
+
+			for (SchoolEnrollment se : f.getSchoolEnrollment("12345678P")) {
+				
+				for(Subject s:f.getSubjects(se.getId_subject())) {
+					
+					for(RA ra:f.getRAs(s.getId())) {
+						
+						for(Qualifies q:f.getQualifies(se.getDni_student(),ra.getId())) {
+							Object[] row = new Object[3];
+							row[0] = s.getName();
+							row[1] = q.getId_RA();
+							row[2] = q.getMark();
+							dtm.addRow(row);
+							
+						}
+					}
+				}
+				
+				
+			}
+
+			f.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	}
 

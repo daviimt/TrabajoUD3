@@ -38,7 +38,7 @@ public class InsertSubject extends JFrame {
 	private String sdni_teacher = "[0-9]{8}[A-Z]";
 	private String shours = "[0-9]+";
 
-	public InsertSubject(String s) {
+	public InsertSubject() {
 		// creamos el frame insertar
 		super("Insert Subject");
 		inicializate(InsertSubject.this);
@@ -134,7 +134,7 @@ public class InsertSubject extends JFrame {
 												Integer.parseInt(jthours.getText()), jtdni_teacher.getText());
 										f.close();
 										dispose();
-										MainWindowSubject mainSubject = new MainWindowSubject(s);
+										MainWindowSubject mainSubject = new MainWindowSubject();
 									} else {
 										icon = new ImageIcon("images/warning.png");
 										JOptionPane.showMessageDialog(null, "Teacher's DNI does not exist", "Error",
@@ -185,7 +185,7 @@ public class InsertSubject extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowSubject mainsub = new MainWindowSubject(s);
+				MainWindowSubject mainsub = new MainWindowSubject();
 
 			}
 		});

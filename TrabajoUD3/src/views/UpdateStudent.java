@@ -218,7 +218,7 @@ public class UpdateStudent extends JFrame {
 								f.WriteStudent(jtdni.getText(),jtname.getText(), jtlastname.getText(), dateB,jtphone.getText(),jtphoto.getText());
 								f.close();
 								dispose();
-								MainWindowStudent main = new MainWindowStudent(s.getDni());
+								MainWindowStudent main = new MainWindowStudent(jtdni.getText());
 							 }catch(SQLException e1){
 						        	Icon icon = new ImageIcon("images/warning.png");
 									JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
@@ -255,7 +255,7 @@ public class UpdateStudent extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowStudent main = new MainWindowStudent(s.getDni());
+				MainWindowStudent main = new MainWindowStudent(jtdni.getText());
 
 			}
 		});

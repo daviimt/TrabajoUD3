@@ -19,6 +19,7 @@ import javax.swing.SwingConstants;
 
 import javax.swing.table.DefaultTableModel;
 
+import app.RA;
 import app.Teacher;
 import app.User;
 
@@ -32,21 +33,23 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
-public class MainWindowAdmin extends JFrame {
+public class MainWindowRA extends JFrame {
 
 	private JTable table;
 	private JPanel panel, panel_1;
 	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbsubject;
 	private JLabel jluser;
-	String[] nameColums = { "ID", "Role" };
+	String[] nameColums = { "ID", "Name"};
 	private Icon icon;
 	DefaultTableModel dtm;
+	private int id_ra;
 	User u = new User();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public MainWindowAdmin() {
+	public MainWindowRA(int id) {
 		super("Admin menu");
-		inicializate(MainWindowAdmin.this);
+		id_ra=id;
+		inicializate(MainWindowRA.this);
 
 		jluser = new JLabel("Username: Admin");
 		jluser.setBackground(Color.GRAY);
@@ -98,7 +101,7 @@ public class MainWindowAdmin extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				InsertTeacher insert = new InsertTeacher();
+				InsertRA insert = new InsertRA();
 
 			}
 		});
@@ -125,7 +128,6 @@ public class MainWindowAdmin extends JFrame {
 						JOptionPane.showMessageDialog(null, "You can't change student data", "Error",
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
-						dispose();
 						UpdateTeacher update = new UpdateTeacher(
 								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
 
@@ -153,7 +155,7 @@ public class MainWindowAdmin extends JFrame {
 					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
 				} else {
 
-					int option = JOptionPane.showOptionDialog(MainWindowAdmin.this, "Are you sure?", "Confirm",
+					int option = JOptionPane.showOptionDialog(MainWindowRA.this, "Are you sure?", "Confirm",
 							JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, null, null);
 
 					if (option == 0) {
@@ -207,34 +209,18 @@ public class MainWindowAdmin extends JFrame {
 		jbclose.setBackground(new Color(8, 116, 247));
 		jbclose.setToolTipText("Log Out");
 		jbclose.setBorderPainted(false);
-		jbclose.setIcon(new ImageIcon("images/logout.png"));
+		jbclose.setIcon(new ImageIcon("images/Back.png"));
 		jbclose.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Login login = new Login();
+				MainWindowSubject mainsubject = new MainWindowSubject();
 
 			}
 		});
 		panel.add(jbclose);
-		
-		jbsubject = new JButton("Modify subjects");
-		jbsubject.setBackground(new Color(8, 116, 247));
-		jbsubject.setToolTipText("Modify subjects");
-		jbsubject.setBorderPainted(false);
-		jbsubject.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("unused")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				MainWindowSubject main = new MainWindowSubject();
-
-			}
-		});
-		panel.add(jbsubject);
 
 		setVisible(true);
 	}
@@ -263,10 +249,10 @@ public class MainWindowAdmin extends JFrame {
 		try {
 			Functions f = new Functions();
 
-			for (User u : f.ReadUsers()) {
+			for (RA u : f.getRAs(id_ra)) {
 				Object[] row = new Object[4];
-				row[0] = u.getDni();
-				row[1] = u.getRole();
+				row[0] = u.getId();
+				row[1] = u.getName();
 				dtm.addRow(row);
 			}
 

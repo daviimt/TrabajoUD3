@@ -28,42 +28,36 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JDateChooser;
 
-import app.Teacher;
-import app.User;
+public class InsertRA extends JFrame {
 
-public class UpdateTeacher extends JFrame {
-
-	private JLabel jlname, jllastname, jlemail;
-	private JTextField jtdni, jtname, jtlastname, jtemail, jtrole = new JTextField("Teacher");;
-	private JPasswordField jppassword, jppassword2;
+	private JLabel jlid, jlname, jldescription, jlweighing, jlid_subj;
+	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
 	private JButton jbconfirm, jbcancel;
 	private Icon icon;
 	static Image imagen;
 	ImageIcon img2;
 	private String sdni = "[0-9]{8}[A-Z]";
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
-	private String sphone = "[0-9]{9}";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
-	public UpdateTeacher(String idTeacher) {
+	public InsertRA() {
 		// creamos el frame insertar
-		super("Update Teacher");
-		inicializate(UpdateTeacher.this);
-		Teacher teacher=new Teacher();
-		User user=new User();
-		
-		try {
-			Functions f = new Functions();
-			teacher = f.ReadTeacher(idTeacher);
-			user = f.Read(idTeacher);
-			f.close();
-		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
-			e2.printStackTrace();
-		}
-		jtdni = new JTextField(teacher.getDni());
+		super("Insert RA");
+		inicializate(InsertRA.this);
 
-		jppassword = new JPasswordField(user.getPassword());
+		jlid = new JLabel("D.N.I. : ");
+		jlid.setBackground(new Color(0, 176, 220));
+		jlid.setBounds(147, 122, 84, 13);
+		jlid.setHorizontalAlignment(SwingConstants.CENTER);
+		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlid);
+
+		jtid = new JTextField();
+		jtid.setBounds(241, 119, 167, 19);
+		jtid.setBackground(new Color(0, 176, 220));
+		jtid.setColumns(12);
+		jtid.setToolTipText("Introduce your DNI");
+		getContentPane().add(jtid);
 
 		jlname = new JLabel("Name: ");
 		jlname.setBackground(new Color(0, 176, 220));
@@ -72,40 +66,54 @@ public class UpdateTeacher extends JFrame {
 		jlname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlname);
 
-		jtname = new JTextField(teacher.getName());
+		jtname = new JTextField();
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Modify your name");
+		jtname.setToolTipText("Introduce your name");
 		getContentPane().add(jtname);
 
-		jllastname = new JLabel("Last name:");
-		jllastname.setBackground(new Color(0, 176, 220));
-		jllastname.setBounds(137, 92, 94, 13);
-		jllastname.setHorizontalAlignment(SwingConstants.CENTER);
-		jllastname.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jllastname);
+		jldescription = new JLabel("Last name:");
+		jldescription.setBackground(new Color(0, 176, 220));
+		jldescription.setBounds(137, 92, 94, 13);
+		jldescription.setHorizontalAlignment(SwingConstants.CENTER);
+		jldescription.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jldescription);
 
-		jtlastname = new JTextField(teacher.getLastname());
-		jtlastname.setBounds(242, 89, 167, 19);
-		jtlastname.setBackground(new Color(0, 176, 220));
-		jtlastname.setColumns(10);
-		jtlastname.setToolTipText("Modify your last name");
-		getContentPane().add(jtlastname);
+		jtdecription = new JTextField();
+		jtdecription.setBounds(242, 89, 167, 19);
+		jtdecription.setBackground(new Color(0, 176, 220));
+		jtdecription.setColumns(10);
+		jtdecription.setToolTipText("Introduce your last name");
+		getContentPane().add(jtdecription);
 
-		jlemail = new JLabel("Email:");
-		jlemail.setBackground(new Color(0, 176, 220));
-		jlemail.setBounds(137, 92, 94, 13);
-		jlemail.setHorizontalAlignment(SwingConstants.CENTER);
-		jlemail.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlemail);
+		jlweighing = new JLabel("Email:");
+		jlweighing.setBackground(new Color(0, 176, 220));
+		jlweighing.setBounds(137, 92, 94, 13);
+		jlweighing.setHorizontalAlignment(SwingConstants.CENTER);
+		jlweighing.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlweighing);
 
-		jtemail = new JTextField(teacher.getEmail());
-		jtemail.setBounds(242, 89, 167, 19);
-		jtemail.setBackground(new Color(0, 176, 220));
-		jtemail.setColumns(10);
-		jtemail.setToolTipText("Modify your email");
-		getContentPane().add(jtemail);
+		jtweighing = new JTextField();
+		jtweighing.setBounds(242, 89, 167, 19);
+		jtweighing.setBackground(new Color(0, 176, 220));
+		jtweighing.setColumns(10);
+		jtweighing.setToolTipText("Introduce your email");
+		getContentPane().add(jtweighing);
+
+		jlid_subj = new JLabel("Email:");
+		jlid_subj.setBackground(new Color(0, 176, 220));
+		jlid_subj.setBounds(137, 92, 94, 13);
+		jlid_subj.setHorizontalAlignment(SwingConstants.CENTER);
+		jlid_subj.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
+		getContentPane().add(jlid_subj);
+
+		jtid_subj = new JTextField();
+		jtid_subj.setBounds(242, 89, 167, 19);
+		jtid_subj.setBackground(new Color(0, 176, 220));
+		jtid_subj.setColumns(10);
+		jtid_subj.setToolTipText("Introduce your email");
+		getContentPane().add(jtid_subj);
 
 		// Boton next
 		jbconfirm = new JButton("");
@@ -121,7 +129,7 @@ public class UpdateTeacher extends JFrame {
 
 				boolean verification = true;
 
-				JTextField[] group = { jtname, jtlastname, jtemail };
+				JTextField[] group = { jtid, jtname, jtdecription, jtweighing, jtid_subj };
 
 				for (JTextField j : group) {
 					if (j.getText().isBlank()) {
@@ -132,31 +140,23 @@ public class UpdateTeacher extends JFrame {
 				}
 
 				if (verification) {
-					if (jtdni.getText().matches(sdni)) {
-						if (jtemail.getText().matches(semail)) {
-							try {
-								
-								Functions f = new Functions();
-								f.DeleteUser(idTeacher);
-								f.WriteUser(jtdni.getText(), jppassword.getText(), jtrole.getText());
-								f.WriteTeacher(jtdni.getText(), jtname.getText(), jtlastname.getText(),
-										jtemail.getText());
-								f.close();
-								
-								dispose();
-								MainWindowAdmin mainAdmin = new MainWindowAdmin();
+					if (jtid.getText().matches(sdni)) {
 
-							} catch (SQLException e1) {
-								Icon icon = new ImageIcon("images/warning.png");
-								JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
-										JOptionPane.WARNING_MESSAGE, icon);
-							}
+						try {
 
-						} else {
-							icon = new ImageIcon("images/warning.png");
-							JOptionPane.showMessageDialog(null, "Email does not meet the required parameters", "Error",
-									JOptionPane.INFORMATION_MESSAGE, icon);
+							Functions f = new Functions();
+							f.WriteRA(Integer.parseInt(jtid.getText()) , jtname.getText(), jtdecription.getText(),
+									Integer.parseInt(jtweighing.getText()),Integer.parseInt(jtid_subj.getText()));
+							f.close();
+							dispose();
+							MainWindowAdmin mainAdmin = new MainWindowAdmin();
+
+						} catch (SQLException e1) {
+							Icon icon = new ImageIcon("images/warning.png");
+							JOptionPane.showMessageDialog(null, "Duplicated ID", "Error", JOptionPane.WARNING_MESSAGE,
+									icon);
 						}
+
 					} else {
 						icon = new ImageIcon("images/warning.png");
 						JOptionPane.showMessageDialog(null, "DNI does not meet the required parameters", "Error",
@@ -202,7 +202,7 @@ public class UpdateTeacher extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(4, 2));
+		jf.getContentPane().setLayout(new GridLayout(7, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
