@@ -172,7 +172,7 @@ public class MainWindowStudent extends JFrame {
 		try {
 			Functions f = new Functions();
 
-			for (SchoolEnrollment se : f.getSchoolEnrollment("12345678P")) {
+			for (SchoolEnrollment se : f.getSchoolEnrollment(s.getDni())) {
 				
 				for(Subject s:f.getSubjects(se.getId_subject())) {
 					

@@ -45,7 +45,7 @@ public class InsertRA extends JFrame {
 		super("Insert RA");
 		inicializate(InsertRA.this);
 
-		jlid = new JLabel("D.N.I. : ");
+		jlid = new JLabel("id: ");
 		jlid.setBackground(new Color(0, 176, 220));
 		jlid.setBounds(147, 122, 84, 13);
 		jlid.setHorizontalAlignment(SwingConstants.CENTER);
@@ -56,7 +56,7 @@ public class InsertRA extends JFrame {
 		jtid.setBounds(241, 119, 167, 19);
 		jtid.setBackground(new Color(0, 176, 220));
 		jtid.setColumns(12);
-		jtid.setToolTipText("Introduce your DNI");
+		jtid.setToolTipText("Introduce the ID");
 		getContentPane().add(jtid);
 
 		jlname = new JLabel("Name: ");
@@ -70,10 +70,10 @@ public class InsertRA extends JFrame {
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce your name");
+		jtname.setToolTipText("Introduce the name");
 		getContentPane().add(jtname);
 
-		jldescription = new JLabel("Last name:");
+		jldescription = new JLabel("Description:");
 		jldescription.setBackground(new Color(0, 176, 220));
 		jldescription.setBounds(137, 92, 94, 13);
 		jldescription.setHorizontalAlignment(SwingConstants.CENTER);
@@ -84,10 +84,10 @@ public class InsertRA extends JFrame {
 		jtdecription.setBounds(242, 89, 167, 19);
 		jtdecription.setBackground(new Color(0, 176, 220));
 		jtdecription.setColumns(10);
-		jtdecription.setToolTipText("Introduce your last name");
+		jtdecription.setToolTipText("Introduce the description");
 		getContentPane().add(jtdecription);
 
-		jlweighing = new JLabel("Email:");
+		jlweighing = new JLabel("Weighing:");
 		jlweighing.setBackground(new Color(0, 176, 220));
 		jlweighing.setBounds(137, 92, 94, 13);
 		jlweighing.setHorizontalAlignment(SwingConstants.CENTER);
@@ -98,10 +98,10 @@ public class InsertRA extends JFrame {
 		jtweighing.setBounds(242, 89, 167, 19);
 		jtweighing.setBackground(new Color(0, 176, 220));
 		jtweighing.setColumns(10);
-		jtweighing.setToolTipText("Introduce your email");
+		jtweighing.setToolTipText("Introduce your weighing");
 		getContentPane().add(jtweighing);
 
-		jlid_subj = new JLabel("Email:");
+		jlid_subj = new JLabel("ID_Subject:");
 		jlid_subj.setBackground(new Color(0, 176, 220));
 		jlid_subj.setBounds(137, 92, 94, 13);
 		jlid_subj.setHorizontalAlignment(SwingConstants.CENTER);
@@ -112,7 +112,7 @@ public class InsertRA extends JFrame {
 		jtid_subj.setBounds(242, 89, 167, 19);
 		jtid_subj.setBackground(new Color(0, 176, 220));
 		jtid_subj.setColumns(10);
-		jtid_subj.setToolTipText("Introduce your email");
+		jtid_subj.setToolTipText("Introduce your id_subj");
 		getContentPane().add(jtid_subj);
 
 		// Boton next
