@@ -383,6 +383,32 @@ public class Functions {
 		return listRA;
 	}
 	
+	public RA ReadRA(int id) {
+
+		RA ra = new RA();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM RA");
+
+			while (rs.next()) {
+
+				if (id == rs.getInt("ID")) {
+					ra.setId(rs.getInt("ID"));
+					ra.setName(rs.getString("Nombre"));
+					ra.setDescription(rs.getString("Descripcion"));
+					ra.setWeighing(rs.getInt("Ponderacion"));
+					ra.setId_subject(rs.getInt("ID_Asig"));
+				}
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return ra;
+	}
+	
 	public void WriteRA(int id, String name, String description, int weighing,int id_sub) throws SQLException {
 
 		PreparedStatement ps;
@@ -406,6 +432,14 @@ public class Functions {
 		Icon icon = new ImageIcon("images/check.png");
 		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
 
+	}
+	
+	public void DeleteRA(int id) {
+		try {
+			statement.execute("DELETE FROM RA WHERE ID= '" + id + "'");
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
 	}
 	
 	public List<Qualifies> getQualifies(String dni,int id_ra) {

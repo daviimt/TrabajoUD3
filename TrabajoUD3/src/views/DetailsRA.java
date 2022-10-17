@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 
 import app.RA;
 
-public class UpdateRA extends JFrame{
+public class DetailsRA extends JFrame{
 	private JLabel jlid, jlname, jldescription, jlweighing, jlid_subj;
 	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
 	private JButton jbconfirm, jbcancel;
@@ -30,16 +30,15 @@ public class UpdateRA extends JFrame{
 	private String sid = "[0-9]+";
 	private String sdni_teacher = "[0-9]{8}[A-Z]";
 	private String shours = "[0-9]+";
-	RA ra = new RA();
 
-	public UpdateRA(int idRA) {
-		super("Update RA");
-		inicializate(UpdateRA.this);
+	public DetailsRA(int idSubject) {
+		super("Details RA");
+		inicializate(DetailsRA.this);
+		RA ra = new RA();
 
 		try {
 			Functions f = new Functions();
-			ra = f.ReadRA(idRA);
-			System.out.println(ra);
+			ra = f.ReadRA(idSubject);
 			f.close();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -53,7 +52,7 @@ public class UpdateRA extends JFrame{
 		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlid);
 
-		jtid = new JTextField(String.valueOf(ra.getId()));
+		jtid = new JTextField(ra.getId());
 		jtid.setBounds(241, 119, 167, 19);
 		jtid.setBackground(new Color(0, 176, 220));
 		jtid.setColumns(12);
@@ -95,7 +94,7 @@ public class UpdateRA extends JFrame{
 		jlweighing.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlweighing);
 
-		jtweighing = new JTextField(String.valueOf(ra.getWeighing()));
+		jtweighing = new JTextField(ra.getWeighing());
 		jtweighing.setBounds(242, 89, 167, 19);
 		jtweighing.setBackground(new Color(0, 176, 220));
 		jtweighing.setColumns(10);
@@ -109,71 +108,13 @@ public class UpdateRA extends JFrame{
 		jlid_subj.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlid_subj);
 
-		jtid_subj = new JTextField(String.valueOf(ra.getId_subject()));
+		jtid_subj = new JTextField(ra.getId_subject());
 		jtid_subj.setBounds(242, 89, 167, 19);
 		jtid_subj.setBackground(new Color(0, 176, 220));
 		jtid_subj.setColumns(10);
 		jtid_subj.setToolTipText("Introduce your id_subj");
 		getContentPane().add(jtid_subj);
-
-		// Boton next
-		jbconfirm = new JButton("");
-		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
-		jbconfirm.setToolTipText("Confirm");
-		jbconfirm.setBackground(new Color(0, 153, 0));
-		jbconfirm.setBounds(276, 302, 115, 37);
-		jbconfirm.addActionListener(new ActionListener() {
-
-			@SuppressWarnings({ "unused", "deprecation" })
-			@Override
-			public void actionPerformed(ActionEvent e) {
-
-				boolean verification = true;
-
-				JTextField[] group = { jtid, jtname, jtdecription, jtweighing, jtid_subj };
-
-				for (JTextField j : group) {
-					if (j.getText().isBlank()) {
-						verification = false;
-						break;
-					}
-
-				}
-
-				if (verification) {
-					if (jtid.getText().matches(sid)) {
-
-						try {
-
-							Functions f = new Functions();
-							f.DeleteRA(ra.getId());
-							f.WriteRA(Integer.parseInt(jtid.getText()) , jtname.getText(), jtdecription.getText(),
-									Integer.parseInt(jtweighing.getText()),Integer.parseInt(jtid_subj.getText()));
-							f.close();
-							dispose();
-							MainWindowRA mainRA = new MainWindowRA(ra.getId());
-
-						} catch (SQLException e1) {
-							Icon icon = new ImageIcon("images/warning.png");
-							JOptionPane.showMessageDialog(null, "Duplicated ID", "Error", JOptionPane.WARNING_MESSAGE,
-									icon);
-						}
-
-					} else {
-						icon = new ImageIcon("images/warning.png");
-						JOptionPane.showMessageDialog(null, "DNI does not meet the required parameters", "Error",
-								JOptionPane.INFORMATION_MESSAGE, icon);
-					}
-				} else {
-					icon = new ImageIcon("images/warning.png");
-					JOptionPane.showMessageDialog(null, "Fill every required field to create the user.", "Error",
-							JOptionPane.WARNING_MESSAGE, icon);
-				}
-
-			}
-		});
-		getContentPane().add(jbconfirm);
-
+		
 		// Boton cancel
 
 		jbcancel = new JButton("");
@@ -204,7 +145,7 @@ public class UpdateRA extends JFrame{
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(6, 2));
+		jf.getContentPane().setLayout(new GridLayout(4, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}

@@ -128,8 +128,7 @@ public class MainWindowRA extends JFrame {
 						JOptionPane.showMessageDialog(null, "You can't change student data", "Error",
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
-						UpdateTeacher update = new UpdateTeacher(
-								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+						UpdateRA update = new UpdateRA(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 
 					}
 
@@ -161,7 +160,7 @@ public class MainWindowRA extends JFrame {
 					if (option == 0) {
 						try {
 							Functions f = new Functions();
-							f.DeleteUser(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+							f.DeleteRA(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 							f.close();
 						} catch (SQLException e1) {
 							// TODO Auto-generated catch block
@@ -195,7 +194,7 @@ public class MainWindowRA extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
 						dispose();
-						DetailsTeacher details = new DetailsTeacher(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+						DetailsRA details = new DetailsRA(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 					}
 
 				}
