@@ -25,9 +25,6 @@ public class DetailsSubject extends JFrame{
 	private JTextField jtid, jtname, jthours, jtdni_teacher;
 	private JButton jbBack;
 
-	static Image imagen;
-	ImageIcon img2;
-
 
 	public DetailsSubject(int idSubject) {
 		super("Details Subject");

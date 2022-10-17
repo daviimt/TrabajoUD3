@@ -179,8 +179,7 @@ public class MainWindowSubject extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
 						dispose();
-						DetailsTeacher details = new DetailsTeacher(
-								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+						DetailsSubject details = new DetailsSubject(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 					}
 
 				}

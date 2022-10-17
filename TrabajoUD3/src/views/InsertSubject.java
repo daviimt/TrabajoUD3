@@ -12,6 +12,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
+import java.util.List;
+
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -25,6 +27,8 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import com.toedter.calendar.JDateChooser;
+
+import app.Subject;
 
 public class InsertSubject extends JFrame {
 
@@ -130,11 +134,25 @@ public class InsertSubject extends JFrame {
 							if (jtdni_teacher.getText().matches(sdni_teacher)) {
 								try {
 									if (f.ReadTeacher(jtdni_teacher.getText()).getDni() != null) {
-										f.WriteSubject(Integer.parseInt(jtid.getText()), jtname.getText(),
-												Integer.parseInt(jthours.getText()), jtdni_teacher.getText());
-										f.close();
-										dispose();
-										MainWindowSubject mainSubject = new MainWindowSubject();
+										boolean existname=false;
+										List<Subject> list=f.ReadSubjects();
+										for(Subject s:list) {
+											if(s.getName().equals(jtname.getText())) {
+												existname=true;
+											}
+										}
+										if (!existname) {
+											
+											f.WriteSubject(Integer.parseInt(jtid.getText()), jtname.getText(),
+													Integer.parseInt(jthours.getText()), jtdni_teacher.getText());
+											f.close();
+											dispose();
+											MainWindowSubject mainSubject = new MainWindowSubject();
+										} else {
+											icon = new ImageIcon("images/warning.png");
+											JOptionPane.showMessageDialog(null, "Subject's name exist", "Error",
+													JOptionPane.INFORMATION_MESSAGE, icon);
+										}
 									} else {
 										icon = new ImageIcon("images/warning.png");
 										JOptionPane.showMessageDialog(null, "Teacher's DNI does not exist", "Error",

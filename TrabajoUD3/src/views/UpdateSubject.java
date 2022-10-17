@@ -133,7 +133,8 @@ public class UpdateSubject extends JFrame {
 							if (jtdni_teacher.getText().matches(sdni_teacher)) {
 								try {
 									if (f.ReadTeacher(jtdni_teacher.getText()).getDni() != null) {
-										//if (f.ReadSubject(Integer.parseInt(jtid.getText())).getName().equals(jtname.getText())) {
+										
+										if (f.ReadSubject(Integer.parseInt(jtid.getText())).getName().equals(jtname.getText())) {
 											
 											f.DeleteSubject(idSubject);
 											f.WriteSubject(Integer.parseInt(jtid.getText()), jtname.getText(),
@@ -142,11 +143,12 @@ public class UpdateSubject extends JFrame {
 
 											dispose();
 											MainWindowSubject mainSubject = new MainWindowSubject();
-										/*} else {
+										} else {
 											icon = new ImageIcon("images/warning.png");
 											JOptionPane.showMessageDialog(null, "Subject's name exist", "Error",
 													JOptionPane.INFORMATION_MESSAGE, icon);
-										}*/
+										}
+										
 									} else {
 										icon = new ImageIcon("images/warning.png");
 										JOptionPane.showMessageDialog(null, "Teacher's DNI does not exist", "Error",
@@ -197,7 +199,7 @@ public class UpdateSubject extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin();
+				MainWindowSubject main = new MainWindowSubject();
 
 			}
 		});
