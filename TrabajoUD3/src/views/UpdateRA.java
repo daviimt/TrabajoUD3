@@ -28,8 +28,6 @@ public class UpdateRA extends JFrame{
 	static Image imagen;
 	ImageIcon img2;
 	private String sid = "[0-9]+";
-	private String sdni_teacher = "[0-9]{8}[A-Z]";
-	private String shours = "[0-9]+";
 	RA ra = new RA();
 
 	public UpdateRA(int idRA) {
@@ -58,6 +56,7 @@ public class UpdateRA extends JFrame{
 		jtid.setBackground(new Color(0, 176, 220));
 		jtid.setColumns(12);
 		jtid.setToolTipText("Introduce the ID");
+		jtid.setEditable(false);
 		getContentPane().add(jtid);
 
 		jlname = new JLabel("Name: ");
@@ -150,6 +149,7 @@ public class UpdateRA extends JFrame{
 							f.WriteRA(Integer.parseInt(jtid.getText()) , jtname.getText(), jtdecription.getText(),
 									Integer.parseInt(jtweighing.getText()),Integer.parseInt(jtid_subj.getText()));
 							f.close();
+							
 							dispose();
 							MainWindowRA mainRA = new MainWindowRA(ra.getId());
 
@@ -187,7 +187,7 @@ public class UpdateRA extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin();
+				MainWindowRA mainteach = new MainWindowRA(ra.getId());
 
 			}
 		});

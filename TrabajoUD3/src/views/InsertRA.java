@@ -36,7 +36,7 @@ public class InsertRA extends JFrame {
 	private Icon icon;
 	static Image imagen;
 	ImageIcon img2;
-	private String sdni = "[0-9]{8}[A-Z]";
+	private String sid = "[0-9]+";
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
@@ -140,7 +140,7 @@ public class InsertRA extends JFrame {
 				}
 
 				if (verification) {
-					if (jtid.getText().matches(sdni)) {
+					if (jtid.getText().matches(sid)) {
 
 						try {
 
@@ -149,7 +149,7 @@ public class InsertRA extends JFrame {
 									Integer.parseInt(jtweighing.getText()),Integer.parseInt(jtid_subj.getText()));
 							f.close();
 							dispose();
-							MainWindowAdmin mainAdmin = new MainWindowAdmin();
+							MainWindowRA mainRA = new MainWindowRA(Integer.parseInt(jtid.getText()));
 
 						} catch (SQLException e1) {
 							Icon icon = new ImageIcon("images/warning.png");
@@ -185,7 +185,7 @@ public class InsertRA extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin();
+				MainWindowRA mainRA= new MainWindowRA(Integer.parseInt( jtid.getText()));
 
 			}
 		});

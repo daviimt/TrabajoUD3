@@ -42,13 +42,13 @@ public class MainWindowRA extends JFrame {
 	String[] nameColums = { "ID", "Name"};
 	private Icon icon;
 	DefaultTableModel dtm;
-	private int id_ra;
+	private int id_subj;
 	User u = new User();
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowRA(int id) {
 		super("Admin menu");
-		id_ra=id;
+		id_subj=id;
 		inicializate(MainWindowRA.this);
 
 		jluser = new JLabel("Username: Admin");
@@ -128,6 +128,7 @@ public class MainWindowRA extends JFrame {
 						JOptionPane.showMessageDialog(null, "You can't change student data", "Error",
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
+						dispose();
 						UpdateRA update = new UpdateRA(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 
 					}
@@ -167,7 +168,7 @@ public class MainWindowRA extends JFrame {
 							e1.printStackTrace();
 						}
 						dispose();
-						MainWindowAdmin mainAdmin = new MainWindowAdmin();
+						MainWindowRA mainRA = new MainWindowRA(id_subj);
 					}
 				}
 			}
@@ -248,7 +249,7 @@ public class MainWindowRA extends JFrame {
 		try {
 			Functions f = new Functions();
 
-			for (RA u : f.getRAs(id_ra)) {
+			for (RA u : f.getRAs(id_subj)) {
 				Object[] row = new Object[4];
 				row[0] = u.getId();
 				row[1] = u.getName();

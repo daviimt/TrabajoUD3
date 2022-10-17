@@ -23,18 +23,12 @@ import app.RA;
 public class DetailsRA extends JFrame{
 	private JLabel jlid, jlname, jldescription, jlweighing, jlid_subj;
 	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
-	private JButton jbconfirm, jbcancel;
-	private Icon icon;
-	static Image imagen;
-	ImageIcon img2;
-	private String sid = "[0-9]+";
-	private String sdni_teacher = "[0-9]{8}[A-Z]";
-	private String shours = "[0-9]+";
+	private JButton jbcancel;
+	RA ra = new RA();
 
 	public DetailsRA(int idSubject) {
 		super("Details RA");
 		inicializate(DetailsRA.this);
-		RA ra = new RA();
 
 		try {
 			Functions f = new Functions();
@@ -52,11 +46,12 @@ public class DetailsRA extends JFrame{
 		jlid.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlid);
 
-		jtid = new JTextField(ra.getId());
+		jtid = new JTextField(String.valueOf(ra.getId()));
 		jtid.setBounds(241, 119, 167, 19);
 		jtid.setBackground(new Color(0, 176, 220));
 		jtid.setColumns(12);
 		jtid.setToolTipText("Introduce the ID");
+		jtid.setEditable(false);
 		getContentPane().add(jtid);
 
 		jlname = new JLabel("Name: ");
@@ -71,6 +66,7 @@ public class DetailsRA extends JFrame{
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
 		jtname.setToolTipText("Introduce the name");
+		jtname.setEditable(false);
 		getContentPane().add(jtname);
 
 		jldescription = new JLabel("Description:");
@@ -85,6 +81,7 @@ public class DetailsRA extends JFrame{
 		jtdecription.setBackground(new Color(0, 176, 220));
 		jtdecription.setColumns(10);
 		jtdecription.setToolTipText("Introduce the description");
+		jtdecription.setEditable(false);
 		getContentPane().add(jtdecription);
 
 		jlweighing = new JLabel("Weighing:");
@@ -94,11 +91,12 @@ public class DetailsRA extends JFrame{
 		jlweighing.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlweighing);
 
-		jtweighing = new JTextField(ra.getWeighing());
+		jtweighing = new JTextField(String.valueOf(ra.getWeighing()));
 		jtweighing.setBounds(242, 89, 167, 19);
 		jtweighing.setBackground(new Color(0, 176, 220));
 		jtweighing.setColumns(10);
 		jtweighing.setToolTipText("Introduce your weighing");
+		jtweighing.setEditable(false);
 		getContentPane().add(jtweighing);
 
 		jlid_subj = new JLabel("ID_Subject:");
@@ -108,11 +106,12 @@ public class DetailsRA extends JFrame{
 		jlid_subj.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
 		getContentPane().add(jlid_subj);
 
-		jtid_subj = new JTextField(ra.getId_subject());
+		jtid_subj = new JTextField(String.valueOf(ra.getId_subject()));
 		jtid_subj.setBounds(242, 89, 167, 19);
 		jtid_subj.setBackground(new Color(0, 176, 220));
 		jtid_subj.setColumns(10);
 		jtid_subj.setToolTipText("Introduce your id_subj");
+		jtid_subj.setEditable(false);
 		getContentPane().add(jtid_subj);
 		
 		// Boton cancel
@@ -128,7 +127,7 @@ public class DetailsRA extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin();
+				MainWindowRA mainteach = new MainWindowRA(ra.getId());
 
 			}
 		});
@@ -145,7 +144,7 @@ public class DetailsRA extends JFrame{
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(4, 2));
+		jf.getContentPane().setLayout(new GridLayout(6, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
