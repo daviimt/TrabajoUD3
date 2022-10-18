@@ -41,7 +41,7 @@ public class MainWindowSubject extends JFrame {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowSubject() {
-		super("Admin menu");
+		super("Modify subjects");
 		inicializate(MainWindowSubject.this);
 
 		jluser = new JLabel("Username: Admin");
@@ -200,7 +200,7 @@ public class MainWindowSubject extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin main = new MainWindowAdmin();
+				SelectView selectview = new SelectView();
 
 			}
 		});

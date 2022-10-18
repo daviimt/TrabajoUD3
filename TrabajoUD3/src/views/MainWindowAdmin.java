@@ -36,7 +36,7 @@ public class MainWindowAdmin extends JFrame {
 
 	private JTable table;
 	private JPanel panel, panel_1;
-	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbsubject;
+	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbchoosesubject;
 	private JLabel jluser;
 	String[] nameColums = { "ID", "Role" };
 	private Icon icon;
@@ -45,7 +45,7 @@ public class MainWindowAdmin extends JFrame {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowAdmin() {
-		super("Admin menu");
+		super("Modify users");
 		inicializate(MainWindowAdmin.this);
 
 		jluser = new JLabel("Username: Admin");
@@ -205,36 +205,36 @@ public class MainWindowAdmin extends JFrame {
 
 		jbclose = new JButton("");
 		jbclose.setBackground(new Color(8, 116, 247));
-		jbclose.setToolTipText("Log Out");
+		jbclose.setToolTipText("Back");
 		jbclose.setBorderPainted(false);
-		jbclose.setIcon(new ImageIcon("images/logout.png"));
+		jbclose.setIcon(new ImageIcon("images/Back.png"));
 		jbclose.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Login login = new Login();
+				SelectView selectview = new SelectView();
 
 			}
 		});
 		panel.add(jbclose);
 		
-		jbsubject = new JButton("Modify subjects");
-		jbsubject.setBackground(new Color(8, 116, 247));
-		jbsubject.setToolTipText("Modify subjects");
-		jbsubject.setBorderPainted(false);
-		jbsubject.addActionListener(new ActionListener() {
+		jbchoosesubject = new JButton("Choose subjects");
+		jbchoosesubject.setBackground(new Color(8, 116, 247));
+		jbchoosesubject.setToolTipText("Choose students subjects");
+		jbchoosesubject.setBorderPainted(false);
+		jbchoosesubject.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowSubject main = new MainWindowSubject();
+				//MainWindowSubject main = new MainWindowSubject();
 
 			}
 		});
-		panel.add(jbsubject);
+		panel.add(jbchoosesubject);
 
 		setVisible(true);
 	}

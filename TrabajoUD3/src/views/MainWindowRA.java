@@ -47,7 +47,7 @@ public class MainWindowRA extends JFrame {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowRA(int id) {
-		super("Admin menu");
+		super("Modify RA's");
 		id_subj=id;
 		inicializate(MainWindowRA.this);
 
