@@ -230,7 +230,7 @@ public class MainWindowAdmin extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				//MainWindowSubject main = new MainWindowSubject();
+				MainWindowQualifies main = new MainWindowQualifies();
 
 			}
 		});
