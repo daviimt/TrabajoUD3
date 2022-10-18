@@ -332,6 +332,37 @@ public class Functions {
 		return listSchoolEnrollment;
 	}
 	
+	public List<SchoolEnrollment> getSchoolEnrollmentTeacher(int id_subj) {
+
+		List<SchoolEnrollment> listSchoolEnrollment=new ArrayList<SchoolEnrollment>();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM MATRICULA WHERE COD_ASIG= '" + id_subj+ "'");
+
+			while (rs.next()) {
+				schoolEnrollment = new SchoolEnrollment();
+				schoolEnrollment.setDni_student(rs.getString("DNI_Alumno"));
+				schoolEnrollment.setId_subject(rs.getInt("Cod_Asig"));
+				listSchoolEnrollment.add(schoolEnrollment);
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listSchoolEnrollment;
+	}
+	
+	public void DeleteSchoolEnrollment(int id_asig, String dni_alum) {
+
+		Subject s = new Subject();
+		try {
+			statement.execute("DELETE FROM MATRICULA WHERE DNI_ALUMNO= '" + dni_alum + "' AND COD_ASIG= '"+id_asig+"'");
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+	}
 	
 	//lectura mainwindows student
 	public List<Subject> getSubjects(int cod_asig) {
@@ -340,6 +371,30 @@ public class Functions {
 		try {
 
 			ResultSet rs = statement.executeQuery("SELECT * FROM asignatura WHERE Codigo= '"+cod_asig+"'");
+
+			while (rs.next()) {
+				subject = new Subject();
+				subject.setId(rs.getInt("Codigo"));
+				subject.setName(rs.getString("Nombre"));
+				subject.setHours(rs.getInt("Horas"));
+				subject.setDni_teacher(rs.getString("DNI_Profesor"));
+				listSubjects.add(subject);
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listSubjects;
+	}
+	
+	public List<Subject> getSubjectsTeacher(String id_teacher) {
+
+		List<Subject> listSubjects = new ArrayList<Subject>();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM asignatura WHERE DNI_Profesor= '"+id_teacher+"'");
 
 			while (rs.next()) {
 				subject = new Subject();
@@ -370,8 +425,8 @@ public class Functions {
 				ra.setId(rs.getInt("ID"));
 				ra.setName(rs.getString("Nombre"));
 				ra.setDescription(rs.getString("Descripcion"));
-				ra.setId(rs.getInt("Ponderacion"));
-				ra.setId(rs.getInt("ID_Asig"));
+				ra.setWeighing(rs.getInt("Ponderacion"));
+				ra.setId_subject(rs.getInt("ID_Asig"));;
 				listRA.add(ra);
 			}
 
@@ -463,6 +518,27 @@ public class Functions {
 			System.out.println(ex);
 		}
 		return listQualifies;
+	}
+	
+	public void writeMark(String dni_alum, int id_sub,float mark) throws SQLException {
+
+		PreparedStatement ps;
+		String sql;
+		qualifie = new Qualifies();
+		qualifie.setId_RA(id_sub);
+		qualifie.setDni_student(dni_alum);
+		qualifie.setMark(mark);
+
+		sql = "insert into CALIFICA (DNI_Alumno, ID_RA, Nota) values(?,?,?)";
+		ps = connection.prepareStatement(sql);
+		ps.setInt(1, qualifie.getId_RA());
+		ps.setString(2, qualifie.getDni_student());
+		ps.setFloat(3, qualifie.getMark());
+		ps.executeUpdate();
+
+		Icon icon = new ImageIcon("images/check.png");
+		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
+
 	}
 
 	public void close() throws SQLException {

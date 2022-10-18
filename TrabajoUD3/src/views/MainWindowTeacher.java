@@ -11,6 +11,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -34,7 +35,11 @@ import javax.swing.plaf.basic.BasicScrollBarUI;
 import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.table.DefaultTableModel;
 
+import app.Qualifies;
+import app.RA;
+import app.SchoolEnrollment;
 import app.Student;
+import app.Subject;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -52,16 +57,17 @@ public class MainWindowTeacher extends JFrame {
 	private JPanel panel, panel_1;
 	private JButton jbupdate, jbclose;
 	private JLabel jluser;
-	String[] nameColums = { "Student","Subject", "RA", "Mark" };
+	String[] nameColums = { "Subject", "Student", "RA", "Mark" };
 	private Icon icon;
-	Student s = new Student();
+	String idTeacher;
+	DefaultTableModel dtm;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public MainWindowTeacher(String s) {
+	public MainWindowTeacher(String id) {
 		super("Teacher menu");
 		inicializate(MainWindowTeacher.this);
-
-		jluser = new JLabel("Username: " + s);
+		idTeacher = id;
+		jluser = new JLabel("Username: " + id);
 		jluser.setBackground(Color.GRAY);
 		jluser.setHorizontalAlignment(SwingConstants.CENTER);
 		jluser.setFont(new Font("Poor Richard", Font.BOLD, 18));
@@ -111,8 +117,22 @@ public class MainWindowTeacher extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				icon = new ImageIcon("images/warning.png");
-				String mark=JOptionPane.showInputDialog(MainWindowTeacher.this, "Enter the mark fot this student", "Mark", JOptionPane.WARNING_MESSAGE);
-
+				String mark = JOptionPane.showInputDialog(MainWindowTeacher.this, "Enter the mark fot this student",
+						"Mark", JOptionPane.WARNING_MESSAGE);
+				float markf=Float.parseFloat(mark);
+				
+				try {
+					Functions f=new Functions();
+					f.writeMark(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)),Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 2))), markf);
+					f.close();
+				} catch (NumberFormatException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					System.out.println(e1);
+					e1.printStackTrace();
+				}
 			}
 		});
 
@@ -151,15 +171,42 @@ public class MainWindowTeacher extends JFrame {
 	}
 
 	public void createJTable() {
-		DefaultTableModel dtmCrypto = new DefaultTableModel() {
+		dtm = new DefaultTableModel() {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
 			}
 		};
-		dtmCrypto.setColumnIdentifiers(nameColums);
-		table.setModel(dtmCrypto);
+		dtm.setColumnIdentifiers(nameColums);
+		table.setModel(dtm);
 
+		try {
+			Functions f = new Functions();
+			// falta crear las funciones pasandole los datos que salen un metodo get subjetque te devuelva los subject que tiene el profesor y otra matricula que te devuelva las matriculas con el dni de los almunos que estan matriculados en esa subject
+			for (Subject s:f.getSubjectsTeacher(idTeacher)) {
+				for(RA ra:f.getRAs(s.getId())) {
+					for(SchoolEnrollment se : f.getSchoolEnrollmentTeacher(s.getId())) {
+						for(Qualifies q:f.getQualifies(se.getDni_student(),ra.getId())) {
+							
+							Object[] row = new Object[4];
+							row[0] = s.getName();
+							row[1] = se.getDni_student();
+							row[2] = q.getId_RA();
+							row[3] = q.getMark();
+							dtm.addRow(row);
+							
+						}
+					}
+				}
+				
+				
+			}
+
+			f.close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

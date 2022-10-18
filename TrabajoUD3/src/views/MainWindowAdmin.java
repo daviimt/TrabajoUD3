@@ -193,7 +193,8 @@ public class MainWindowAdmin extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
 						dispose();
-						DetailsTeacher details = new DetailsTeacher(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+						DetailsTeacher details = new DetailsTeacher(
+								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
 					}
 
 				}
@@ -219,7 +220,7 @@ public class MainWindowAdmin extends JFrame {
 			}
 		});
 		panel.add(jbclose);
-		
+
 		jbchoosesubject = new JButton("Choose subjects");
 		jbchoosesubject.setBackground(new Color(8, 116, 247));
 		jbchoosesubject.setToolTipText("Choose students subjects");
@@ -229,8 +230,19 @@ public class MainWindowAdmin extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				dispose();
-				MainWindowQualifies main = new MainWindowQualifies();
+				if (table.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
+					if (String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)).equals("Teacher")) {
+						icon = new ImageIcon("images/warning.png");
+						JOptionPane.showMessageDialog(null, "You can't choose a teacher", "Error",
+								JOptionPane.INFORMATION_MESSAGE, icon);
+					} else {
+						dispose();
+						MainWindowEnrollment main = new MainWindowEnrollment(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+					}
+
+				}
 
 			}
 		});
