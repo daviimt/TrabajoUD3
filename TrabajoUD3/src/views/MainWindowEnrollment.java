@@ -120,7 +120,6 @@ public class MainWindowEnrollment extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				//Eliminar asignatura ListSubject
-				
 				//Añadir asignatura LisSubSelect
 				
 				createJTable();
