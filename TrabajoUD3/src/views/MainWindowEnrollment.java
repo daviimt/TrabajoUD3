@@ -166,14 +166,24 @@ public class MainWindowEnrollment extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				Functions f=new Functions();
+				int id=0;
 				if (tableSelected.getSelectedRow() < 0) {
 					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
 				} else {
+					id=f.getIDSubject(String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0)));
 					listSubSelect.remove((String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))));
 					listSubject.add((String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))));
 				}
 				createJTable();
 				createJTableSelected();
+				try {
+					f.DeleteSchoolEnrollment(id, dni_Alum);
+					f.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 			}
 		});
 

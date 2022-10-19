@@ -388,7 +388,7 @@ public class Functions {
 		schoolEnrollment.setDni_student(dni_alum);
 		schoolEnrollment.setId_subject(id_asig);
 
-		sql = "insert into RA(DNI_Alumno, Cod_Asig) values(?,?)";
+		sql = "insert into matricula(DNI_Alumno, Cod_Asig) values(?,?)";
 		ps = connection.prepareStatement(sql);
 		ps.setString(1, schoolEnrollment.getDni_student());
 		ps.setInt(2, schoolEnrollment.getId_subject());
@@ -667,9 +667,7 @@ public class Functions {
 	public List<Subject> viewSubjects(String dni) {
 		List<Subject> listSubjects = new ArrayList<Subject>();
 		try {
-			String insertquery = "SELECT a.* FROM  matricula m, asignatura a WHERE '"
-					+ dni
-					+ "' = m.DNI_Alumno AND m.Cod_Asig = a.Codigo";
+			String insertquery = "SELECT * FROM asignatura a WHERE Codigo NOT IN (SELECT Cod_Asig FROM matricula WHERE DNI_Alumno= '"+dni+"')";
 			ResultSet result = statement.executeQuery(insertquery);
 			while (result.next()) {
 				subject =new Subject();
