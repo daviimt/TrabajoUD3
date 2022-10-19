@@ -17,6 +17,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,6 +25,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import app.SchoolEnrollment;
 import app.Subject;
 
 @SuppressWarnings("serial")
@@ -31,22 +33,43 @@ public class MainWindowEnrollment extends JFrame {
 
 	private JTable table, tableSelected;
 	private JPanel panel_1;
-	private JButton jbSelect, jbclose ;
+	private JButton jbSelect, jbDeselect, jbconfirm, jbclose;
 	private JLabel jluser, jltable, jltableSelected;
-	String[] nameColums = {"Name"};
-	String[] nameColumsSelected = {"Name"};
+	String[] nameColums = { "Name" };
+	String[] nameColumsSelected = { "Name" };
 	private Icon icon;
 	DefaultTableModel dtm;
 	DefaultTableModel dtmSelected;
 	String dniAlum;
-	List <Subject> listSubject = new ArrayList();
-	List <Subject> listSubSelect = new ArrayList();
+	List<String> listSubject = new ArrayList();
+	List<String> listSubSelect = new ArrayList();
+
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowEnrollment(String dni_Alum) {
-		super("Modify qualifies");
+		super("School Enrollment");
 		getContentPane().setBackground(new Color(0, 176, 220));
 		inicializate(MainWindowEnrollment.this);
-
+		try {
+			//CAMBIAR READSUBJECTS X READSUBEJECTS QUE NO ESTE MATRICULADO
+			Functions f = new Functions();
+			for (Subject s : f.ReadSubjects()) {
+				listSubject.add(s.getName());
+			}
+			f.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			Functions f = new Functions();
+			for (SchoolEnrollment s : f.getSchoolEnrollment(dni_Alum)) {
+				listSubSelect.add(f.ReadSubject(s.getId_subject()).getName());
+			}
+			f.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
 		dniAlum = dni_Alum;
 
 		jluser = new JLabel("Username: Admin");
@@ -59,7 +82,7 @@ public class MainWindowEnrollment extends JFrame {
 		jltable.setLocation(21, 52);
 		jltable.setSize(255, 50);
 		getContentPane().add(jltable);
-		
+
 		table = new JTable();
 		table.setOpaque(true);
 		table.getTableHeader().setForeground(Color.WHITE);
@@ -99,7 +122,7 @@ public class MainWindowEnrollment extends JFrame {
 
 		jpupper.add(jluser);
 		getContentPane().add(jpupper, BorderLayout.NORTH);
-		
+
 		panel_1 = new JPanel();
 		panel_1.setSize(612, 74);
 		panel_1.setLocation(0, 317);
@@ -108,10 +131,10 @@ public class MainWindowEnrollment extends JFrame {
 		getContentPane().add(panel_1, BorderLayout.SOUTH);
 
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
+
 		jbSelect = new JButton("");
 		jbSelect.setBackground(new Color(8, 116, 247));
-		jbSelect.setToolTipText("Insert subject");
+		jbSelect.setToolTipText("Select subject");
 		jbSelect.setBorderPainted(false);
 		jbSelect.setIcon(new ImageIcon("images/insert.png"));
 		jbSelect.addActionListener(new ActionListener() {
@@ -119,17 +142,56 @@ public class MainWindowEnrollment extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				//Eliminar asignatura ListSubject
-				//Añadir asignatura LisSubSelect
-				
+				if (table.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
+					listSubject.remove((String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
+					listSubSelect.add((String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
+				}
 				createJTable();
 				createJTableSelected();
-				//Insertar asignatura en tabla Matricula
-				
 			}
 		});
+
 		panel_1.add(jbSelect);
-		
+
+		jbDeselect = new JButton("");
+		jbDeselect.setBackground(new Color(8, 116, 247));
+		jbDeselect.setToolTipText("Deselect subject");
+		jbDeselect.setBorderPainted(false);
+		jbDeselect.setIcon(new ImageIcon("images/delete.png"));
+		jbDeselect.addActionListener(new ActionListener() {
+			@SuppressWarnings("unused")
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if (tableSelected.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
+					listSubSelect.remove((String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))));
+					listSubject.add((String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))));
+				}
+				createJTable();
+				createJTableSelected();
+			}
+		});
+
+		panel_1.add(jbDeselect);
+
+		jbconfirm = new JButton("");
+		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
+		jbconfirm.setToolTipText("Confirm");
+		jbconfirm.setBackground(new Color(0, 153, 0));
+		jbconfirm.setBounds(276, 302, 115, 37);
+		jbconfirm.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// Cargar la asignatura seleccionada en la tabla Matricula
+
+			}
+		});
+		panel_1.add(jbconfirm);
+
 		jbclose = new JButton("");
 		jbclose.setVerticalAlignment(SwingConstants.BOTTOM);
 		jbclose.setBackground(new Color(8, 116, 247));
@@ -163,8 +225,6 @@ public class MainWindowEnrollment extends JFrame {
 		jf.setIconImage(icon1);
 	}
 
-	
-
 	public void createJTable() {
 		dtm = new DefaultTableModel() {
 			@Override
@@ -174,14 +234,19 @@ public class MainWindowEnrollment extends JFrame {
 		};
 		dtm.setColumnIdentifiers(nameColums);
 		table.setModel(dtm);
-		try {
-			Functions f = new Functions();
-			listSubject = f.ReadSubjects();
-			for(Subject s : listSubject) {
-				Object[] row = new Object[1];
-				row[0] = s.getName();
-				dtm.addRow(row);
-			}
+
+		for (String s : listSubject) {
+			Object[] row = new Object[1];
+			row[0] = s;
+			dtm.addRow(row);
+		}
+
+//			listSubject = f.ReadSubjects();
+//			for(Subject s : listSubject) {
+//				Object[] row = new Object[1];
+//				row[0] = s.getName();
+//				dtm.addRow(row);
+//			}
 //			for (Subject s : f.ReadSubjects()) {
 //				for (SchoolEnrollment se : f.getSchoolEnrollment(dniAlum)) {
 //					for (Subject s2 : f.getSubjects(se.getId_subject())) {
@@ -194,12 +259,8 @@ public class MainWindowEnrollment extends JFrame {
 //				}
 //			}
 
-			f.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
 	}
-	
+
 	public void createJTableSelected() {
 		dtmSelected = new DefaultTableModel() {
 			@Override
@@ -211,9 +272,9 @@ public class MainWindowEnrollment extends JFrame {
 		tableSelected.setModel(dtmSelected);
 		try {
 			Functions f = new Functions();
-			for(Subject s : listSubSelect) {
+			for (String s : listSubSelect) {
 				Object[] row = new Object[1];
-				row[0] = s.getName();
+				row[0] = s;
 				dtmSelected.addRow(row);
 			}
 //			for (SchoolEnrollment se : f.getSchoolEnrollment(dniAlum)) {
