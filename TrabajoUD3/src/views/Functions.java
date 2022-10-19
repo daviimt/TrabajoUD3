@@ -525,15 +525,28 @@ public class Functions {
 		PreparedStatement ps;
 		String sql;
 		qualifie = new Qualifies();
-		qualifie.setId_RA(id_sub);
 		qualifie.setDni_student(dni_alum);
+		qualifie.setId_RA(id_sub);
 		qualifie.setMark(mark);
 
 		sql = "insert into CALIFICA (DNI_Alumno, ID_RA, Nota) values(?,?,?)";
 		ps = connection.prepareStatement(sql);
-		ps.setInt(1, qualifie.getId_RA());
-		ps.setString(2, qualifie.getDni_student());
+		ps.setString(1, qualifie.getDni_student());
+		ps.setInt(2, qualifie.getId_RA());
 		ps.setFloat(3, qualifie.getMark());
+		ps.executeUpdate();
+
+		Icon icon = new ImageIcon("images/check.png");
+		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
+
+	}
+	
+	public void updateMark(String dni_alum, int id_ra,float mark) throws SQLException {
+
+		PreparedStatement ps;
+
+		ps = connection.prepareStatement("UPDATE califica SET Nota= "+mark+ " WHERE DNI_Alumno= '"+dni_alum+"' AND ID_RA= '"+id_ra+"'");
+
 		ps.executeUpdate();
 
 		Icon icon = new ImageIcon("images/check.png");

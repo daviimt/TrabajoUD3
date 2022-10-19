@@ -123,7 +123,7 @@ public class MainWindowTeacher extends JFrame {
 				
 				try {
 					Functions f=new Functions();
-					f.writeMark(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)),Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 2))), markf);
+					f.updateMark(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)),Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 2))), markf);
 					f.close();
 				} catch (NumberFormatException e1) {
 					// TODO Auto-generated catch block
@@ -133,6 +133,8 @@ public class MainWindowTeacher extends JFrame {
 					System.out.println(e1);
 					e1.printStackTrace();
 				}
+				dispose();
+				MainWindowTeacher main=new MainWindowTeacher(id);
 			}
 		});
 

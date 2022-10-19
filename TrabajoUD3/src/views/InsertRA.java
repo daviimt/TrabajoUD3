@@ -40,12 +40,12 @@ public class InsertRA extends JFrame {
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
-	public InsertRA() {
+	public InsertRA(int id_subj) {
 		// creamos el frame insertar
 		super("Insert RA");
 		inicializate(InsertRA.this);
 
-		jlid = new JLabel("id: ");
+		jlid = new JLabel("ID: ");
 		jlid.setBackground(new Color(0, 176, 220));
 		jlid.setBounds(147, 122, 84, 13);
 		jlid.setHorizontalAlignment(SwingConstants.CENTER);
@@ -101,19 +101,7 @@ public class InsertRA extends JFrame {
 		jtweighing.setToolTipText("Introduce your weighing");
 		getContentPane().add(jtweighing);
 
-		jlid_subj = new JLabel("ID_Subject:");
-		jlid_subj.setBackground(new Color(0, 176, 220));
-		jlid_subj.setBounds(137, 92, 94, 13);
-		jlid_subj.setHorizontalAlignment(SwingConstants.CENTER);
-		jlid_subj.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlid_subj);
-
-		jtid_subj = new JTextField();
-		jtid_subj.setBounds(242, 89, 167, 19);
-		jtid_subj.setBackground(new Color(0, 176, 220));
-		jtid_subj.setColumns(10);
-		jtid_subj.setToolTipText("Introduce your id_subj");
-		getContentPane().add(jtid_subj);
+		jtid_subj = new JTextField(String.valueOf(id_subj));
 
 		// Boton next
 		jbconfirm = new JButton("");
@@ -149,7 +137,7 @@ public class InsertRA extends JFrame {
 									Integer.parseInt(jtweighing.getText()),Integer.parseInt(jtid_subj.getText()));
 							f.close();
 							dispose();
-							MainWindowRA mainRA = new MainWindowRA(Integer.parseInt(jtid.getText()));
+							MainWindowRA mainRA = new MainWindowRA(id_subj);
 
 						} catch (SQLException e1) {
 							Icon icon = new ImageIcon("images/warning.png");
@@ -202,7 +190,7 @@ public class InsertRA extends JFrame {
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(7, 2));
+		jf.getContentPane().setLayout(new GridLayout(5, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
