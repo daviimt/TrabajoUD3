@@ -50,18 +50,18 @@ public class MainWindowEnrollment extends JFrame {
 		getContentPane().setBackground(new Color(0, 176, 220));
 		inicializate(MainWindowEnrollment.this);
 		try {
-			//CAMBIAR READSUBJECTS X READSUBEJECTS QUE NO ESTE MATRICULADO
+			// CAMBIAR READSUBJECTS X READSUBEJECTS QUE NO ESTE MATRICULADO
 			Functions f = new Functions();
-			for (Subject s : f.ReadSubjects()) {
-				for(SchoolEnrollment se : f.getSchoolEnrollment(dni_Alum))
-					if(s.getId()!=se.getId_subject())
-						listSubject.add(s.getName());
+			for (Subject s : f.viewSubjects(dni_Alum)) {
+				System.out.println(s);
+				listSubject.add(s.getName());
+
 			}
 			f.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	
+
 		try {
 			Functions f = new Functions();
 			for (SchoolEnrollment s : f.getSchoolEnrollment(dni_Alum)) {
@@ -71,7 +71,7 @@ public class MainWindowEnrollment extends JFrame {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		dniAlum = dni_Alum;
 
 		jluser = new JLabel("Username: Admin");
@@ -189,6 +189,17 @@ public class MainWindowEnrollment extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				// Cargar la asignatura seleccionada en la tabla Matricula
+
+				try {
+					Functions f = new Functions();
+					f.WriteSchoolEnrollment(
+							f.getIDSubject(String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))),
+							dni_Alum);
+					f.close();
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 
 			}
 		});

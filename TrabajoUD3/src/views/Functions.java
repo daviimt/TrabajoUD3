@@ -278,6 +278,32 @@ public class Functions {
 		}
 		return subject;
 	}
+	
+	public int getIDSubject(String name) {
+
+		Subject subject = new Subject();
+		try {
+
+			ResultSet rs = statement.executeQuery("SELECT * FROM asignatura");
+
+			while (rs.next()) {
+
+				if (name.equals(rs.getString("Nombre"))) {
+					subject = new Subject();
+					subject.setId(rs.getInt("Codigo"));
+					subject.setName(rs.getString("Nombre"));
+					subject.setHours(rs.getInt("Horas"));
+					subject.setDni_teacher(rs.getString("DNI_Profesor"));
+				}
+			}
+
+			rs.close();
+
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return subject.getId();
+	}
 
 	public void WriteSubject(int id, String name, int hours, String dni_teacher) throws SQLException {
 
@@ -638,22 +664,27 @@ public class Functions {
 		return listTeacher;
 	}
 	
-//	public List<Subject> viewSubjects(String dni) {
-//		List<Subject> listSubjects = new ArrayList<Subject>();
-//		try {
-//			String insertquery = "SELECT r.ID_Asig,a.Nombre, SUM(c.nota*(r.ponderacion/100)) 'Nota' FROM califica c, matricula m, ra r,asignatura a WHERE '"
-//					+ dni
-//					+ "' = m.DNI_Alumno AND m.DNI_Alumno =c.DNI_Alumno AND r.ID=c.ID_RA AND r.ID_Asig=m.Cod_Asig AND a.Codigo =r.ID_Asig GROUP BY r.ID_Asig;";
-//			ResultSet result = statement.executeQuery(insertquery);
-//			while (result.next()) {
-//				Object[] data = { result.getString("ID_Asig"), result.getString("Nombre"), result.getString("Nota") };
-//				listSubjects.add(data);
-//			}
-//		} catch (SQLException ex) {
-//			System.out.println("Problem To Show Data");
-//		}
-//		return listSubjects;
-//	}
+	public List<Subject> viewSubjects(String dni) {
+		List<Subject> listSubjects = new ArrayList<Subject>();
+		try {
+			String insertquery = "SELECT a.* FROM  matricula m, asignatura a WHERE '"
+					+ dni
+					+ "' = m.DNI_Alumno AND m.Cod_Asig = a.Codigo";
+			ResultSet result = statement.executeQuery(insertquery);
+			while (result.next()) {
+				subject =new Subject();
+				subject.setId(result.getInt("Codigo"));
+				subject.setName(result.getString("Nombre")); 
+				subject.setHours(result.getInt("Horas")); 
+				subject.setDni_teacher(result.getString("DNI_Profesor"));
+
+				listSubjects.add(subject);
+			}
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
+		return listSubjects;
+	}
 
 	public void close() throws SQLException {
 		statement.close();
