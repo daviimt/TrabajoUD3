@@ -193,27 +193,16 @@ public class MainWindowStudent extends JFrame {
 		};
 		dtm.setColumnIdentifiers(nameColums);
 		table.setModel(dtm);
-		float globalMark=0;
+		
 		try {
 			Functions f = new Functions();
 
-			for (SchoolEnrollment se : f.getSchoolEnrollment(s.getDni())) {
-
-				for (Subject s : f.getSubjects(se.getId_subject())) {
-
-					for (RA ra : f.getRAs(s.getId())) {
-						for (Qualifies q : f.getQualifies(se.getDni_student(), ra.getId())) {
-							float partialMark =(ra.getWeighing()/100F)*q.getMark();
-							globalMark+=partialMark;
-						}
-					}
-					Object[] row = new Object[3];
-					row[0] = s.getId();
-					row[1] = s.getName();
-					row[2] = globalMark;
-					dtm.addRow(row);
-				}
-
+			for (Object[] q : f.viewStudents(s.getDni())) {
+				Object[] row = new Object[3];
+				row[0] = q[0];
+				row[1] = q[1];
+				row[2] = q[2];
+				dtm.addRow(row);
 			}
 
 			f.close();
