@@ -53,13 +53,15 @@ public class MainWindowEnrollment extends JFrame {
 			//CAMBIAR READSUBJECTS X READSUBEJECTS QUE NO ESTE MATRICULADO
 			Functions f = new Functions();
 			for (Subject s : f.ReadSubjects()) {
-				listSubject.add(s.getName());
+				for(SchoolEnrollment se : f.getSchoolEnrollment(dni_Alum))
+					if(s.getId()!=se.getId_subject())
+						listSubject.add(s.getName());
 			}
 			f.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+	
 		try {
 			Functions f = new Functions();
 			for (SchoolEnrollment s : f.getSchoolEnrollment(dni_Alum)) {
