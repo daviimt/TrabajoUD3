@@ -193,7 +193,7 @@ public class MainWindowStudent extends JFrame {
 		};
 		dtm.setColumnIdentifiers(nameColums);
 		table.setModel(dtm);
-		float markGlobal=0;
+		float globalMark=0;
 		try {
 			Functions f = new Functions();
 
@@ -204,13 +204,13 @@ public class MainWindowStudent extends JFrame {
 					for (RA ra : f.getRAs(s.getId())) {
 						for (Qualifies q : f.getQualifies(se.getDni_student(), ra.getId())) {
 							float partialMark =(ra.getWeighing()/100F)*q.getMark();
-							markGlobal+=partialMark;
+							globalMark+=partialMark;
 						}
 					}
 					Object[] row = new Object[3];
 					row[0] = s.getId();
 					row[1] = s.getName();
-					row[2] = markGlobal;
+					row[2] = globalMark;
 					dtm.addRow(row);
 				}
 

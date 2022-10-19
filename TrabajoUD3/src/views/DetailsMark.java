@@ -153,6 +153,9 @@ public class DetailsMark extends JFrame {
 		};
 		dtm.setColumnIdentifiers(nameColums);
 		table.setModel(dtm);
+		float globalMark=0;
+		int id=0;
+		
 		try {
 			Functions f = new Functions();
 
@@ -163,12 +166,13 @@ public class DetailsMark extends JFrame {
 					for(RA ra:f.getRAs(s.getId())) {
 						
 						for(Qualifies q:f.getQualifies(se.getDni_student(),ra.getId())) {
-							Object[] row = new Object[2];
-							row[0] = q.getId_RA();
-							row[1] = q.getMark();
-							dtm.addRow(row);
-							
+							id=q.getId_RA();
+							globalMark=q.getMark();
 						}
+						Object[] row = new Object[2];
+						row[0] = id;
+						row[1] = globalMark;
+						dtm.addRow(row);
 					}
 				}
 				
