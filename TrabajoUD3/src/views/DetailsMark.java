@@ -53,33 +53,33 @@ import java.awt.FlowLayout;
 @SuppressWarnings("serial")
 public class DetailsMark extends JFrame {
 
-
 	private JTable table;
 	private JPanel panel, panel_1;
 	private JButton jbclose;
 	private JLabel jluser;
 	private File f = new File("files/Cryptos");
-	String[] nameColums = {"RA", "Mark" };
+	String[] nameColums = { "RA", "Mark" };
 	private Icon icon;
 	Student s = new Student();
 	int id_subj;
-	
+	String dni_student;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public DetailsMark(String dni,int id) {
+	public DetailsMark(String dni, int id) {
 		super("Mark details");
 		inicializate(DetailsMark.this);
-		id_subj=id;
-		Functions f=new Functions();
-		s=f.ReadStudent(dni);
-		
+		id_subj = id;
+		dni_student=dni;
+		Functions f = new Functions();
+		s = f.ReadStudent(dni);
+
 		jluser = new JLabel("Username: " + s.getDni());
 		jluser.setBackground(Color.GRAY);
 		jluser.setHorizontalAlignment(SwingConstants.CENTER);
 		jluser.setFont(new Font("Poor Richard", Font.BOLD, 18));
 
 		JPanel jpupper = new JPanel();
-		jpupper.setBackground(new Color(8, 116, 247 ));
+		jpupper.setBackground(new Color(8, 116, 247));
 
 		jpupper.add(jluser);
 		add(jpupper, BorderLayout.NORTH);
@@ -100,16 +100,16 @@ public class DetailsMark extends JFrame {
 
 		createJTable();
 		// Termina el JTable
-		
+
 		panel_1 = new JPanel();
-		panel_1.setBackground(new Color(8, 116, 247 ));
+		panel_1.setBackground(new Color(8, 116, 247));
 		panel_1.setOpaque(true);
 		add(panel_1, BorderLayout.SOUTH);
 
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		panel = new JPanel();
-		panel.setBackground(new Color(8, 116, 247 ));
+		panel.setBackground(new Color(8, 116, 247));
 		panel_1.add(panel);
 
 		jbclose = new JButton("");
@@ -153,30 +153,17 @@ public class DetailsMark extends JFrame {
 		};
 		dtm.setColumnIdentifiers(nameColums);
 		table.setModel(dtm);
-		float globalMark=0;
-		int id=0;
-		
+
 		try {
 			Functions f = new Functions();
 
-			for (SchoolEnrollment se : f.getSchoolEnrollment(s.getDni())) {
-				
-				for(Subject s:f.getSubjects(id_subj)) {
-					
-					for(RA ra:f.getRAs(s.getId())) {
-						
-						for(Qualifies q:f.getQualifies(se.getDni_student(),ra.getId())) {
-							id=q.getId_RA();
-							globalMark=q.getMark();
-						}
-						Object[] row = new Object[2];
-						row[0] = id;
-						row[1] = globalMark;
-						dtm.addRow(row);
-					}
-				}
-				
-				
+			for (Object[] q : f.viewStudentsRA(dni_student,id_subj)) {
+
+				Object[] row = new Object[2];
+				row[0] = q[0];
+				row[1] = q[1];
+				dtm.addRow(row);
+
 			}
 
 			f.close();

@@ -553,6 +553,49 @@ public class Functions {
 		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
 
 	}
+	
+	public List<Object[]> viewStudents(String dni) {
+		List<Object[]> listSubjects = new ArrayList<Object[]>();
+		try {
+			String insertquery = "SELECT r.ID_Asig,a.Nombre, SUM(c.nota*(r.ponderacion/100)) 'Nota' FROM califica c, matricula m, ra r,asignatura a WHERE '"
+					+ dni
+					+ "' = m.DNI_Alumno AND m.DNI_Alumno =c.DNI_Alumno AND r.ID=c.ID_RA AND r.ID_Asig=m.Cod_Asig AND a.Codigo =r.ID_Asig GROUP BY r.ID_Asig;";
+			ResultSet result = statement.executeQuery(insertquery);
+			while (result.next()) {
+				Object[] data = { result.getString("ID_Asig"), result.getString("Nombre"), result.getString("Nota") };
+				listSubjects.add(data);
+			}
+		} catch (SQLException ex) {
+			System.out.println("Problem To Show Data");
+		}
+		return listSubjects;
+	}
+
+	public List<Object[]> viewStudentsRA(String dni, int codAsig) {
+		List<Object[]> listSubjectsRA = new ArrayList<Object[]>();
+
+		try {
+
+			String insertquery = "SELECT c.ID_RA, r.Nombre, c.Nota, r.Ponderacion FROM califica c, matricula m, ra r WHERE '"
+					+ dni + "' = m.DNI_Alumno AND m.DNI_Alumno =c.DNI_Alumno AND r.ID=c.ID_RA AND r.ID_Asig='" + codAsig
+					+ "' GROUP BY r.id;";
+
+			ResultSet result = statement.executeQuery(insertquery);
+
+			while (result.next()) {
+
+				Object[] data = { result.getString("ID_RA"), result.getString("Nombre"), result.getString("Nota"),
+						result.getString("Ponderacion") };
+				listSubjectsRA.add(data);
+				
+			}
+		} catch (SQLException ex) {
+			System.out.println("Problem To Show Data");
+		}
+
+		return listSubjectsRA;
+	}
+
 
 	public void close() throws SQLException {
 		statement.close();
