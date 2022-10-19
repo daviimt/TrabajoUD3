@@ -57,7 +57,7 @@ public class InsertTeacher extends JFrame {
 		jtdni.setBounds(241, 119, 167, 19);
 		jtdni.setBackground(new Color(0, 176, 220));
 		jtdni.setColumns(12);
-		jtdni.setToolTipText("Introduce your DNI");
+		jtdni.setToolTipText("Introduce the DNI");
 		getContentPane().add(jtdni);
 
 		jlname = new JLabel("Name: ");
@@ -71,7 +71,7 @@ public class InsertTeacher extends JFrame {
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce your name");
+		jtname.setToolTipText("Introduce the name");
 		getContentPane().add(jtname);
 		
 		jllastname = new JLabel("Last name:");
@@ -85,7 +85,7 @@ public class InsertTeacher extends JFrame {
 		jtlastname.setBounds(242, 89, 167, 19);
 		jtlastname.setBackground(new Color(0, 176, 220));
 		jtlastname.setColumns(10);
-		jtlastname.setToolTipText("Introduce your last name");
+		jtlastname.setToolTipText("Introduce the last name");
 		getContentPane().add(jtlastname);
 
 		jlemail = new JLabel("Email:");
@@ -99,7 +99,7 @@ public class InsertTeacher extends JFrame {
 		jtemail.setBounds(242, 89, 167, 19);
 		jtemail.setBackground(new Color(0, 176, 220));
 		jtemail.setColumns(10);
-		jtemail.setToolTipText("Introduce your email");
+		jtemail.setToolTipText("Introduce the email");
 		getContentPane().add(jtemail);
 
 		jlpassword = new JLabel("Password: ");
@@ -113,7 +113,7 @@ public class InsertTeacher extends JFrame {
 		jppassword.setBounds(241, 206, 167, 19);
 		jppassword.setBackground(new Color(0, 176, 220));
 		jppassword.setColumns(10);
-		jppassword.setToolTipText("Introduce your password");
+		jppassword.setToolTipText("Introduce the password");
 		getContentPane().add(jppassword);
 
 		jlpassword2 = new JLabel("Repeat Pass.: ");
@@ -127,7 +127,7 @@ public class InsertTeacher extends JFrame {
 		jppassword2.setBounds(241, 236, 167, 19);
 		jppassword2.setBackground(new Color(0, 176, 220));
 		jppassword2.setColumns(10);
-		jppassword2.setToolTipText("Confirm your password");
+		jppassword2.setToolTipText("Confirm the password");
 		getContentPane().add(jppassword2);
 		
 		// Boton next

@@ -39,7 +39,7 @@ public class DetailsRA extends JFrame{
 			e2.printStackTrace();
 		}
 
-		jlid = new JLabel("id: ");
+		jlid = new JLabel("ID: ");
 		jlid.setBackground(new Color(0, 176, 220));
 		jlid.setBounds(147, 122, 84, 13);
 		jlid.setHorizontalAlignment(SwingConstants.CENTER);
@@ -50,7 +50,7 @@ public class DetailsRA extends JFrame{
 		jtid.setBounds(241, 119, 167, 19);
 		jtid.setBackground(new Color(0, 176, 220));
 		jtid.setColumns(12);
-		jtid.setToolTipText("Introduce the ID");
+		jtid.setToolTipText("RAs ID");
 		jtid.setEditable(false);
 		getContentPane().add(jtid);
 
@@ -65,7 +65,7 @@ public class DetailsRA extends JFrame{
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce the name");
+		jtname.setToolTipText("RAs name");
 		jtname.setEditable(false);
 		getContentPane().add(jtname);
 
@@ -80,7 +80,7 @@ public class DetailsRA extends JFrame{
 		jtdecription.setBounds(242, 89, 167, 19);
 		jtdecription.setBackground(new Color(0, 176, 220));
 		jtdecription.setColumns(10);
-		jtdecription.setToolTipText("Introduce the description");
+		jtdecription.setToolTipText("RAs description");
 		jtdecription.setEditable(false);
 		getContentPane().add(jtdecription);
 
@@ -95,11 +95,11 @@ public class DetailsRA extends JFrame{
 		jtweighing.setBounds(242, 89, 167, 19);
 		jtweighing.setBackground(new Color(0, 176, 220));
 		jtweighing.setColumns(10);
-		jtweighing.setToolTipText("Introduce your weighing");
+		jtweighing.setToolTipText("Ras weighing");
 		jtweighing.setEditable(false);
 		getContentPane().add(jtweighing);
 
-		jlid_subj = new JLabel("ID_Subject:");
+		jlid_subj = new JLabel("Subject ID:");
 		jlid_subj.setBackground(new Color(0, 176, 220));
 		jlid_subj.setBounds(137, 92, 94, 13);
 		jlid_subj.setHorizontalAlignment(SwingConstants.CENTER);
@@ -110,7 +110,7 @@ public class DetailsRA extends JFrame{
 		jtid_subj.setBounds(242, 89, 167, 19);
 		jtid_subj.setBackground(new Color(0, 176, 220));
 		jtid_subj.setColumns(10);
-		jtid_subj.setToolTipText("Introduce your id_subj");
+		jtid_subj.setToolTipText("Subject ID");
 		jtid_subj.setEditable(false);
 		getContentPane().add(jtid_subj);
 		

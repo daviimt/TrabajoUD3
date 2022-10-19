@@ -120,7 +120,6 @@ public class MainWindowStudent extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				System.out.println(s);
 				UpdateStudent update = new UpdateStudent(s);
 
 			}

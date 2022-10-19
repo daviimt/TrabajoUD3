@@ -47,7 +47,7 @@ public class Register extends JFrame {
 
 	public Register() {
 
-		super("Register an user");
+		super("Register a student");
 		getContentPane().setBackground(new Color(102, 204, 153));
 		inicializate(Register.this);
 

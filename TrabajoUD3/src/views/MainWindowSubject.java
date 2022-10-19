@@ -115,6 +115,7 @@ public class MainWindowSubject extends JFrame {
 				if (table.getSelectedRow() < 0) {
 					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
 				} else {
+					dispose();
 					UpdateSubject update = new UpdateSubject(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 
 				}

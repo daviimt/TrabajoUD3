@@ -30,20 +30,22 @@ import com.toedter.calendar.JDateChooser;
 
 public class InsertRA extends JFrame {
 
-	private JLabel jlid, jlname, jldescription, jlweighing, jlid_subj;
+	private JLabel jlid, jlname, jldescription, jlweighing;
 	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
 	private JButton jbconfirm, jbcancel;
 	private Icon icon;
 	static Image imagen;
 	ImageIcon img2;
+	private int id_subj;
 	private String sid = "[0-9]+";
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
-	public InsertRA(int id_subj) {
+	public InsertRA(int id) {
 		// creamos el frame insertar
 		super("Insert RA");
 		inicializate(InsertRA.this);
+		id_subj=id;
 
 		jlid = new JLabel("ID: ");
 		jlid.setBackground(new Color(0, 176, 220));
@@ -98,7 +100,7 @@ public class InsertRA extends JFrame {
 		jtweighing.setBounds(242, 89, 167, 19);
 		jtweighing.setBackground(new Color(0, 176, 220));
 		jtweighing.setColumns(10);
-		jtweighing.setToolTipText("Introduce your weighing");
+		jtweighing.setToolTipText("Introduce the weighing");
 		getContentPane().add(jtweighing);
 
 		jtid_subj = new JTextField(String.valueOf(id_subj));
@@ -173,7 +175,7 @@ public class InsertRA extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowRA mainRA= new MainWindowRA(Integer.parseInt( jtid.getText()));
+				MainWindowRA mainRA= new MainWindowRA(id_subj);
 
 			}
 		});

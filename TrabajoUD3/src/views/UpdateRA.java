@@ -20,8 +20,8 @@ import javax.swing.SwingConstants;
 
 import app.RA;
 
-public class UpdateRA extends JFrame{
-	private JLabel jlid, jlname, jldescription, jlweighing, jlid_subj;
+public class UpdateRA extends JFrame {
+	private JLabel jlid, jlname, jldescription, jlweighing;
 	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
 	private JButton jbconfirm, jbcancel;
 	private Icon icon;
@@ -37,14 +37,13 @@ public class UpdateRA extends JFrame{
 		try {
 			Functions f = new Functions();
 			ra = f.ReadRA(idRA);
-			System.out.println(ra);
 			f.close();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 
-		jlid = new JLabel("id: ");
+		jlid = new JLabel("ID: ");
 		jlid.setBackground(new Color(0, 176, 220));
 		jlid.setBounds(147, 122, 84, 13);
 		jlid.setHorizontalAlignment(SwingConstants.CENTER);
@@ -55,7 +54,7 @@ public class UpdateRA extends JFrame{
 		jtid.setBounds(241, 119, 167, 19);
 		jtid.setBackground(new Color(0, 176, 220));
 		jtid.setColumns(12);
-		jtid.setToolTipText("Introduce the ID");
+		jtid.setToolTipText("Modify the ID");
 		jtid.setEditable(false);
 		getContentPane().add(jtid);
 
@@ -70,7 +69,7 @@ public class UpdateRA extends JFrame{
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce the name");
+		jtname.setToolTipText("Modify the name");
 		getContentPane().add(jtname);
 
 		jldescription = new JLabel("Description:");
@@ -84,7 +83,7 @@ public class UpdateRA extends JFrame{
 		jtdecription.setBounds(242, 89, 167, 19);
 		jtdecription.setBackground(new Color(0, 176, 220));
 		jtdecription.setColumns(10);
-		jtdecription.setToolTipText("Introduce the description");
+		jtdecription.setToolTipText("Modify the description");
 		getContentPane().add(jtdecription);
 
 		jlweighing = new JLabel("Weighing:");
@@ -98,22 +97,10 @@ public class UpdateRA extends JFrame{
 		jtweighing.setBounds(242, 89, 167, 19);
 		jtweighing.setBackground(new Color(0, 176, 220));
 		jtweighing.setColumns(10);
-		jtweighing.setToolTipText("Introduce your weighing");
+		jtweighing.setToolTipText("Modify the weighing");
 		getContentPane().add(jtweighing);
 
-		jlid_subj = new JLabel("ID_Subject:");
-		jlid_subj.setBackground(new Color(0, 176, 220));
-		jlid_subj.setBounds(137, 92, 94, 13);
-		jlid_subj.setHorizontalAlignment(SwingConstants.CENTER);
-		jlid_subj.setFont(new Font("Noto Serif Myanmar", Font.PLAIN, 13));
-		getContentPane().add(jlid_subj);
-
 		jtid_subj = new JTextField(String.valueOf(ra.getId_subject()));
-		jtid_subj.setBounds(242, 89, 167, 19);
-		jtid_subj.setBackground(new Color(0, 176, 220));
-		jtid_subj.setColumns(10);
-		jtid_subj.setToolTipText("Introduce your id_subj");
-		getContentPane().add(jtid_subj);
 
 		// Boton next
 		jbconfirm = new JButton("");
@@ -136,9 +123,7 @@ public class UpdateRA extends JFrame{
 						verification = false;
 						break;
 					}
-
 				}
-
 				if (verification) {
 					if (jtid.getText().matches(sid)) {
 
@@ -146,12 +131,12 @@ public class UpdateRA extends JFrame{
 
 							Functions f = new Functions();
 							f.DeleteRA(ra.getId());
-							f.WriteRA(Integer.parseInt(jtid.getText()) , jtname.getText(), jtdecription.getText(),
-									Integer.parseInt(jtweighing.getText()),Integer.parseInt(jtid_subj.getText()));
+							f.WriteRA(Integer.parseInt(jtid.getText()), jtname.getText(), jtdecription.getText(),
+									Integer.parseInt(jtweighing.getText()), Integer.parseInt(jtid_subj.getText()));
 							f.close();
-							
+
 							dispose();
-							MainWindowRA mainRA = new MainWindowRA(ra.getId());
+							MainWindowRA mainRA = new MainWindowRA(ra.getId_subject());
 
 						} catch (SQLException e1) {
 							Icon icon = new ImageIcon("images/warning.png");
@@ -187,7 +172,7 @@ public class UpdateRA extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowRA mainteach = new MainWindowRA(ra.getId());
+				MainWindowRA mainteach = new MainWindowRA(ra.getId_subject());
 
 			}
 		});
@@ -204,9 +189,8 @@ public class UpdateRA extends JFrame{
 		jf.setMinimumSize(getSize());
 		jf.setResizable(false);
 		jf.setLocationRelativeTo(null);
-		jf.getContentPane().setLayout(new GridLayout(6, 2));
+		jf.getContentPane().setLayout(new GridLayout(5, 2));
 		Image icon1 = Toolkit.getDefaultToolkit().getImage("images/School.png");
 		jf.setIconImage(icon1);
 	}
 }
-

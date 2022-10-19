@@ -53,6 +53,7 @@ public class DetailsSubject extends JFrame{
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
+		jtname.setToolTipText("Subjects name");
 		jtname.setEditable(false);
 		getContentPane().add(jtname);
 
@@ -67,6 +68,7 @@ public class DetailsSubject extends JFrame{
 		jthours.setBounds(242, 89, 167, 19);
 		jthours.setBackground(new Color(0, 176, 220));
 		jthours.setColumns(10);
+		jthours.setToolTipText("Number of hours");
 		jthours.setEditable(false);
 		getContentPane().add(jthours);
 
@@ -81,6 +83,7 @@ public class DetailsSubject extends JFrame{
 		jtdni_teacher.setBounds(242, 59, 167, 19);
 		jtdni_teacher.setBackground(new Color(0, 176, 220));
 		jtdni_teacher.setColumns(10);
+		jtdni_teacher.setToolTipText("DNI of the teacher");
 		jtdni_teacher.setEditable(false);
 		getContentPane().add(jtdni_teacher);
 
@@ -97,7 +100,7 @@ public class DetailsSubject extends JFrame{
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowAdmin mainteach = new MainWindowAdmin();
+				MainWindowSubject main = new MainWindowSubject();
 
 			}
 		});

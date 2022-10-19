@@ -76,7 +76,7 @@ public class UpdateTeacher extends JFrame {
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Modify your name");
+		jtname.setToolTipText("Modify the tachers name");
 		getContentPane().add(jtname);
 
 		jllastname = new JLabel("Last name:");
@@ -90,7 +90,7 @@ public class UpdateTeacher extends JFrame {
 		jtlastname.setBounds(242, 89, 167, 19);
 		jtlastname.setBackground(new Color(0, 176, 220));
 		jtlastname.setColumns(10);
-		jtlastname.setToolTipText("Modify your last name");
+		jtlastname.setToolTipText("Modify the tachers last name");
 		getContentPane().add(jtlastname);
 
 		jlemail = new JLabel("Email:");
@@ -104,7 +104,7 @@ public class UpdateTeacher extends JFrame {
 		jtemail.setBounds(242, 89, 167, 19);
 		jtemail.setBackground(new Color(0, 176, 220));
 		jtemail.setColumns(10);
-		jtemail.setToolTipText("Modify your email");
+		jtemail.setToolTipText("Modify the tachers email");
 		getContentPane().add(jtemail);
 
 		// Boton next

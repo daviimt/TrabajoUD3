@@ -75,7 +75,7 @@ public class DetailsTeacher extends JFrame {
 		jtdni.setBounds(241, 119, 167, 19);
 		jtdni.setBackground(new Color(0, 176, 220));
 		jtdni.setColumns(12);
-		jtdni.setToolTipText("Introduce your DNI");
+		jtdni.setToolTipText("Teachers DNI");
 		jtdni.setEditable(false);
 		getContentPane().add(jtdni);
 		
@@ -90,7 +90,7 @@ public class DetailsTeacher extends JFrame {
 		jtname.setBounds(242, 59, 167, 19);
 		jtname.setBackground(new Color(0, 176, 220));
 		jtname.setColumns(10);
-		jtname.setToolTipText("Introduce your name");
+		jtname.setToolTipText("Teachers name");
 		jtname.setEditable(false);
 		getContentPane().add(jtname);
 
@@ -105,7 +105,7 @@ public class DetailsTeacher extends JFrame {
 		jtlastname.setBounds(242, 89, 167, 19);
 		jtlastname.setBackground(new Color(0, 176, 220));
 		jtlastname.setColumns(10);
-		jtlastname.setToolTipText("Introduce your last name");
+		jtlastname.setToolTipText("Teachers last name");
 		jtlastname.setEditable(false);
 		getContentPane().add(jtlastname);
 
@@ -120,7 +120,7 @@ public class DetailsTeacher extends JFrame {
 		jtemail.setBounds(242, 89, 167, 19);
 		jtemail.setBackground(new Color(0, 176, 220));
 		jtemail.setColumns(10);
-		jtemail.setToolTipText("Introduce your email");
+		jtemail.setToolTipText("Teachers email");
 		jtemail.setEditable(false);
 		getContentPane().add(jtemail);
 
