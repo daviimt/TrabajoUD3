@@ -596,6 +596,28 @@ public class Functions {
 		return listSubjectsRA;
 	}
 
+	public List<Object[]> viewTeacherFinalGrade(String codAsig) {
+		List<Object[]> listTeacher = new ArrayList<Object[]>();
+		try {
+
+			String insertquery = "SELECT r.codAsig,alu.nombre, SUM(c.nota*(r.ponderacion/100)) 'Nota' "
+					+ "FROM califica c, matricula m, ra r,asignatura a, alumnos alu " + "WHERE '" + codAsig
+					+ "'=m.codAsig AND m.dniAlumno =c.dniAlumno AND r.id=c.idRa AND r.codAsig=m.codAsig AND a.codAsig =r.codAsig AND alu.dni=m.dniAlumno "
+					+ "GROUP BY alu.dni;";
+
+			ResultSet result = statement.executeQuery(insertquery);
+
+			while (result.next()) {
+
+				Object[] data = { result.getString("nombre"), result.getString("nota") };
+				listTeacher.add(data);
+
+			}
+		} catch (SQLException ex) {
+			System.out.println("Problem To Show Data");
+		}
+		return listTeacher;
+	}
 
 	public void close() throws SQLException {
 		statement.close();
