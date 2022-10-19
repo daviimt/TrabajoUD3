@@ -51,32 +51,35 @@ import java.awt.Font;
 import java.awt.FlowLayout;
 
 @SuppressWarnings("serial")
-public class MainWindowStudent extends JFrame {
+public class DetailsMark extends JFrame {
+
 
 	private JTable table;
 	private JPanel panel, panel_1;
-	private JButton jbupdate, jbdetails, jbclose;
+	private JButton jbclose;
 	private JLabel jluser;
 	private File f = new File("files/Cryptos");
-	String[] nameColums = {"ID", "Subject", "Mark" };
+	String[] nameColums = {"RA", "Mark" };
 	private Icon icon;
 	Student s = new Student();
-	DefaultTableModel dtm;
+	int id_subj;
+	
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-	public MainWindowStudent(String dni) {
-		super("Student menu");
-		inicializate(MainWindowStudent.this);
-		Functions f = new Functions();
-		s = f.ReadStudent(dni);
-
+	public DetailsMark(String dni,int id) {
+		super("Mark details");
+		inicializate(DetailsMark.this);
+		id_subj=id;
+		Functions f=new Functions();
+		s=f.ReadStudent(dni);
+		
 		jluser = new JLabel("Username: " + s.getDni());
 		jluser.setBackground(Color.GRAY);
 		jluser.setHorizontalAlignment(SwingConstants.CENTER);
 		jluser.setFont(new Font("Poor Richard", Font.BOLD, 18));
 
 		JPanel jpupper = new JPanel();
-		jpupper.setBackground(new Color(8, 116, 247));
+		jpupper.setBackground(new Color(8, 116, 247 ));
 
 		jpupper.add(jluser);
 		add(jpupper, BorderLayout.NORTH);
@@ -97,73 +100,30 @@ public class MainWindowStudent extends JFrame {
 
 		createJTable();
 		// Termina el JTable
-
+		
 		panel_1 = new JPanel();
-		panel_1.setBackground(new Color(8, 116, 247));
+		panel_1.setBackground(new Color(8, 116, 247 ));
 		panel_1.setOpaque(true);
 		add(panel_1, BorderLayout.SOUTH);
 
 		panel_1.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
 		panel = new JPanel();
-		panel.setBackground(new Color(8, 116, 247));
+		panel.setBackground(new Color(8, 116, 247 ));
 		panel_1.add(panel);
-
-		jbupdate = new JButton("");
-		jbupdate.setBackground(new Color(8, 116, 247));
-		jbupdate.setToolTipText("Update your data");
-		jbupdate.setBorderPainted(false);
-		jbupdate.setIcon(new ImageIcon("images/update.png"));
-		jbupdate.addActionListener(new ActionListener() {
-
-			@SuppressWarnings("unused")
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-				System.out.println(s);
-				UpdateStudent update = new UpdateStudent(s);
-
-			}
-		});
-
-		panel.add(jbupdate);
-
-		jbdetails = new JButton("");
-		jbdetails.setBackground(new Color(8, 116, 247));
-		jbdetails.setToolTipText("Details");
-		jbdetails.setBorderPainted(false);
-		jbdetails.setIcon(new ImageIcon("images/details.png"));
-
-		jbdetails.addActionListener(new ActionListener() {
-
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				if (table.getSelectedRow() < 0) {
-					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
-				} else {
-
-					dispose();
-					DetailsMark details = new DetailsMark(dni,Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
-
-				}
-
-			}
-		});
-
-		panel.add(jbdetails);
 
 		jbclose = new JButton("");
 		jbclose.setBackground(new Color(8, 116, 247));
 		jbclose.setToolTipText("Log Out");
 		jbclose.setBorderPainted(false);
-		jbclose.setIcon(new ImageIcon("images/logout.png"));
+		jbclose.setIcon(new ImageIcon("images/Back.png"));
 		jbclose.addActionListener(new ActionListener() {
 
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				Login login = new Login();
+				MainWindowStudent main = new MainWindowStudent(dni);
 
 			}
 		});
@@ -185,7 +145,7 @@ public class MainWindowStudent extends JFrame {
 	}
 
 	public void createJTable() {
-		dtm = new DefaultTableModel() {
+		DefaultTableModel dtm = new DefaultTableModel() {
 			@Override
 			public boolean isCellEditable(int row, int column) {
 				return false;
@@ -193,27 +153,26 @@ public class MainWindowStudent extends JFrame {
 		};
 		dtm.setColumnIdentifiers(nameColums);
 		table.setModel(dtm);
-		float markGlobal=0;
 		try {
 			Functions f = new Functions();
 
 			for (SchoolEnrollment se : f.getSchoolEnrollment(s.getDni())) {
-
-				for (Subject s : f.getSubjects(se.getId_subject())) {
-
-					for (RA ra : f.getRAs(s.getId())) {
-						for (Qualifies q : f.getQualifies(se.getDni_student(), ra.getId())) {
-							float partialMark =(ra.getWeighing()/100F)*q.getMark();
-							markGlobal+=partialMark;
+				
+				for(Subject s:f.getSubjects(id_subj)) {
+					
+					for(RA ra:f.getRAs(s.getId())) {
+						
+						for(Qualifies q:f.getQualifies(se.getDni_student(),ra.getId())) {
+							Object[] row = new Object[2];
+							row[0] = q.getId_RA();
+							row[1] = q.getMark();
+							dtm.addRow(row);
+							
 						}
 					}
-					Object[] row = new Object[3];
-					row[0] = s.getId();
-					row[1] = s.getName();
-					row[2] = markGlobal;
-					dtm.addRow(row);
 				}
-
+				
+				
 			}
 
 			f.close();
