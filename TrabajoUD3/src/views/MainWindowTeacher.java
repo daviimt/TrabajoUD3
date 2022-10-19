@@ -117,24 +117,29 @@ public class MainWindowTeacher extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				icon = new ImageIcon("images/warning.png");
-				String mark = JOptionPane.showInputDialog(MainWindowTeacher.this, "Enter the mark fot this student",
+				String mark = JOptionPane.showInputDialog(MainWindowTeacher.this, "Enter the mark for this student",
 						"Mark", JOptionPane.WARNING_MESSAGE);
-				float markf=Float.parseFloat(mark);
+				float markf = Float.parseFloat(mark);
 				
-				try {
-					Functions f=new Functions();
-					f.updateMark(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)),Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 2))), markf);
-					f.close();
-				} catch (NumberFormatException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					System.out.println(e1);
-					e1.printStackTrace();
+				if (table.getSelectedRow() < 0) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
+				} else {
+
+					try {
+						Functions f = new Functions();
+						f.updateMark(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 1)),
+								Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 2))), markf);
+						f.close();
+					} catch (NumberFormatException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					} catch (SQLException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					dispose();
+					MainWindowTeacher main = new MainWindowTeacher(id);
 				}
-				dispose();
-				MainWindowTeacher main=new MainWindowTeacher(id);
 			}
 		});
 
@@ -184,24 +189,16 @@ public class MainWindowTeacher extends JFrame {
 
 		try {
 			Functions f = new Functions();
-			// falta crear las funciones pasandole los datos que salen un metodo get subjetque te devuelva los subject que tiene el profesor y otra matricula que te devuelva las matriculas con el dni de los almunos que estan matriculados en esa subject
-			for (Subject s:f.getSubjectsTeacher(idTeacher)) {
-				for(RA ra:f.getRAs(s.getId())) {
-					for(SchoolEnrollment se : f.getSchoolEnrollmentTeacher(s.getId())) {
-						for(Qualifies q:f.getQualifies(se.getDni_student(),ra.getId())) {
-							
-							Object[] row = new Object[4];
-							row[0] = s.getName();
-							row[1] = se.getDni_student();
-							row[2] = q.getId_RA();
-							row[3] = q.getMark();
-							dtm.addRow(row);
-							
-						}
-					}
+
+			for (Subject s : f.getSubjectsTeacher(idTeacher)) {
+				for (Object[] q : f.viewTeacherFinalGrade(s.getId())) {
+					Object[] row = new Object[4];
+					row[0] = q[0];
+					row[1] = q[1];
+					row[2] = q[2];
+					row[3] = q[3];
+					dtm.addRow(row);
 				}
-				
-				
 			}
 
 			f.close();

@@ -596,25 +596,25 @@ public class Functions {
 		return listSubjectsRA;
 	}
 
-	public List<Object[]> viewTeacherFinalGrade(String codAsig) {
+	public List<Object[]> viewTeacherFinalGrade(int codAsig) {
 		List<Object[]> listTeacher = new ArrayList<Object[]>();
 		try {
 
-			String insertquery = "SELECT r.codAsig,alu.nombre, SUM(c.nota*(r.ponderacion/100)) 'Nota' "
-					+ "FROM califica c, matricula m, ra r,asignatura a, alumnos alu " + "WHERE '" + codAsig
-					+ "'=m.codAsig AND m.dniAlumno =c.dniAlumno AND r.id=c.idRa AND r.codAsig=m.codAsig AND a.codAsig =r.codAsig AND alu.dni=m.dniAlumno "
-					+ "GROUP BY alu.dni;";
+			String insertquery = "SELECT a.Nombre, alu.DNI,r.ID, c.Nota "
+					+ "FROM califica c, matricula m, ra r,asignatura a, alumno alu " + "WHERE '" + codAsig
+					+ "'=m.Cod_Asig AND m.DNI_Alumno =c.DNI_Alumno AND r.ID=c.ID_RA AND r.ID_Asig=m.Cod_Asig AND a.Codigo=r.ID_Asig AND alu.DNI=m.DNI_Alumno "
+					+ "GROUP BY alu.DNI;";
 
 			ResultSet result = statement.executeQuery(insertquery);
 
 			while (result.next()) {
 
-				Object[] data = { result.getString("nombre"), result.getString("nota") };
+				Object[] data = {result.getString("a.Nombre"),result.getString("alu.DNI"), result.getString("r.ID"), result.getString("Nota") };
 				listTeacher.add(data);
 
 			}
 		} catch (SQLException ex) {
-			System.out.println("Problem To Show Data");
+			System.out.println(ex);
 		}
 		return listTeacher;
 	}
