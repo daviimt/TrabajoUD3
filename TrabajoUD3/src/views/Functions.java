@@ -354,6 +354,25 @@ public class Functions {
 		return listSchoolEnrollment;
 	}
 	
+	public void WriteSchoolEnrollment(int id_asig, String dni_alum) throws SQLException {
+
+		PreparedStatement ps;
+		String sql;
+		schoolEnrollment = new SchoolEnrollment();
+		schoolEnrollment.setDni_student(dni_alum);
+		schoolEnrollment.setId_subject(id_asig);
+
+		sql = "insert into RA(DNI_Alumno, Cod_Asig) values(?,?)";
+		ps = connection.prepareStatement(sql);
+		ps.setString(1, schoolEnrollment.getDni_student());
+		ps.setInt(2, schoolEnrollment.getId_subject());
+		ps.executeUpdate();
+
+		Icon icon = new ImageIcon("images/check.png");
+		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
+
+	}
+	
 	public void DeleteSchoolEnrollment(int id_asig, String dni_alum) {
 
 		Subject s = new Subject();
@@ -618,6 +637,23 @@ public class Functions {
 		}
 		return listTeacher;
 	}
+	
+//	public List<Subject> viewSubjects(String dni) {
+//		List<Subject> listSubjects = new ArrayList<Subject>();
+//		try {
+//			String insertquery = "SELECT r.ID_Asig,a.Nombre, SUM(c.nota*(r.ponderacion/100)) 'Nota' FROM califica c, matricula m, ra r,asignatura a WHERE '"
+//					+ dni
+//					+ "' = m.DNI_Alumno AND m.DNI_Alumno =c.DNI_Alumno AND r.ID=c.ID_RA AND r.ID_Asig=m.Cod_Asig AND a.Codigo =r.ID_Asig GROUP BY r.ID_Asig;";
+//			ResultSet result = statement.executeQuery(insertquery);
+//			while (result.next()) {
+//				Object[] data = { result.getString("ID_Asig"), result.getString("Nombre"), result.getString("Nota") };
+//				listSubjects.add(data);
+//			}
+//		} catch (SQLException ex) {
+//			System.out.println("Problem To Show Data");
+//		}
+//		return listSubjects;
+//	}
 
 	public void close() throws SQLException {
 		statement.close();
