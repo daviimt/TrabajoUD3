@@ -285,7 +285,6 @@ public class UpdateStudent extends JFrame {
 			//Si selecciona un archivo borra la imagen anterior y establece la nueva
 			
 			if (fileChooser.APPROVE_OPTION == sel) {
-				System.out.println(student);
 				File imgOld = new File(student.getPhoto());
 				imgOld.delete();
 				

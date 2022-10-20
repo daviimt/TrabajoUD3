@@ -9,6 +9,7 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +26,7 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import app.RA;
 import app.SchoolEnrollment;
 import app.Subject;
 
@@ -53,7 +55,6 @@ public class MainWindowEnrollment extends JFrame {
 			// CAMBIAR READSUBJECTS X READSUBEJECTS QUE NO ESTE MATRICULADO
 			Functions f = new Functions();
 			for (Subject s : f.viewSubjects(dni_Alum)) {
-				System.out.println(s);
 				listSubject.add(s.getName());
 
 			}
@@ -136,7 +137,7 @@ public class MainWindowEnrollment extends JFrame {
 
 		jbSelect = new JButton("");
 		jbSelect.setBackground(new Color(8, 116, 247));
-		jbSelect.setToolTipText("Select subject");
+		jbSelect.setToolTipText("Select subject to insert");
 		jbSelect.setBorderPainted(false);
 		jbSelect.setIcon(new ImageIcon("images/insert.png"));
 		jbSelect.addActionListener(new ActionListener() {
@@ -166,12 +167,17 @@ public class MainWindowEnrollment extends JFrame {
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Functions f=new Functions();
-				int id=0;
+				Functions f = new Functions();
+				int id = 0;
 				if (tableSelected.getSelectedRow() < 0) {
 					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
 				} else {
-					id=f.getIDSubject(String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0)));
+					for (RA ra : f.getRAs(f.getIDSubject(
+							String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))))) {
+						f.DeleteMark(dni_Alum,ra.getId());
+					}
+
+					id = f.getIDSubject(String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0)));
 					listSubSelect.remove((String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))));
 					listSubject.add((String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))));
 				}
@@ -191,9 +197,9 @@ public class MainWindowEnrollment extends JFrame {
 
 		jbconfirm = new JButton("");
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
-		jbconfirm.setToolTipText("Confirm");
-		jbconfirm.setBackground(new Color(0, 153, 0));
+		jbconfirm.setToolTipText("Confirm school enrollment");
 		jbconfirm.setBounds(276, 302, 115, 37);
+		jbconfirm.setBackground(new Color(8, 116, 247));
 		jbconfirm.addActionListener(new ActionListener() {
 
 			@Override
@@ -201,14 +207,21 @@ public class MainWindowEnrollment extends JFrame {
 				// Cargar la asignatura seleccionada en la tabla Matricula
 
 				try {
+
 					Functions f = new Functions();
 					f.WriteSchoolEnrollment(
 							f.getIDSubject(String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))),
 							dni_Alum);
+					for (RA ra : f.getRAs(f
+							.getIDSubject(String.valueOf(dtmSelected.getValueAt(tableSelected.getSelectedRow(), 0))))) {
+						f.writeMark(dni_Alum, ra.getId(), 0);
+
+					}
 					f.close();
 				} catch (SQLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Select a new subject", "Error:", JOptionPane.ERROR_MESSAGE);
+				} catch (ArrayIndexOutOfBoundsException a) {
+					JOptionPane.showMessageDialog(null, "No row selected", "Error:", JOptionPane.ERROR_MESSAGE);
 				}
 
 			}

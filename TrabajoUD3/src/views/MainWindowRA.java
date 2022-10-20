@@ -207,7 +207,7 @@ public class MainWindowRA extends JFrame {
 
 		jbclose = new JButton("");
 		jbclose.setBackground(new Color(8, 116, 247));
-		jbclose.setToolTipText("Log Out");
+		jbclose.setToolTipText("Back");
 		jbclose.setBorderPainted(false);
 		jbclose.setIcon(new ImageIcon("images/Back.png"));
 		jbclose.addActionListener(new ActionListener() {

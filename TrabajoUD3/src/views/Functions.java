@@ -581,9 +581,6 @@ public class Functions {
 		ps.setFloat(3, qualifie.getMark());
 		ps.executeUpdate();
 
-		Icon icon = new ImageIcon("images/check.png");
-		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
-
 	}
 	
 	public void updateMark(String dni_alum, int id_ra,float mark) throws SQLException {
@@ -597,6 +594,14 @@ public class Functions {
 		Icon icon = new ImageIcon("images/check.png");
 		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
 
+	}
+	
+	public void DeleteMark(String dni, int ra) {
+		try {
+			statement.execute("DELETE FROM Califica WHERE DNI_Alumno= '" + dni + "' AND ID_RA= '"+ra+"'");
+		} catch (SQLException ex) {
+			System.out.println(ex);
+		}
 	}
 	
 	public List<Object[]> viewStudents(String dni) {
@@ -648,12 +653,11 @@ public class Functions {
 			String insertquery = "SELECT a.Nombre, alu.DNI,r.ID, c.Nota "
 					+ "FROM califica c, matricula m, ra r,asignatura a, alumno alu " + "WHERE '" + codAsig
 					+ "'=m.Cod_Asig AND m.DNI_Alumno =c.DNI_Alumno AND r.ID=c.ID_RA AND r.ID_Asig=m.Cod_Asig AND a.Codigo=r.ID_Asig AND alu.DNI=m.DNI_Alumno "
-					+ "GROUP BY alu.DNI;";
+					;
 
 			ResultSet result = statement.executeQuery(insertquery);
 
 			while (result.next()) {
-
 				Object[] data = {result.getString("a.Nombre"),result.getString("alu.DNI"), result.getString("r.ID"), result.getString("Nota") };
 				listTeacher.add(data);
 

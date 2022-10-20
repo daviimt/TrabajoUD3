@@ -239,7 +239,8 @@ public class MainWindowAdmin extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
 						dispose();
-						MainWindowEnrollment main = new MainWindowEnrollment(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
+						MainWindowEnrollment main = new MainWindowEnrollment(
+								String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0)));
 					}
 
 				}

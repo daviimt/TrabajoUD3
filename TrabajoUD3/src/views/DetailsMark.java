@@ -161,7 +161,7 @@ public class DetailsMark extends JFrame {
 
 				Object[] row = new Object[2];
 				row[0] = q[0];
-				row[1] = q[1];
+				row[1] = q[2];
 				dtm.addRow(row);
 
 			}
