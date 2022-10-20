@@ -9,23 +9,36 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import app.Subject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DetailsSubject.
+ */
 public class DetailsSubject extends JFrame{
+	
+	/** The jldni teacher. */
 	private JLabel jlname, jlhours, jldni_teacher;
+	
+	/** The jtdni teacher. */
 	private JTextField jtid, jtname, jthours, jtdni_teacher;
+	
+	/** The jb back. */
 	private JButton jbBack;
 
 
+	/**
+	 * Instantiates a new details subject.
+	 *
+	 * @param idSubject the id subject
+	 */
 	public DetailsSubject(int idSubject) {
 		super("Details Subject");
 		inicializate(DetailsSubject.this);
@@ -108,6 +121,11 @@ public class DetailsSubject extends JFrame{
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

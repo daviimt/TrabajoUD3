@@ -7,41 +7,56 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.List;
 
-import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
-import com.toedter.calendar.JDateChooser;
 
 import app.Subject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InsertSubject.
+ */
 public class InsertSubject extends JFrame {
 
+	/** The jldni teacher. */
 	private JLabel jlid, jlname, jlhours, jldni_teacher;
+	
+	/** The jtdni teacher. */
 	private JTextField jtid, jtname, jthours, jtdni_teacher;
+	
+	/** The jbcancel. */
 	private JButton jbconfirm, jbcancel;
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The imagen. */
 	static Image imagen;
+	
+	/** The img 2. */
 	ImageIcon img2;
+	
+	/** The sid. */
 	private String sid = "[0-9]+";
+	
+	/** The sdni teacher. */
 	private String sdni_teacher = "[0-9]{8}[A-Z]";
+	
+	/** The shours. */
 	private String shours = "[0-9]+";
 
+	/**
+	 * Instantiates a new insert subject.
+	 */
 	public InsertSubject() {
 		// creamos el frame insertar
 		super("Insert Subject");
@@ -211,6 +226,11 @@ public class InsertSubject extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

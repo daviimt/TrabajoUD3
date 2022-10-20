@@ -20,7 +20,6 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
 import app.RA;
-import app.Teacher;
 import app.User;
 
 import java.awt.BorderLayout;
@@ -32,19 +31,45 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainWindowRA.
+ */
 @SuppressWarnings("serial")
 public class MainWindowRA extends JFrame {
 
+	/** The table. */
 	private JTable table;
+	
+	/** The panel 1. */
 	private JPanel panel, panel_1;
+	
+	/** The jbsubject. */
 	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbsubject;
+	
+	/** The jluser. */
 	private JLabel jluser;
+	
+	/** The name colums. */
 	String[] nameColums = { "ID", "Name"};
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The dtm. */
 	DefaultTableModel dtm;
+	
+	/** The id subj. */
 	private int id_subj;
+	
+	/** The u. */
 	User u = new User();
 
+	/**
+	 * Instantiates a new main window RA.
+	 *
+	 * @param id the id
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowRA(int id) {
 		super("Modify RA's");
@@ -225,6 +250,11 @@ public class MainWindowRA extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -237,6 +267,9 @@ public class MainWindowRA extends JFrame {
 		jf.setIconImage(icon1);
 	}
 
+	/**
+	 * Creates the J table.
+	 */
 	public void createJTable() {
 		dtm = new DefaultTableModel() {
 			@Override

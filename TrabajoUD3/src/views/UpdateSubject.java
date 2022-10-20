@@ -7,43 +7,57 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
 
-import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import com.toedter.calendar.JDateChooser;
 
 import app.Subject;
-import app.Teacher;
-import app.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UpdateSubject.
+ */
 public class UpdateSubject extends JFrame {
 
+	/** The jldni teacher. */
 	private JLabel jlname, jlhours, jldni_teacher;
+	
+	/** The jtdni teacher. */
 	private JTextField jtid, jtname, jthours, jtdni_teacher;
+	
+	/** The jbcancel. */
 	private JButton jbconfirm, jbcancel;
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The imagen. */
 	static Image imagen;
+	
+	/** The img 2. */
 	ImageIcon img2;
+	
+	/** The sid. */
 	private String sid = "[0-9]+";
+	
+	/** The sdni teacher. */
 	private String sdni_teacher = "[0-9]{8}[A-Z]";
+	
+	/** The shours. */
 	private String shours = "[0-9]+";
 
+	/**
+	 * Instantiates a new update subject.
+	 *
+	 * @param idSubject the id subject
+	 */
 	public UpdateSubject(int idSubject) {
 		super("Update Subject");
 		inicializate(UpdateSubject.this);
@@ -207,6 +221,11 @@ public class UpdateSubject extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

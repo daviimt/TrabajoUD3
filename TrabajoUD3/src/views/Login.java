@@ -2,16 +2,11 @@ package views;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.swing.Icon;
@@ -55,6 +50,7 @@ public class Login extends JFrame {
 	/** The fusers. */
 	private File fusers = new File("files/Users");
 
+	/** The sid. */
 	private String sid = "[0-9]{8}[A-Z]";
 
 	/**

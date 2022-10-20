@@ -7,44 +7,64 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
 
-import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
-
-import com.toedter.calendar.JDateChooser;
 
 import app.Teacher;
 import app.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DetailsTeacher.
+ */
 public class DetailsTeacher extends JFrame {
 
+	/** The jlemail. */
 	private JLabel jldni,jlname, jllastname, jlemail;
+	
+	/** The jtrole. */
 	private JTextField jtdni, jtname, jtlastname, jtemail, jtrole = new JTextField("Teacher");;
+	
+	/** The jppassword 2. */
 	private JPasswordField jppassword, jppassword2;
-	private JButton jbconfirm, jbcancel;
+	
+	/** The jbcancel. */
+	private JButton jbcancel;
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The imagen. */
 	static Image imagen;
+	
+	/** The img 2. */
 	ImageIcon img2;
+	
+	/** The sdni. */
 	private String sdni = "[0-9]{8}[A-Z]";
+	
+	/** The semail. */
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
+	
+	/** The sphone. */
 	private String sphone = "[0-9]{9}";
+	
+	/** The spassw. */
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
+	/**
+	 * Instantiates a new details teacher.
+	 *
+	 * @param idTeacher the id teacher
+	 */
 	public DetailsTeacher(String idTeacher) {
 		// creamos el frame insertar
 		super("Details Teacher");
@@ -145,6 +165,11 @@ public class DetailsTeacher extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

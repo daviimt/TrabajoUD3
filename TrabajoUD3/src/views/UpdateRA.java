@@ -20,16 +20,41 @@ import javax.swing.SwingConstants;
 
 import app.RA;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class UpdateRA.
+ */
 public class UpdateRA extends JFrame {
+	
+	/** The jlweighing. */
 	private JLabel jlid, jlname, jldescription, jlweighing;
+	
+	/** The jtid subj. */
 	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
+	
+	/** The jbcancel. */
 	private JButton jbconfirm, jbcancel;
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The imagen. */
 	static Image imagen;
+	
+	/** The img 2. */
 	ImageIcon img2;
+	
+	/** The sid. */
 	private String sid = "[0-9]+";
+	
+	/** The ra. */
 	RA ra = new RA();
 
+	/**
+	 * Instantiates a new update RA.
+	 *
+	 * @param idRA the id RA
+	 */
 	public UpdateRA(int idRA) {
 		super("Update RA");
 		inicializate(UpdateRA.this);
@@ -180,6 +205,11 @@ public class UpdateRA extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -28,23 +28,52 @@ import javax.swing.SwingConstants;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 import com.toedter.calendar.JDateChooser;
-import com.toedter.calendar.JTextFieldDateEditor;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Register.
+ */
 public class Register extends JFrame {
 
+	/** The jl image. */
 	private JLabel jldni, jlname, jllastname, jldate, jlphone, jlpassword, jlpassword2, jlImage;
+	
+	/** The jtrole. */
 	private JTextField jtdni, jtname, jtlastname, jtdate, jtphone, jtphoto, jtrole = new JTextField("Student");
+	
+	/** The jppassword 2. */
 	private JPasswordField jppassword, jppassword2;
+	
+	/** The jbphoto. */
 	private JButton jbconfirm, jbcancel, jbphoto;
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The imagen. */
 	static Image imagen;
+	
+	/** The img 2. */
 	ImageIcon img2;
+	
+	/** The sdni. */
 	private String sdni = "[0-9]{8}[A-Z]";
+	
+	/** The sphone. */
 	private String sphone = "[0-9]{9}";
+	
+	/** The spassw. */
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
+	
+	/** The date chooser. */
 	private JDateChooser dateChooser;
+	
+	/** The date birth. */
 	private String date_birth;
 
+	/**
+	 * Instantiates a new register.
+	 */
 	public Register() {
 
 		super("Register a student");
@@ -270,8 +299,17 @@ public class Register extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * The Class InsertImg.
+	 */
 	// Insert Image Method
 	public class InsertImg implements ActionListener {
+		
+		/**
+		 * Action performed.
+		 *
+		 * @param e the e
+		 */
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			File photo = new File("images/alumn/" + jtdni.getText()+"png");
@@ -314,6 +352,11 @@ public class Register extends JFrame {
 		}
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

@@ -9,23 +9,38 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import app.RA;
 
-public class DetailsRA extends JFrame{
+// TODO: Auto-generated Javadoc
+/**
+ * The Class DetailsRA.
+ */
+public class DetailsRA extends JFrame {
+	
+	/** The jlid subj. */
 	private JLabel jlid, jlname, jldescription, jlweighing, jlid_subj;
+	
+	/** The jtid subj. */
 	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
+	
+	/** The jbcancel. */
 	private JButton jbcancel;
+	
+	/** The ra. */
 	RA ra = new RA();
 
+	/**
+	 * Instantiates a new details RA.
+	 *
+	 * @param idSubject the id subject
+	 */
 	public DetailsRA(int idSubject) {
 		super("Details RA");
 		inicializate(DetailsRA.this);
@@ -113,7 +128,7 @@ public class DetailsRA extends JFrame{
 		jtid_subj.setToolTipText("Subject ID");
 		jtid_subj.setEditable(false);
 		getContentPane().add(jtid_subj);
-		
+
 		// Boton cancel
 
 		jbcancel = new JButton("");
@@ -135,6 +150,11 @@ public class DetailsRA extends JFrame{
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -149,4 +169,3 @@ public class DetailsRA extends JFrame{
 		jf.setIconImage(icon1);
 	}
 }
-

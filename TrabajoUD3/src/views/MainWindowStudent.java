@@ -2,25 +2,11 @@ package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -29,40 +15,57 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
-import javax.swing.plaf.basic.BasicComboBoxUI;
-import javax.swing.plaf.basic.BasicComboPopup;
-import javax.swing.plaf.basic.BasicScrollBarUI;
-import javax.swing.plaf.basic.ComboPopup;
 import javax.swing.table.DefaultTableModel;
 
-import app.Qualifies;
-import app.RA;
-import app.SchoolEnrollment;
 import app.Student;
-import app.Subject;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 
 import java.awt.Font;
 import java.awt.FlowLayout;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainWindowStudent.
+ */
 @SuppressWarnings("serial")
 public class MainWindowStudent extends JFrame {
 
+	/** The table. */
 	private JTable table;
+	
+	/** The panel 1. */
 	private JPanel panel, panel_1;
+	
+	/** The jbclose. */
 	private JButton jbupdate, jbdetails, jbclose;
+	
+	/** The jluser. */
 	private JLabel jluser;
+	
+	/** The f. */
 	private File f = new File("files/Cryptos");
+	
+	/** The name colums. */
 	String[] nameColums = {"ID", "Subject", "Mark" };
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The s. */
 	Student s = new Student();
+	
+	/** The dtm. */
 	DefaultTableModel dtm;
 
+	/**
+	 * Instantiates a new main window student.
+	 *
+	 * @param dni the dni
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowStudent(String dni) {
 		super("Student menu");
@@ -171,6 +174,11 @@ public class MainWindowStudent extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -183,6 +191,9 @@ public class MainWindowStudent extends JFrame {
 		jf.setIconImage(icon1);
 	}
 
+	/**
+	 * Creates the J table.
+	 */
 	public void createJTable() {
 		dtm = new DefaultTableModel() {
 			@Override

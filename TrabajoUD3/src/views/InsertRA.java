@@ -7,40 +7,58 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
 
-import javax.swing.AbstractButton;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.filechooser.FileNameExtensionFilter;
 
-import com.toedter.calendar.JDateChooser;
-
+// TODO: Auto-generated Javadoc
+/**
+ * The Class InsertRA.
+ */
 public class InsertRA extends JFrame {
 
+	/** The jlweighing. */
 	private JLabel jlid, jlname, jldescription, jlweighing;
+	
+	/** The jtid subj. */
 	private JTextField jtid, jtname, jtdecription, jtweighing, jtid_subj;
+	
+	/** The jbcancel. */
 	private JButton jbconfirm, jbcancel;
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The imagen. */
 	static Image imagen;
+	
+	/** The img 2. */
 	ImageIcon img2;
+	
+	/** The id subj. */
 	private int id_subj;
+	
+	/** The sid. */
 	private String sid = "[0-9]+";
+	
+	/** The semail. */
 	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
+	
+	/** The spassw. */
 	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
 
+	/**
+	 * Instantiates a new insert RA.
+	 *
+	 * @param id the id
+	 */
 	public InsertRA(int id) {
 		// creamos el frame insertar
 		super("Insert RA");
@@ -183,6 +201,11 @@ public class InsertRA extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

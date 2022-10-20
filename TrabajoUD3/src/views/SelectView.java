@@ -11,10 +11,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class SelectView.
+ */
 public class SelectView extends JFrame {
 
+	/** The jblogout. */
 	private JButton jbusers, jbsubject, jblogout;
 
+	/**
+	 * Instantiates a new select view.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public SelectView() {
 		super("Select view");
@@ -78,6 +86,11 @@ public class SelectView extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		jf.setBackground(new Color(0, 176, 220));

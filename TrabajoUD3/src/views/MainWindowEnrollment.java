@@ -9,7 +9,6 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
-import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,22 +29,54 @@ import app.RA;
 import app.SchoolEnrollment;
 import app.Subject;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainWindowEnrollment.
+ */
 @SuppressWarnings("serial")
 public class MainWindowEnrollment extends JFrame {
 
+	/** The table selected. */
 	private JTable table, tableSelected;
+	
+	/** The panel 1. */
 	private JPanel panel_1;
+	
+	/** The jbclose. */
 	private JButton jbSelect, jbDeselect, jbconfirm, jbclose;
+	
+	/** The jltable selected. */
 	private JLabel jluser, jltable, jltableSelected;
+	
+	/** The name colums. */
 	String[] nameColums = { "Name" };
+	
+	/** The name colums selected. */
 	String[] nameColumsSelected = { "Name" };
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The dtm. */
 	DefaultTableModel dtm;
+	
+	/** The dtm selected. */
 	DefaultTableModel dtmSelected;
+	
+	/** The dni alum. */
 	String dniAlum;
+	
+	/** The list subject. */
 	List<String> listSubject = new ArrayList();
+	
+	/** The list sub select. */
 	List<String> listSubSelect = new ArrayList();
 
+	/**
+	 * Instantiates a new main window enrollment.
+	 *
+	 * @param dni_Alum the dni alum
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowEnrollment(String dni_Alum) {
 		super("School Enrollment");
@@ -248,6 +279,11 @@ public class MainWindowEnrollment extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -261,6 +297,9 @@ public class MainWindowEnrollment extends JFrame {
 		jf.setIconImage(icon1);
 	}
 
+	/**
+	 * Creates the J table.
+	 */
 	public void createJTable() {
 		dtm = new DefaultTableModel() {
 			@Override
@@ -297,6 +336,9 @@ public class MainWindowEnrollment extends JFrame {
 
 	}
 
+	/**
+	 * Creates the J table selected.
+	 */
 	public void createJTableSelected() {
 		dtmSelected = new DefaultTableModel() {
 			@Override

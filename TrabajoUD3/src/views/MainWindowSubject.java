@@ -23,22 +23,42 @@ import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
-import app.Qualifies;
-import app.RA;
-import app.SchoolEnrollment;
 import app.Subject;
 import app.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainWindowSubject.
+ */
 public class MainWindowSubject extends JFrame {
+	
+	/** The table. */
 	private JTable table;
+	
+	/** The panel 1. */
 	private JPanel panel, panel_1;
+	
+	/** The jbra. */
 	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbra;
+	
+	/** The jluser. */
 	private JLabel jluser;
+	
+	/** The name colums. */
 	String[] nameColums = { "ID", "Name" };
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The dtm. */
 	DefaultTableModel dtm;
+	
+	/** The u. */
 	User u = new User();
 
+	/**
+	 * Instantiates a new main window subject.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowSubject() {
 		super("Modify subjects");
@@ -231,6 +251,11 @@ public class MainWindowSubject extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -243,6 +268,9 @@ public class MainWindowSubject extends JFrame {
 		jf.setIconImage(icon1);
 	}
 
+	/**
+	 * Creates the J table.
+	 */
 	public void createJTable() {
 		dtm = new DefaultTableModel() {
 			@Override

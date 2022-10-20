@@ -1,7 +1,6 @@
 package views;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,8 +13,6 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-import com.mysql.cj.xdevapi.Result;
-
 import app.Qualifies;
 import app.RA;
 import app.SchoolEnrollment;
@@ -24,18 +21,42 @@ import app.Subject;
 import app.Teacher;
 import app.User;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Functions.
+ */
 public class Functions {
 
+	/** The statement. */
 	Statement statement;
+	
+	/** The connection. */
 	Connection connection;
+	
+	/** The user. */
 	User user;
+	
+	/** The student. */
 	Student student;
+	
+	/** The teacher. */
 	Teacher teacher;
+	
+	/** The subject. */
 	Subject subject;
+	
+	/** The qualifie. */
 	Qualifies qualifie;
+	
+	/** The ra. */
 	RA ra;
+	
+	/** The school enrollment. */
 	SchoolEnrollment schoolEnrollment;
 	
+	/**
+	 * Instantiates a new functions.
+	 */
 	public Functions() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
@@ -52,6 +73,12 @@ public class Functions {
 		}
 	}
 
+	/**
+	 * Read.
+	 *
+	 * @param dni the dni
+	 * @return the user
+	 */
 	public User Read(String dni) {
 
 		User u = new User();
@@ -77,6 +104,12 @@ public class Functions {
 		return u;
 	}
 
+	/**
+	 * Read student.
+	 *
+	 * @param dni the dni
+	 * @return the student
+	 */
 	public Student ReadStudent(String dni) {
 
 		Student  student = new Student();
@@ -104,6 +137,17 @@ public class Functions {
 		return student;
 	}
 
+	/**
+	 * Write student.
+	 *
+	 * @param dni the dni
+	 * @param name the name
+	 * @param lastname the lastname
+	 * @param birth_date the birth date
+	 * @param phone the phone
+	 * @param photo the photo
+	 * @throws SQLException the SQL exception
+	 */
 	public void WriteStudent(String dni, String name, String lastname, String birth_date, String phone, String photo)
 			throws SQLException {
 
@@ -131,6 +175,12 @@ public class Functions {
 		JOptionPane.showMessageDialog(null, "Data inserted", "Completed", JOptionPane.INFORMATION_MESSAGE, icon);
 	}
 
+	/**
+	 * Read teacher.
+	 *
+	 * @param dni the dni
+	 * @return the teacher
+	 */
 	public Teacher ReadTeacher(String dni) {
 
 		Teacher teacher = new Teacher();
@@ -157,6 +207,15 @@ public class Functions {
 		return teacher;
 	}
 
+	/**
+	 * Write teacher.
+	 *
+	 * @param dni the dni
+	 * @param name the name
+	 * @param lastname the lastname
+	 * @param email the email
+	 * @throws SQLException the SQL exception
+	 */
 	public void WriteTeacher(String dni, String name, String lastname, String email) throws SQLException {
 
 		PreparedStatement ps;
@@ -180,6 +239,11 @@ public class Functions {
 
 	}
 
+	/**
+	 * Read users.
+	 *
+	 * @return the list
+	 */
 	public List<User> ReadUsers() {
 
 		List<User> listUsers = new ArrayList<User>();
@@ -203,6 +267,14 @@ public class Functions {
 		return listUsers;
 	}
 
+	/**
+	 * Write user.
+	 *
+	 * @param dni the dni
+	 * @param password the password
+	 * @param role the role
+	 * @throws SQLException the SQL exception
+	 */
 	public void WriteUser(String dni, String password, String role) throws SQLException {
 
 		PreparedStatement ps;
@@ -221,6 +293,11 @@ public class Functions {
 
 	}
 
+	/**
+	 * Delete user.
+	 *
+	 * @param id the id
+	 */
 	public void DeleteUser(String id) {
 		try {
 			statement.execute("DELETE FROM usuarios WHERE ID= '" + id + "'");
@@ -229,6 +306,11 @@ public class Functions {
 		}
 	}
 
+	/**
+	 * Read subjects.
+	 *
+	 * @return the list
+	 */
 	public List<Subject> ReadSubjects() {
 
 		List<Subject> listSubjects = new ArrayList<Subject>();
@@ -253,6 +335,12 @@ public class Functions {
 		return listSubjects;
 	}
 
+	/**
+	 * Read subject.
+	 *
+	 * @param id the id
+	 * @return the subject
+	 */
 	public Subject ReadSubject(int id) {
 
 		Subject subject = new Subject();
@@ -279,6 +367,12 @@ public class Functions {
 		return subject;
 	}
 	
+	/**
+	 * Gets the ID subject.
+	 *
+	 * @param name the name
+	 * @return the ID subject
+	 */
 	public int getIDSubject(String name) {
 
 		Subject subject = new Subject();
@@ -305,6 +399,15 @@ public class Functions {
 		return subject.getId();
 	}
 
+	/**
+	 * Write subject.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param hours the hours
+	 * @param dni_teacher the dni teacher
+	 * @throws SQLException the SQL exception
+	 */
 	public void WriteSubject(int id, String name, int hours, String dni_teacher) throws SQLException {
 
 		PreparedStatement ps;
@@ -325,6 +428,12 @@ public class Functions {
 
 	}
 
+	/**
+	 * Delete subject.
+	 *
+	 * @param id the id
+	 * @return the subject
+	 */
 	public Subject DeleteSubject(int id) {
 
 		Subject s = new Subject();
@@ -336,6 +445,12 @@ public class Functions {
 		return s;
 	}
 	
+	/**
+	 * Gets the school enrollment.
+	 *
+	 * @param dni_alum the dni alum
+	 * @return the school enrollment
+	 */
 	public List<SchoolEnrollment> getSchoolEnrollment(String dni_alum) {
 
 		List<SchoolEnrollment> listSchoolEnrollment=new ArrayList<SchoolEnrollment>();
@@ -358,6 +473,12 @@ public class Functions {
 		return listSchoolEnrollment;
 	}
 	
+	/**
+	 * Gets the school enrollment teacher.
+	 *
+	 * @param id_subj the id subj
+	 * @return the school enrollment teacher
+	 */
 	public List<SchoolEnrollment> getSchoolEnrollmentTeacher(int id_subj) {
 
 		List<SchoolEnrollment> listSchoolEnrollment=new ArrayList<SchoolEnrollment>();
@@ -380,6 +501,13 @@ public class Functions {
 		return listSchoolEnrollment;
 	}
 	
+	/**
+	 * Write school enrollment.
+	 *
+	 * @param id_asig the id asig
+	 * @param dni_alum the dni alum
+	 * @throws SQLException the SQL exception
+	 */
 	public void WriteSchoolEnrollment(int id_asig, String dni_alum) throws SQLException {
 
 		PreparedStatement ps;
@@ -399,6 +527,12 @@ public class Functions {
 
 	}
 	
+	/**
+	 * Delete school enrollment.
+	 *
+	 * @param id_asig the id asig
+	 * @param dni_alum the dni alum
+	 */
 	public void DeleteSchoolEnrollment(int id_asig, String dni_alum) {
 
 		Subject s = new Subject();
@@ -409,6 +543,12 @@ public class Functions {
 		}
 	}
 	
+	/**
+	 * Gets the subjects.
+	 *
+	 * @param cod_asig the cod asig
+	 * @return the subjects
+	 */
 	//lectura mainwindows student
 	public List<Subject> getSubjects(int cod_asig) {
 
@@ -434,6 +574,12 @@ public class Functions {
 		return listSubjects;
 	}
 	
+	/**
+	 * Gets the subjects teacher.
+	 *
+	 * @param id_teacher the id teacher
+	 * @return the subjects teacher
+	 */
 	public List<Subject> getSubjectsTeacher(String id_teacher) {
 
 		List<Subject> listSubjects = new ArrayList<Subject>();
@@ -458,6 +604,12 @@ public class Functions {
 		return listSubjects;
 	}
 	
+	/**
+	 * Gets the r as.
+	 *
+	 * @param id_asig the id asig
+	 * @return the r as
+	 */
 	public List<RA> getRAs(int id_asig) {
 
 		List<RA> listRA=new ArrayList<RA>();
@@ -483,6 +635,12 @@ public class Functions {
 		return listRA;
 	}
 	
+	/**
+	 * Read RA.
+	 *
+	 * @param id the id
+	 * @return the ra
+	 */
 	public RA ReadRA(int id) {
 
 		RA ra = new RA();
@@ -509,6 +667,16 @@ public class Functions {
 		return ra;
 	}
 	
+	/**
+	 * Write RA.
+	 *
+	 * @param id the id
+	 * @param name the name
+	 * @param description the description
+	 * @param weighing the weighing
+	 * @param id_sub the id sub
+	 * @throws SQLException the SQL exception
+	 */
 	public void WriteRA(int id, String name, String description, int weighing,int id_sub) throws SQLException {
 
 		PreparedStatement ps;
@@ -534,6 +702,11 @@ public class Functions {
 
 	}
 	
+	/**
+	 * Delete RA.
+	 *
+	 * @param id the id
+	 */
 	public void DeleteRA(int id) {
 		try {
 			statement.execute("DELETE FROM RA WHERE ID= '" + id + "'");
@@ -542,6 +715,13 @@ public class Functions {
 		}
 	}
 	
+	/**
+	 * Gets the qualifies.
+	 *
+	 * @param dni the dni
+	 * @param id_ra the id ra
+	 * @return the qualifies
+	 */
 	public List<Qualifies> getQualifies(String dni,int id_ra) {
 
 		List<Qualifies> listQualifies=new ArrayList<Qualifies>();
@@ -565,6 +745,14 @@ public class Functions {
 		return listQualifies;
 	}
 	
+	/**
+	 * Write mark.
+	 *
+	 * @param dni_alum the dni alum
+	 * @param id_sub the id sub
+	 * @param mark the mark
+	 * @throws SQLException the SQL exception
+	 */
 	public void writeMark(String dni_alum, int id_sub,float mark) throws SQLException {
 
 		PreparedStatement ps;
@@ -583,6 +771,14 @@ public class Functions {
 
 	}
 	
+	/**
+	 * Update mark.
+	 *
+	 * @param dni_alum the dni alum
+	 * @param id_ra the id ra
+	 * @param mark the mark
+	 * @throws SQLException the SQL exception
+	 */
 	public void updateMark(String dni_alum, int id_ra,float mark) throws SQLException {
 
 		PreparedStatement ps;
@@ -596,6 +792,12 @@ public class Functions {
 
 	}
 	
+	/**
+	 * Delete mark.
+	 *
+	 * @param dni the dni
+	 * @param ra the ra
+	 */
 	public void DeleteMark(String dni, int ra) {
 		try {
 			statement.execute("DELETE FROM Califica WHERE DNI_Alumno= '" + dni + "' AND ID_RA= '"+ra+"'");
@@ -604,6 +806,12 @@ public class Functions {
 		}
 	}
 	
+	/**
+	 * View students.
+	 *
+	 * @param dni the dni
+	 * @return the list
+	 */
 	public List<Object[]> viewStudents(String dni) {
 		List<Object[]> listSubjects = new ArrayList<Object[]>();
 		try {
@@ -621,6 +829,13 @@ public class Functions {
 		return listSubjects;
 	}
 
+	/**
+	 * View students RA.
+	 *
+	 * @param dni the dni
+	 * @param codAsig the cod asig
+	 * @return the list
+	 */
 	public List<Object[]> viewStudentsRA(String dni, int codAsig) {
 		List<Object[]> listSubjectsRA = new ArrayList<Object[]>();
 
@@ -646,6 +861,12 @@ public class Functions {
 		return listSubjectsRA;
 	}
 
+	/**
+	 * View teacher final grade.
+	 *
+	 * @param codAsig the cod asig
+	 * @return the list
+	 */
 	public List<Object[]> viewTeacherFinalGrade(int codAsig) {
 		List<Object[]> listTeacher = new ArrayList<Object[]>();
 		try {
@@ -668,6 +889,12 @@ public class Functions {
 		return listTeacher;
 	}
 	
+	/**
+	 * View subjects.
+	 *
+	 * @param dni the dni
+	 * @return the list
+	 */
 	public List<Subject> viewSubjects(String dni) {
 		List<Subject> listSubjects = new ArrayList<Subject>();
 		try {
@@ -688,6 +915,11 @@ public class Functions {
 		return listSubjects;
 	}
 
+	/**
+	 * Close.
+	 *
+	 * @throws SQLException the SQL exception
+	 */
 	public void close() throws SQLException {
 		statement.close();
 		connection.close();

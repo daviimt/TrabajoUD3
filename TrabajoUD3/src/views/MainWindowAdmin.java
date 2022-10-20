@@ -19,7 +19,6 @@ import javax.swing.SwingConstants;
 
 import javax.swing.table.DefaultTableModel;
 
-import app.Teacher;
 import app.User;
 
 import java.awt.BorderLayout;
@@ -31,18 +30,40 @@ import java.awt.Toolkit;
 import java.awt.Font;
 import java.awt.FlowLayout;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class MainWindowAdmin.
+ */
 @SuppressWarnings("serial")
 public class MainWindowAdmin extends JFrame {
 
+	/** The table. */
 	private JTable table;
+	
+	/** The panel 1. */
 	private JPanel panel, panel_1;
+	
+	/** The jbchoosesubject. */
 	private JButton jbupdate, jbinsert, jbdelete, jbdetails, jbclose, jbchoosesubject;
+	
+	/** The jluser. */
 	private JLabel jluser;
+	
+	/** The name colums. */
 	String[] nameColums = { "ID", "Role" };
+	
+	/** The icon. */
 	private Icon icon;
+	
+	/** The dtm. */
 	DefaultTableModel dtm;
+	
+	/** The u. */
 	User u = new User();
 
+	/**
+	 * Instantiates a new main window admin.
+	 */
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public MainWindowAdmin() {
 		super("Modify users");
@@ -252,6 +273,11 @@ public class MainWindowAdmin extends JFrame {
 		setVisible(true);
 	}
 
+	/**
+	 * Inicializate.
+	 *
+	 * @param jf the jf
+	 */
 	private void inicializate(JFrame jf) {
 
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -264,6 +290,9 @@ public class MainWindowAdmin extends JFrame {
 		jf.setIconImage(icon1);
 	}
 
+	/**
+	 * Creates the J table.
+	 */
 	public void createJTable() {
 		dtm = new DefaultTableModel() {
 			@Override
