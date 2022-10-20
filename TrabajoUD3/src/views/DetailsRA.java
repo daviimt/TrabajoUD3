@@ -41,13 +41,13 @@ public class DetailsRA extends JFrame {
 	 *
 	 * @param idSubject the id subject
 	 */
-	public DetailsRA(int idSubject) {
+	public DetailsRA(int id_Subject,int id) {
 		super("Details RA");
 		inicializate(DetailsRA.this);
 
 		try {
 			Functions f = new Functions();
-			ra = f.ReadRA(idSubject);
+			ra = f.ReadRA(id);
 			f.close();
 		} catch (SQLException e2) {
 			// TODO Auto-generated catch block
@@ -142,7 +142,7 @@ public class DetailsRA extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				MainWindowRA mainteach = new MainWindowRA(ra.getId());
+				MainWindowRA mainteach = new MainWindowRA(id_Subject);
 
 			}
 		});

@@ -220,7 +220,7 @@ public class MainWindowRA extends JFrame {
 								JOptionPane.INFORMATION_MESSAGE, icon);
 					} else {
 						dispose();
-						DetailsRA details = new DetailsRA(Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
+						DetailsRA details = new DetailsRA(id_subj,Integer.parseInt(String.valueOf(dtm.getValueAt(table.getSelectedRow(), 0))));
 					}
 
 				}
