@@ -48,12 +48,6 @@ public class InsertRA extends JFrame {
 	/** The sid. */
 	private String sid = "[0-9]+";
 	
-	/** The semail. */
-	private String semail = "^[A-Za-z0-9]+@[A-Za-z0-9]+.([A-Za-z0-9]+)$";
-	
-	/** The spassw. */
-	private String spassw = "[A-Za-z\\d$@$#_!%*?&]{6,15}$";
-
 	/**
 	 * Instantiates a new insert RA.
 	 *
@@ -123,48 +117,37 @@ public class InsertRA extends JFrame {
 
 		jtid_subj = new JTextField(String.valueOf(id_subj));
 
-		// Boton next
 		jbconfirm = new JButton("");
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
 		jbconfirm.setToolTipText("Confirm");
 		jbconfirm.setBackground(new Color(0, 153, 0));
 		jbconfirm.setBounds(276, 302, 115, 37);
 		jbconfirm.addActionListener(new ActionListener() {
-
 			@SuppressWarnings({ "unused", "deprecation" })
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				boolean verification = true;
-
 				JTextField[] group = { jtid, jtname, jtdecription, jtweighing, jtid_subj };
-
 				for (JTextField j : group) {
 					if (j.getText().isBlank()) {
 						verification = false;
 						break;
 					}
-
 				}
-
 				if (verification) {
 					if (jtid.getText().matches(sid)) {
-
 						try {
-
 							Functions f = new Functions();
 							f.WriteRA(Integer.parseInt(jtid.getText()) , jtname.getText(), jtdecription.getText(),
 									Integer.parseInt(jtweighing.getText()),Integer.parseInt(jtid_subj.getText()));
 							f.close();
 							dispose();
 							MainWindowRA mainRA = new MainWindowRA(id_subj);
-
 						} catch (SQLException e1) {
 							Icon icon = new ImageIcon("images/warning.png");
 							JOptionPane.showMessageDialog(null, "Duplicated ID", "Error", JOptionPane.WARNING_MESSAGE,
 									icon);
 						}
-
 					} else {
 						icon = new ImageIcon("images/warning.png");
 						JOptionPane.showMessageDialog(null, "DNI does not meet the required parameters", "Error",
@@ -180,15 +163,12 @@ public class InsertRA extends JFrame {
 		});
 		getContentPane().add(jbconfirm);
 
-		// Boton cancel
-
 		jbcancel = new JButton("");
 		jbcancel.setBounds(48, 302, 112, 37);
 		jbcancel.setBackground(new Color(153, 0, 0));
 		jbcancel.setToolTipText("Cancel");
 		jbcancel.setIcon(new ImageIcon("images/Cross.png"));
 		jbcancel.addActionListener(new ActionListener() {
-
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {

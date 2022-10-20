@@ -22,6 +22,7 @@ import app.RA;
 /**
  * The Class DetailsRA.
  */
+@SuppressWarnings("serial")
 public class DetailsRA extends JFrame {
 	
 	/** The jlid subj. */
@@ -50,7 +51,6 @@ public class DetailsRA extends JFrame {
 			ra = f.ReadRA(id);
 			f.close();
 		} catch (SQLException e2) {
-			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
 
@@ -128,8 +128,6 @@ public class DetailsRA extends JFrame {
 		jtid_subj.setToolTipText("Subject ID");
 		jtid_subj.setEditable(false);
 		getContentPane().add(jtid_subj);
-
-		// Boton cancel
 
 		jbcancel = new JButton("");
 		jbcancel.setBounds(48, 302, 112, 37);

@@ -148,7 +148,6 @@ public class InsertTeacher extends JFrame {
 		jppassword2.setToolTipText("Confirm the password");
 		getContentPane().add(jppassword2);
 		
-		// Boton next
 		jbconfirm = new JButton("");
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
 		jbconfirm.setToolTipText("Confirm");

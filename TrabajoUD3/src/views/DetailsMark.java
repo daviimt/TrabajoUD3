@@ -2,9 +2,7 @@ package views;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.sql.SQLException;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -45,14 +43,8 @@ public class DetailsMark extends JFrame {
 	/** The jluser. */
 	private JLabel jluser;
 
-	/** The f. */
-	private File f = new File("files/Cryptos");
-
 	/** The name colums. */
 	String[] nameColums = { "RA", "Mark" };
-
-	/** The icon. */
-	private Icon icon;
 
 	/** The s. */
 	Student s = new Student();
@@ -69,14 +61,20 @@ public class DetailsMark extends JFrame {
 	 * @param dni the dni
 	 * @param id  the id
 	 */
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	
 	public DetailsMark(String dni, int id) {
 		super("Mark details");
 		inicializate(DetailsMark.this);
 		id_subj = id;
 		dni_student = dni;
-		Functions f = new Functions();
-		s = f.ReadStudent(dni);
+		try {
+			Functions f = new Functions();
+			s = f.ReadStudent(dni);
+			f.close();
+		} catch (SQLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
 		jluser = new JLabel("Username: " + s.getDni());
 		jluser.setBackground(Color.GRAY);

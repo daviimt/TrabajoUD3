@@ -25,6 +25,7 @@ import app.Subject;
 /**
  * The Class InsertSubject.
  */
+@SuppressWarnings("serial")
 public class InsertSubject extends JFrame {
 
 	/** The jldni teacher. */
@@ -118,30 +119,23 @@ public class InsertSubject extends JFrame {
 		jtdni_teacher.setToolTipText("Introduce teacher's DNI");
 		getContentPane().add(jtdni_teacher);
 
-		// Boton next
 		jbconfirm = new JButton("");
 		jbconfirm.setIcon(new ImageIcon("images/BlackTick.png"));
 		jbconfirm.setToolTipText("Confirm");
 		jbconfirm.setBackground(new Color(0, 153, 0));
 		jbconfirm.setBounds(276, 302, 115, 37);
 		jbconfirm.addActionListener(new ActionListener() {
-
 			@SuppressWarnings({ "unused", "deprecation" })
 			@Override
 			public void actionPerformed(ActionEvent e) {
-
 				boolean verification = true;
-
 				JTextField[] group = { jtid, jtname, jthours, jtdni_teacher };
-
 				for (JTextField j : group) {
 					if (j.getText().isBlank()) {
 						verification = false;
 						break;
 					}
-
 				}
-
 				Functions f = new Functions();
 				if (verification) {
 					if (jtid.getText().matches(sid)) {
@@ -157,7 +151,6 @@ public class InsertSubject extends JFrame {
 											}
 										}
 										if (!existname) {
-											
 											f.WriteSubject(Integer.parseInt(jtid.getText()), jtname.getText(),
 													Integer.parseInt(jthours.getText()), jtdni_teacher.getText());
 											f.close();
@@ -173,7 +166,6 @@ public class InsertSubject extends JFrame {
 										JOptionPane.showMessageDialog(null, "Teacher's DNI does not exist", "Error",
 												JOptionPane.INFORMATION_MESSAGE, icon);
 									}
-
 								} catch (SQLException e1) {
 									Icon icon = new ImageIcon("images/warning.png");
 									JOptionPane.showMessageDialog(null, "Duplicated ID", "Error",
@@ -200,12 +192,9 @@ public class InsertSubject extends JFrame {
 					JOptionPane.showMessageDialog(null, "Fill every required field to create the subject.", "Error",
 							JOptionPane.WARNING_MESSAGE, icon);
 				}
-
 			}
 		});
 		getContentPane().add(jbconfirm);
-
-		// Boton cancel
 
 		jbcancel = new JButton("");
 		jbcancel.setBounds(48, 302, 112, 37);
@@ -213,13 +202,11 @@ public class InsertSubject extends JFrame {
 		jbcancel.setToolTipText("Cancel");
 		jbcancel.setIcon(new ImageIcon("images/Cross.png"));
 		jbcancel.addActionListener(new ActionListener() {
-
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				MainWindowSubject mainsub = new MainWindowSubject();
-
 			}
 		});
 		getContentPane().add(jbcancel);

@@ -22,12 +22,14 @@ import app.Subject;
 /**
  * The Class DetailsSubject.
  */
+@SuppressWarnings("serial")
 public class DetailsSubject extends JFrame{
 	
 	/** The jldni teacher. */
 	private JLabel jlname, jlhours, jldni_teacher;
 	
 	/** The jtdni teacher. */
+	@SuppressWarnings("unused")
 	private JTextField jtid, jtname, jthours, jtdni_teacher;
 	
 	/** The jb back. */
@@ -100,23 +102,20 @@ public class DetailsSubject extends JFrame{
 		jtdni_teacher.setEditable(false);
 		getContentPane().add(jtdni_teacher);
 
-		// Boton cancel
-
 		jbBack = new JButton("");
 		jbBack.setBounds(48, 302, 112, 37);
 		jbBack.setBackground(new Color(153, 0, 0));
 		jbBack.setToolTipText("Back");
 		jbBack.setIcon(new ImageIcon("images/Cross.png"));
 		jbBack.addActionListener(new ActionListener() {
-
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				MainWindowSubject main = new MainWindowSubject();
-
 			}
 		});
+		
 		getContentPane().add(jbBack);
 		setVisible(true);
 	}

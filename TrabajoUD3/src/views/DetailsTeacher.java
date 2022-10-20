@@ -81,7 +81,6 @@ public class DetailsTeacher extends JFrame {
 			// TODO Auto-generated catch block
 			e2.printStackTrace();
 		}
-		System.out.println(user.getPassword());
 
 		jppassword = new JPasswordField(user.getPassword());
 		jldni = new JLabel("D.N.I. : ");
@@ -144,23 +143,20 @@ public class DetailsTeacher extends JFrame {
 		jtemail.setEditable(false);
 		getContentPane().add(jtemail);
 
-		// Boton cancel
-
 		jbcancel = new JButton("");
 		jbcancel.setBounds(48, 302, 112, 37);
 		jbcancel.setBackground(new Color(153, 0, 0));
 		jbcancel.setToolTipText("Cancel");
 		jbcancel.setIcon(new ImageIcon("images/Cross.png"));
 		jbcancel.addActionListener(new ActionListener() {
-
 			@SuppressWarnings("unused")
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				MainWindowAdmin mainteach = new MainWindowAdmin();
-
 			}
 		});
+		
 		getContentPane().add(jbcancel);
 		setVisible(true);
 	}
